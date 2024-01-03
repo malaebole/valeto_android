@@ -12,14 +12,15 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_20sdp">
+        android:layout_marginTop="@dimen/_25sdp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:fontFamily="@font/helvetica"
             android:text="Login"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="@dimen/_25sdp"
             android:textColor="@color/appColor"
             android:textStyle="bold" />
 
@@ -30,6 +31,149 @@
         android:layout_height="200dp"
         android:scaleType="centerInside"
         android:layout_below="@+id/login_bar"
-        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
         android:src="@drawable/login_intro_img" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img_charac"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/helvetica"
+            android:gravity="center"
+            android:text="WELCOME TO VALETO"
+            android:textColor="@color/blackColor"
+            android:textSize="@dimen/_26sdp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/helvetica"
+            android:gravity="center"
+            android:text="Find the fast and easy way to park \nat your desired destination."
+            android:textColor="@color/lightGreyTextColor"
+            android:textSize="@dimen/_16sdp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:background="@drawable/rounded_corner_bg_white">
+
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:fontFamily="sans-serif"
+                android:hint="Enter Your Email"
+                android:textSize="@dimen/_16sdp"
+                android:textColor="@color/appColor"
+                android:inputType="textEmailAddress"
+                android:textCursorDrawable="@null" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:background="@drawable/rounded_corner_bg_white">
+
+            <EditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:fontFamily="sans-serif"
+                android:hint="Enter Password"
+                android:inputType="textPassword"
+                android:textSize="@dimen/_16sdp"
+                android:textColor="@color/appColor"
+                android:textCursorDrawable="@null" />
+
+        </RelativeLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btn_continue"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardElevation="0dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@color/appColor" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Login"
+                android:fontFamily="@font/helvetica_bold"
+                android:textSize="@dimen/_16sdp"
+                android:textColor="@color/whiteColor" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tv_forget_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:fontFamily="@font/helvetica"
+            android:gravity="center"
+            android:text="@string/forget_password"
+            android:textColor="@color/lightGreyTextColor"
+            android:textSize="@dimen/_16sdp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Don't Have an Account?"
+            android:fontFamily="@font/helvetica"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:textColor="@color/lightGreyTextColor"
+            android:gravity="center"
+            android:textSize="@dimen/_16sdp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign Up!"
+            android:fontFamily="@font/helvetica"
+            android:textColor="@color/appColor"
+            android:gravity="center"
+            android:textSize="@dimen/_16sdp"
+            android:textStyle="bold" />
+    </LinearLayout>
 </RelativeLayout>

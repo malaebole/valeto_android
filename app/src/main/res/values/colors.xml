@@ -26,6 +26,7 @@
     <color name="step_bar_color">#004E93</color>
     <color name="greenColor50">#8049D483</color>
     <color name="greenGraphColor">#004C55</color>
+    <color name="lightGreyTextColor">#7A7E83</color>
 
 <!--    range calendar color -->
     <color name="calendar_day_unselected_bg">#00000000</color>

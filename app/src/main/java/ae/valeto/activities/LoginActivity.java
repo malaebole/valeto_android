@@ -27,9 +27,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         makeStatusbarTransperant();
 
         checkKeyboardListener();
+
 //        CCPCountry.setDialogTitle(getString(R.string.select_country_region));
 //        CCPCountry.setSearchHintMessage(getString(R.string.search_hint));
-
 //        binding.btnSkip.setOnClickListener(this);
 //        binding.btnContinue.setOnClickListener(this);
 //        binding.btnBack.setOnClickListener(this);
@@ -45,6 +45,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 //        Functions.hideLoader(hudd);
 //        //ipdetails(true, ipAddress);
 //    }
+
 
 //    @Override
 //    public void onIPFailed() {
@@ -92,7 +93,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 //            }
 //        }
 //    }
-
 
     @Override
     protected void onResume() {
