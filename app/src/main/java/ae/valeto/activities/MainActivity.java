@@ -21,6 +21,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         makeStatusbarTransperant();
     }
 
+
+
     @Override
     public void onClick(View v) {
 
