@@ -1,5 +1,6 @@
 package ae.valeto.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -15,7 +16,6 @@ import ae.valeto.util.KeyboardUtils;
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
     private ActivityLoginBinding binding;
-    String SelectedcountryCode, userIpDetails, userModule;
 //    private kProgressHud hudd;
 
 
@@ -36,8 +36,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 //        binding.infoIcon.setOnClickListener(this);
 //        binding.resetPassword.setOnClickListener(this);
 
-        userModule = Functions.getPrefValue(getContext(), Constants.kUserModule);
-        userIpDetails = Functions.getPrefValue(getContext(), Constants.kLoginType);
+        binding.tvForgetPass.setOnClickListener(this);
+        binding.btnLogin.setOnClickListener(this);
+        binding.btnSignup.setOnClickListener(this);
+
+
+
+
     }
 
 //    @Override
@@ -140,7 +145,19 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
     @Override
     public void onClick(View v) {
-       // if (v == binding.btnBack) {
+        if (v == binding.tvForgetPass){
+            Intent intent = new Intent(getContext(), ForgetPasswordActivity.class);
+            startActivity(intent);
+        }
+        else if (v == binding.btnLogin) {
+
+        }
+        else if (v == binding.btnSignup) {
+
+        }
+
+
+        // if (v == binding.btnBack) {
        //     finish();
         //}
       //  else if (v == binding.btnContinue) {
