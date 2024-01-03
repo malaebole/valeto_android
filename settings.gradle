@@ -1,0 +1,2 @@
+include ':app',':ActionSheet'
+rootProject.name='Valeto'
