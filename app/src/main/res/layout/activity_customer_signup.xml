@@ -8,422 +8,218 @@
     android:isScrollContainer="true"
     android:background="@color/bgVuColor">
 
-<!--    <RelativeLayout-->
-<!--        android:id="@+id/rel"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        app:layout_constraintHeight_percent=".55"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent">-->
+        <RelativeLayout
+            android:id="@+id/rel"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent=".35"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/main_bg"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_45sdp"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true">
 
-<!--        <ImageView-->
-<!--            android:id="@+id/imageView"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:scaleType="centerCrop"-->
-<!--            android:src="@drawable/signup_bg_new"/>-->
-<!--        <View-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:background="#B30084FF"-->
-<!--            android:layout_alignTop="@id/imageView"-->
-<!--            android:layout_alignBottom="@id/imageView"/>-->
+                <ImageButton
+                    android:id="@+id/btn_back"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:background="@null"
+                    android:padding="@dimen/_3sdp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/back_btn" />
 
-<!--        <RelativeLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="@dimen/_40sdp"-->
-<!--            android:layout_marginTop="@dimen/_25sdp">-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/helvetica_bold"
+                    android:text="Sign Up Account"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:textColor="@color/whiteColor"
+                    android:textSize="@dimen/_24sdp"
+                    android:textStyle="bold" />
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_centerInParent="true"-->
-<!--                android:text="@string/signup"-->
-<!--                android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-<!--                android:textColor="@color/whiteColor"-->
-<!--                android:textStyle="bold" />-->
 
-<!--            <ImageButton-->
-<!--                android:id="@+id/btn_back"-->
-<!--                android:layout_width="@dimen/_30sdp"-->
-<!--                android:layout_height="@dimen/_30sdp"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                android:layout_marginStart="@dimen/_10sdp"-->
-<!--                android:background="@null"-->
-<!--                android:padding="@dimen/_3sdp"-->
-<!--                android:scaleType="centerInside"-->
-<!--                android:src="@drawable/back_arrowll" />-->
 
-<!--        </RelativeLayout>-->
+            </LinearLayout>
 
-<!--    </RelativeLayout>-->
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/bottomContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            android:layout_marginTop="@dimen/_140sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:scrollbars="none">
+            <LinearLayout
+                android:id="@+id/layout_reset_pass"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_30sdp"
+                android:orientation="vertical">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/rel_main_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    app:cardCornerRadius="@dimen/_100sdp"
+                    app:contentPadding="@dimen/_10sdp"
+                    android:layout_gravity="center_horizontal"
+                    app:cardBackgroundColor="#F9F8FA"
+                    android:elevation="@dimen/_8sdp">
 
-<!--    <RelativeLayout-->
-<!--        android:id="@+id/bottomContainer"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:background="@drawable/login_btm_bg"-->
-<!--        android:visibility="visible"-->
-<!--        android:fitsSystemWindows="true"-->
-<!--        android:layout_marginTop="@dimen/_155sdp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent">-->
+                    <ImageView
+                        android:id="@+id/customer_img_vu"
+                        android:layout_width="@dimen/_130sdp"
+                        android:layout_height="@dimen/_130sdp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/cam_ic" />
 
-<!--        <ScrollView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_marginTop="@dimen/_10sdp"-->
-<!--            android:scrollbars="none">-->
+                </androidx.cardview.widget.CardView>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:background="@drawable/rounded_corner_bg_white">
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="vertical"-->
-<!--                android:paddingBottom="@dimen/_10sdp">-->
+                    <EditText
+                        android:id="@+id/et_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:fontFamily="sans-serif"
+                        android:hint="Full Name"
+                        android:inputType="text"
+                        android:textColor="@color/appColor"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/_16sdp" />
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="@dimen/_20sdp"-->
-<!--                android:layout_marginEnd="@dimen/_20sdp"-->
-<!--                android:orientation="vertical"-->
-<!--                android:paddingBottom="@dimen/_10sdp">-->
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="@drawable/rounded_corner_bg_white">
 
-<!--                <com.google.android.material.card.MaterialCardView-->
-<!--                    android:id="@+id/img_card"-->
-<!--                    android:layout_width="@dimen/_110sdp"-->
-<!--                    android:layout_height="@dimen/_110sdp"-->
-<!--                    android:layout_gravity="center_horizontal"-->
-<!--                    android:layout_marginTop="@dimen/_20sdp"-->
-<!--                    android:theme="@style/Theme.MaterialComponents.Light"-->
-<!--                    app:cardBackgroundColor="#33000000"-->
-<!--                    app:cardCornerRadius="@dimen/_55sdp">-->
+                    <EditText
+                        android:id="@+id/et_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:fontFamily="sans-serif"
+                        android:hint="Enter Your Email"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/appColor"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/_16sdp" />
 
-<!--                    <LinearLayout-->
-<!--                        android:id="@+id/emoji_vu"-->
-<!--                        android:layout_width="@dimen/_50sdp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_gravity="center"-->
-<!--                        android:orientation="vertical">-->
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="@drawable/rounded_corner_bg_white">
 
-<!--                        <ImageView-->
-<!--                            android:id="@+id/emoji_img_vu"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="@dimen/_50sdp"-->
-<!--                            android:layout_centerHorizontal="true"-->
-<!--                            android:translationZ="@dimen/_90sdp"-->
-<!--                            android:scaleType="centerInside" />-->
+                    <EditText
+                        android:id="@+id/et_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:fontFamily="sans-serif"
+                        android:hint="Mobile Number"
+                        android:inputType="phone"
+                        android:textColor="@color/appColor"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/_16sdp" />
 
-<!--                        <ImageView-->
-<!--                            android:id="@+id/shirt_img_vu"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="@dimen/_50sdp"-->
-<!--                            android:layout_centerHorizontal="true"-->
-<!--                            android:layout_marginTop="@dimen/_minus5sdp"-->
-<!--                            android:scaleType="centerInside" />-->
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="@drawable/rounded_corner_bg_white">
 
-<!--                    </LinearLayout>-->
+                    <EditText
+                        android:id="@+id/et_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:fontFamily="sans-serif"
+                        android:hint="Enter Password"
+                        android:inputType="textPassword"
+                        android:textColor="@color/appColor"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/_16sdp" />
 
-<!--                    <ImageView-->
-<!--                        android:id="@+id/img_vu_place"-->
-<!--                        android:layout_width="@dimen/_40sdp"-->
-<!--                        android:layout_height="@dimen/_40sdp"-->
-<!--                        android:layout_gravity="center"-->
-<!--                        android:scaleType="centerInside"-->
-<!--                        android:src="@drawable/cam_icc" />-->
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="@drawable/rounded_corner_bg_white">
 
-<!--                </com.google.android.material.card.MaterialCardView>-->
+                    <EditText
+                        android:id="@+id/et_cnfrm_pass"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:fontFamily="sans-serif"
+                        android:hint="Confirm Password"
+                        android:inputType="textPassword"
+                        android:textColor="@color/appColor"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/_16sdp" />
 
-<!--                <TextView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="@dimen/_10sdp"-->
-<!--                    android:fontFamily="sans-serif-medium"-->
-<!--                    android:text="@string/add_image_optional"-->
-<!--                    android:textAlignment="center"-->
-<!--                    android:textAppearance="@style/TextAppearance.AppCompat.Small"-->
-<!--                    android:textColor="@color/darkTextColor" />-->
+                </RelativeLayout>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/btn_signup"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_70sdp"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    app:cardElevation="0dp">
 
-<!--                <androidx.recyclerview.widget.RecyclerView-->
-<!--                    android:id="@+id/shirt_recycler_vu"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="@dimen/_50sdp"-->
-<!--                    android:layout_marginTop="@dimen/_20sdp"-->
-<!--                    android:layoutDirection="ltr"-->
-<!--                    android:scrollbars="none" />-->
-<!--            </LinearLayout>-->
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@color/appColor" />
 
-<!--                <RelativeLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="@dimen/_40sdp"-->
-<!--                    android:layout_marginStart="@dimen/_15sdp"-->
-<!--                    android:layout_marginEnd="@dimen/_15sdp"-->
-<!--                    android:layout_marginTop="@dimen/_10sdp"-->
-<!--                    android:background="@drawable/rounded_corner_bg_white">-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/helvetica_bold"
+                        android:gravity="center"
+                        android:text="Sign Up"
+                        android:textColor="@color/whiteColor"
+                        android:textSize="@dimen/_16sdp" />
 
-<!--                    <EditText-->
-<!--                        android:id="@+id/et_full_name"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:hint="@string/full_name"-->
-<!--                        android:textColorHint="@color/black"-->
-<!--                        android:background="@null"-->
-<!--                        android:textAppearance="@style/TextAppearance.AppCompat.Small"-->
-<!--                        android:textColor="@color/darkTextColor"-->
-<!--                        android:fontFamily="sans-serif"-->
-<!--                        android:textCursorDrawable="@null"-->
-<!--                        android:inputType="textPersonName"/>-->
-
-<!--                </RelativeLayout>-->
-
-<!--&lt;!&ndash;                <RelativeLayout&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_height="@dimen/_40sdp"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_marginTop="@dimen/_10sdp"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_marginStart="@dimen/_15sdp"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_marginEnd="@dimen/_15sdp"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:background="@drawable/rounded_corner_bg_white">&ndash;&gt;-->
-
-<!--&lt;!&ndash;                    <EditText&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:id="@+id/et_last_name"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_height="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:hint="@string/last_name"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:textColorHint="@color/black"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:background="@null"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:textAppearance="@style/TextAppearance.AppCompat.Small"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:textColor="@color/darkTextColor"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:fontFamily="sans-serif"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:textCursorDrawable="@null"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:inputType="textPersonName"/>&ndash;&gt;-->
-
-<!--&lt;!&ndash;                </RelativeLayout>&ndash;&gt;-->
-
-<!--                <RelativeLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="@dimen/_40sdp"-->
-<!--                    android:layout_marginTop="@dimen/_10sdp"-->
-<!--                    android:layout_marginStart="@dimen/_15sdp"-->
-<!--                    android:layout_marginEnd="@dimen/_15sdp"-->
-<!--                    android:background="@drawable/rounded_corner_bg_white">-->
-
-<!--                    <EditText-->
-<!--                        android:id="@+id/et_team_name"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:hint="@string/team_and_nick_name"-->
-<!--                        android:textColorHint="@color/black"-->
-<!--                        android:background="@null"-->
-<!--                        android:textAppearance="@style/TextAppearance.AppCompat.Small"-->
-<!--                        android:textColor="@color/darkTextColor"-->
-<!--                        android:fontFamily="sans-serif"-->
-<!--                        android:textCursorDrawable="@null"-->
-<!--                        android:inputType="text"/>-->
-
-<!--                </RelativeLayout>-->
-
-<!--&lt;!&ndash;                <RelativeLayout&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_height="@dimen/_40sdp"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_marginTop="@dimen/_10sdp"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_marginStart="@dimen/_15sdp"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_marginEnd="@dimen/_15sdp"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:background="@drawable/rounded_corner_bg_white">&ndash;&gt;-->
-
-<!--&lt;!&ndash;                    <EditText&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:id="@+id/et_country"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_height="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:hint="@string/select_country"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:textColorHint="@color/black"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:background="@null"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:textAppearance="@style/TextAppearance.AppCompat.Small"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:textColor="@color/darkTextColor"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:fontFamily="sans-serif"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:textCursorDrawable="@null"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:inputType="text"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:focusableInTouchMode="false"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:clickable="true"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:focusable="true"/>&ndash;&gt;-->
-
-<!--&lt;!&ndash;                    <ImageView&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_width="@dimen/_12sdp"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_height="@dimen/_12sdp"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_centerVertical="true"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_alignParentEnd="true"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_marginEnd="@dimen/_5sdp"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:background="@null"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:scaleType="centerInside"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:src="@drawable/down_arrow_dark"/>&ndash;&gt;-->
-
-<!--&lt;!&ndash;                </RelativeLayout>&ndash;&gt;-->
-
-<!--&lt;!&ndash;                <RelativeLayout&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_height="@dimen/_40sdp"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_marginTop="@dimen/_10sdp"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_marginStart="@dimen/_15sdp"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_marginEnd="@dimen/_15sdp"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:background="@drawable/rounded_corner_bg_white">&ndash;&gt;-->
-
-<!--&lt;!&ndash;                    <EditText&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:id="@+id/et_city"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_height="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:hint="@string/select_city"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:textColorHint="@color/black"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:background="@null"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:textAppearance="@style/TextAppearance.AppCompat.Small"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:textColor="@color/darkTextColor"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:fontFamily="sans-serif"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:textCursorDrawable="@null"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:inputType="text"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:focusableInTouchMode="false"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:clickable="true"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:focusable="true"/>&ndash;&gt;-->
-
-<!--&lt;!&ndash;                    <ImageView&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_width="@dimen/_12sdp"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_height="@dimen/_12sdp"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_centerVertical="true"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_alignParentEnd="true"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_marginEnd="@dimen/_5sdp"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:background="@null"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:scaleType="centerInside"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:src="@drawable/down_arrow_dark"/>&ndash;&gt;-->
-
-<!--&lt;!&ndash;                </RelativeLayout>&ndash;&gt;-->
-
-<!--                <RelativeLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="@dimen/_40sdp"-->
-<!--                    android:layout_marginStart="@dimen/_15sdp"-->
-<!--                    android:layout_marginEnd="@dimen/_15sdp"-->
-<!--                    android:layout_marginTop="@dimen/_10sdp"-->
-<!--                    android:background="@drawable/rounded_corner_bg_white">-->
-
-<!--                    <EditText-->
-<!--                        android:id="@+id/et_dob"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:hint="@string/date_of_birth"-->
-<!--                        android:textColorHint="@color/black"-->
-<!--                        android:background="@null"-->
-<!--                        android:textAppearance="@style/TextAppearance.AppCompat.Small"-->
-<!--                        android:textColor="@color/darkTextColor"-->
-<!--                        android:fontFamily="sans-serif"-->
-<!--                        android:textCursorDrawable="@null"-->
-<!--                        android:inputType="text"-->
-<!--                        android:focusableInTouchMode="false"-->
-<!--                        android:clickable="true"-->
-<!--                        android:focusable="true"/>-->
-
-<!--                    <ImageView-->
-<!--                        android:layout_width="@dimen/_15sdp"-->
-<!--                        android:layout_height="@dimen/_15sdp"-->
-<!--                        android:layout_centerVertical="true"-->
-<!--                        android:layout_alignParentEnd="true"-->
-<!--                        android:layout_marginEnd="@dimen/_5sdp"-->
-<!--                        android:background="@null"-->
-<!--                        android:scaleType="centerInside"-->
-<!--                        android:src="@drawable/calendar_dark"/>-->
-
-<!--                </RelativeLayout>-->
-
-<!--                <RelativeLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="@dimen/_40sdp"-->
-<!--                    android:layout_marginTop="@dimen/_10sdp"-->
-<!--                    android:layout_marginStart="@dimen/_15sdp"-->
-<!--                    android:layout_marginEnd="@dimen/_15sdp"-->
-<!--                    android:background="@drawable/rounded_corner_bg_white">-->
-
-<!--                    <EditText-->
-<!--                        android:id="@+id/et_email"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:hint="@string/email"-->
-<!--                        android:textColorHint="@color/black"-->
-<!--                        android:background="@null"-->
-<!--                        android:textAppearance="@style/TextAppearance.AppCompat.Small"-->
-<!--                        android:textColor="@color/darkTextColor"-->
-<!--                        android:fontFamily="sans-serif"-->
-<!--                        android:textCursorDrawable="@null"-->
-<!--                        android:inputType="textEmailAddress"/>-->
-
-<!--                </RelativeLayout>-->
-
-<!--&lt;!&ndash;                <RelativeLayout&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_height="@dimen/_40sdp"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_marginTop="@dimen/_10sdp"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_marginStart="@dimen/_15sdp"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_marginEnd="@dimen/_15sdp"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:background="@drawable/rounded_corner_bg_white">&ndash;&gt;-->
-
-<!--&lt;!&ndash;                    <EditText&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:id="@+id/et_gender"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_height="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:hint="@string/gender"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:textColorHint="@color/black"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:background="@null"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:textAppearance="@style/TextAppearance.AppCompat.Small"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:textColor="@color/darkTextColor"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:fontFamily="sans-serif"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:textCursorDrawable="@null"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:inputType="text"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:focusableInTouchMode="false"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:clickable="true"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:focusable="true"/>&ndash;&gt;-->
-
-<!--&lt;!&ndash;                </RelativeLayout>&ndash;&gt;-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/tv_terms"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="@dimen/_15sdp"-->
-<!--                    android:layout_marginEnd="@dimen/_15sdp"-->
-<!--                    android:text="@string/terms_cond_register"-->
-<!--                    android:textColor="@color/darkTextColor"-->
-<!--                    android:textAppearance="@style/TextAppearance.AppCompat.Small"-->
-<!--                    android:fontFamily="sans-serif"-->
-<!--                    android:layout_marginTop="@dimen/_10sdp"/>-->
-
-<!--                <androidx.cardview.widget.CardView-->
-<!--                    android:id="@+id/btn_signup"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="@dimen/_40sdp"-->
-<!--                    android:layout_marginEnd="@dimen/_20sdp"-->
-<!--                    android:layout_marginStart="@dimen/_20sdp"-->
-<!--                    android:layout_marginTop="@dimen/_20sdp"-->
-<!--                    android:layout_marginBottom="@dimen/_15sdp"-->
-<!--                    app:cardCornerRadius="@dimen/_10sdp"-->
-<!--                    app:cardElevation="0dp">-->
-
-<!--                    <ImageView-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:src="@drawable/green_btn_bg"-->
-<!--                        android:scaleType="centerCrop"/>-->
-
-<!--                    <TextView-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:text="@string/signup"-->
-<!--                        android:gravity="center"-->
-<!--                        android:textColor="@color/whiteColor"-->
-<!--                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>-->
-
-<!--                </androidx.cardview.widget.CardView>-->
-
-<!--            </LinearLayout>-->
-
-<!--        </ScrollView>-->
-
-<!--    </RelativeLayout>-->
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+            </ScrollView>
+        </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
