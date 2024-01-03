@@ -19,13 +19,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         makeStatusbarTransperant();
-
-
-
-
-
-
-
     }
 
     @Override
