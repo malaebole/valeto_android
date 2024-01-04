@@ -18,6 +18,7 @@
     <color name="darkTextColor">#26334a</color>
     <color name="separatorColor">#cdd1dd</color>
     <color name="bgVuColor">#FFFFFF</color>  <!--#f0f8ff -->
+    <color name="cutomerBgVuColor">#F7F7F7</color>  <!--#f0f8ff -->
     <color name="yellowColor">#ffe200</color>
     <color name="orangeColor">#FF9F00</color>
     <color name="maskColor">#F20084FF</color>

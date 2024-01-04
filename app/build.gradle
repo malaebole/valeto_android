@@ -12,7 +12,7 @@ android {
     defaultConfig {
         applicationId "ae.valeto"
         minSdk 21
-        targetSdk 34
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -88,6 +88,20 @@ dependencies {
 
     // action sheet module
     implementation project(path: ':ActionSheet')
+
+
+    // tab bar
+    implementation 'com.jpeng:JPTabBar:1.4.0'
+
+    implementation 'com.nineoldandroids:library:2.4.0'
+
+
+    // badge view
+    implementation 'com.nex3z:notification-badge:1.0.2'
+
+    //keyboard visibility
+    implementation 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:3.0.0-RC2'
+
 
 
 

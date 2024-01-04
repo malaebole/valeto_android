@@ -7,33 +7,33 @@
     tools:context=".activities.LoginActivity"
     android:background="@color/bgVuColor">
 
-    <RelativeLayout
-        android:id="@+id/login_bar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_25sdp">
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/login_bar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="@dimen/_40sdp"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="@dimen/_25sdp">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:fontFamily="@font/helvetica"
-            android:text="Login"
-            android:textSize="@dimen/_25sdp"
-            android:textColor="@color/appColor"
-            android:textStyle="bold" />
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:fontFamily="@font/helvetica"-->
+<!--            android:text="Login"-->
+<!--            android:textColor="@color/appColor"-->
+<!--            android:textSize="@dimen/_25sdp"-->
+<!--            android:textStyle="bold" />-->
 
-    </RelativeLayout>
+<!--    </RelativeLayout>-->
     <ImageView
         android:id="@+id/img_charac"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:scaleType="centerInside"
-        android:layout_below="@+id/login_bar"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_alignParentTop="true"
         android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginTop="35dp"
         android:layout_marginEnd="@dimen/_5sdp"
+        android:scaleType="centerInside"
         android:src="@drawable/login_intro_img" />
 
     <LinearLayout

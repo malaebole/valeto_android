@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.view.View;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import ae.valeto.base.BaseActivity;
+import ae.valeto.customer.CustomerMainTabsActivity;
 import ae.valeto.databinding.ActivityLoginBinding;
 import ae.valeto.signup.CustomerSignupActivity;
 import ae.valeto.util.Constants;
@@ -151,6 +152,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             startActivity(intent);
         }
         else if (v == binding.btnLogin) {
+            Intent intent = new Intent(getContext(), CustomerMainTabsActivity.class);
+            startActivity(intent);
+            finish();
 
         }
         else if (v == binding.btnSignup) {

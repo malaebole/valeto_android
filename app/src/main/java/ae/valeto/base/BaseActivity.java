@@ -29,6 +29,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -37,8 +39,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
+import ae.valeto.util.AppManager;
 import ae.valeto.util.Constants;
 import ae.valeto.util.Functions;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -303,6 +310,43 @@ public class BaseActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return "";
+    }
+
+
+    protected void getUnreadNotificationAPI(UnreadCountCallback callback) {
+//        Call<ResponseBody> call = AppManager.getInstance().apiInterface.unreadNotifCount(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID));
+//        call.enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                int count = 0;
+//                if (response.body() != null) {
+//                    try {
+//                        JSONObject object = new JSONObject(response.body().string());
+//                        if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
+//                            JSONObject obj = object.getJSONObject(Constants.kData);
+//                            String c = obj.getString("total_unread");
+//                            count = Integer.parseInt(c);
+//                        }
+//                        else {
+//
+//                        }
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//                callback.unreadNotificationCount(count);
+//            }
+//            @Override
+//            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                callback.unreadNotificationCount(0);
+//            }
+//        });
+    }
+
+
+
+    public interface UnreadCountCallback {
+        void unreadNotificationCount(int count);
     }
 
 }
