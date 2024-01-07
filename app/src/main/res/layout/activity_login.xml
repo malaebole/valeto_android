@@ -29,9 +29,10 @@
         android:id="@+id/img_charac"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="@dimen/_5sdp"
-        android:layout_marginTop="35dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="45dp"
         android:layout_marginEnd="@dimen/_5sdp"
         android:scaleType="centerInside"
         android:src="@drawable/login_intro_img" />
@@ -62,8 +63,7 @@
             android:gravity="center"
             android:text="Find the fast and easy way to park \nat your desired destination."
             android:textColor="@color/lightGreyTextColor"
-            android:textSize="@dimen/_16sdp"
-            android:textStyle="bold" />
+            android:textSize="@dimen/_16sdp" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -78,12 +78,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
-                android:fontFamily="sans-serif"
-                android:hint="Enter Your Email"
+                android:hint="Enter your email"
                 android:textSize="@dimen/_16sdp"
-                android:textColor="@color/appColor"
                 android:inputType="textEmailAddress"
-                android:textCursorDrawable="@null" />
+                android:fontFamily="@font/helvetica"
+                android:textColor="@color/appColor"
+                android:textCursorDrawable="@color/appColor" />
 
         </RelativeLayout>
         <RelativeLayout
@@ -99,12 +99,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
-                android:fontFamily="sans-serif"
-                android:hint="Enter Password"
+                android:hint="Enter password"
                 android:inputType="textPassword"
                 android:textSize="@dimen/_16sdp"
+                android:fontFamily="@font/helvetica"
                 android:textColor="@color/appColor"
-                android:textCursorDrawable="@null" />
+                android:textCursorDrawable="@color/appColor" />
 
         </RelativeLayout>
         <androidx.cardview.widget.CardView
@@ -157,7 +157,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Don't Have an Account?"
+            android:text="Don't have an account?"
             android:fontFamily="@font/helvetica"
             android:layout_marginEnd="@dimen/_10sdp"
             android:textColor="@color/lightGreyTextColor"
@@ -167,7 +167,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign Up!"
+            android:text="Sign up!"
             android:fontFamily="@font/helvetica"
             android:textColor="@color/appColor"
             android:gravity="center"

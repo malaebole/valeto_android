@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">valeto</string>
-    <string name="forget_password"><u>Forget Password?</u></string>
+    <string name="forget_password"><u>Forget password?</u></string>
 </resources>

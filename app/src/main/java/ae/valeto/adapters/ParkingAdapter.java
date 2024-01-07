@@ -13,8 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import ae.valeto.R;
 import ae.valeto.models.Parking;
+import co.lujun.androidtagview.TagContainerLayout;
 
-public class ParkingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.ViewHolder> {
 
     private final Context context;
     private final List<Parking> parkingList;
@@ -34,19 +35,18 @@ public class ParkingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         this.itemClickListener = itemClickListener;
     }
 
+
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.customer_parking_list_adapter, parent, false);
-        RecyclerView.ViewHolder viewHolder = new ClubViewHolder(v);
-        return viewHolder;
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.customer_parking_list_adapter, parent, false);
+        return new ViewHolder(view);
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-            ClubViewHolder holder = (ClubViewHolder) viewHolder;
 //
 //        }else if (getItemViewType(position) == TYPE_Club_List){
 //            CustomCLubNameHolder holder = (CustomCLubNameHolder)viewHolder;
@@ -105,30 +105,31 @@ public class ParkingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
 
 
-        class ClubViewHolder extends RecyclerView.ViewHolder {
-
-            ImageView imgBanner;
-            TextView tvPrice, tvLoc, tvRate, tvParkingNew;
-            CardView layout;
+    class ViewHolder extends RecyclerView.ViewHolder{
 
 
-            public ClubViewHolder(@NonNull View itemView) {
-                super(itemView);
+        ImageView imgBanner;
+        TextView tvPrice, tvLoc, tvRate, tvParkingNew;
+        CardView layout;
 
-                imgBanner = itemView.findViewById(R.id.img_vu);
-                tvPrice = itemView.findViewById(R.id.tv_price);
-                tvLoc = itemView.findViewById(R.id.tv_loc);
-                tvRate = itemView.findViewById(R.id.tv_rate);
-                layout = itemView.findViewById(R.id.rel_main);
-                tvParkingNew = itemView.findViewById(R.id.tv_parking_name);
 
-            }
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            imgBanner = itemView.findViewById(R.id.img_vu);
+            tvPrice = itemView.findViewById(R.id.tv_price);
+            tvLoc = itemView.findViewById(R.id.tv_loc);
+            tvRate = itemView.findViewById(R.id.tv_rate);
+            layout = itemView.findViewById(R.id.rel_main);
+            tvParkingNew = itemView.findViewById(R.id.tv_parking_name);
+
         }
+    }
+
 
 
         public interface ItemClickListener {
             void itemClicked(View view, int pos);
         }
-
 
 }

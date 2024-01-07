@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Locale;
 
 import ae.valeto.R;
+import ae.valeto.activities.ParkingDetailsActivity;
 import ae.valeto.adapters.ParkingAdapter;
 import ae.valeto.base.BaseFragment;
 import ae.valeto.customer.CustomerMainTabsActivity;
@@ -73,7 +74,9 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
     ParkingAdapter.ItemClickListener itemClickListener = new ParkingAdapter.ItemClickListener() {
         @Override
         public void itemClicked(View view, int pos) {
-            populateClubData(pos);
+            Intent intent = new Intent(getActivity(), ParkingDetailsActivity.class);
+            startActivity(intent);
+//            populateClubData(pos);
         }
     };
 

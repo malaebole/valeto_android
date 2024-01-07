@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <co.lujun.androidtagview.TagContainerLayout
+        android:id="@+id/tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:padding="10dp"
+        app:container_background_color="@color/transparent"
+        app:container_enable_drag="false"
+        app:horizontal_interval="10dp"
+        app:tag_background_color="#E2E6EA"
+        app:tag_clickable="false"
+        app:tag_theme="none"
+        app:vertical_interval="10dp"
+        app:tag_text_color="#707070"
+        app:tag_border_color="#E2E6EA" />
+
+</RelativeLayout>
