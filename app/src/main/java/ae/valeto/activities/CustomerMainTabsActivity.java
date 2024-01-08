@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import ae.valeto.R;
 import ae.valeto.base.BaseActivity;
+import ae.valeto.databinding.ActivityCustomerMainTabsBinding;
+import ae.valeto.fragments.MenuFragment;
 import ae.valeto.fragments.ParkingListFragment;
 import ae.valeto.util.AppManager;
 import ae.valeto.util.Constants;
@@ -25,6 +27,7 @@ public class CustomerMainTabsActivity extends BaseActivity {
     private ActivityCustomerMainTabsBinding binding;
     private final List<Fragment> list = new ArrayList<>();
     private final ParkingListFragment parkingListFragment = new ParkingListFragment();
+    private final MenuFragment menuFragment = new MenuFragment();
     private int selectedTabIndex = 0;
 
     // private final OleBookingListFragment oleBookingListFragment = new OleBookingListFragment();
@@ -111,7 +114,7 @@ public class CustomerMainTabsActivity extends BaseActivity {
         binding.contentMainLay.contentMain.tabBar.setIconSize(17);
         binding.contentMainLay.contentMain.tabBar.setTabTextSize(12);
         list.add(parkingListFragment);
-//        list.add(parkingListFragment);
+        list.add(menuFragment);
         binding.contentMainLay.contentMain.tabBar.setGradientEnable(false);
         binding.contentMainLay.contentMain.tabBar.setPageAnimateEnable(true);
 
