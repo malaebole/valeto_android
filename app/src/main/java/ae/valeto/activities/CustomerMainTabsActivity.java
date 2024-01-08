@@ -1,4 +1,4 @@
-package ae.valeto.customer;
+package ae.valeto.activities;
 
 import androidx.fragment.app.Fragment;
 import android.content.Intent;
@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import ae.valeto.R;
 import ae.valeto.base.BaseActivity;
-import ae.valeto.databinding.ActivityCustomerMainTabsBinding;
 import ae.valeto.fragments.ParkingListFragment;
 import ae.valeto.util.AppManager;
 import ae.valeto.util.Constants;
@@ -135,8 +134,8 @@ public class CustomerMainTabsActivity extends BaseActivity {
             binding.contentMainLay.contentMain.tabBar.getMiddleView().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Intent intent = new Intent(getContext(), OleAddFieldActivity.class);
-//                    startActivity(intent);
+                    Intent intent = new Intent(getContext(), CustomerQrCodeActivity.class);
+                    startActivity(intent);
                 }
             });
     }

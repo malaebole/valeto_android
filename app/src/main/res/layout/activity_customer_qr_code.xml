@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cutomerBgVuColor"
+    tools:context=".activities.CustomerQrCodeActivity">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/main_bg" />
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/_55sdp">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:background="@null"
+                android:padding="@dimen/_3sdp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/back_btn" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="@font/helvetica_bold"
+                android:text="My Qr Code"
+                android:textColor="@color/whiteColor"
+                android:textSize="@dimen/_24sdp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/rel_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        app:cardBackgroundColor="@color/whiteColor"
+        app:cardCornerRadius="@dimen/_15sdp"
+        app:cardElevation="4dp"
+        app:contentPaddingBottom="@dimen/_10sdp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/rel_main_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:elevation="@dimen/_8sdp"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                app:cardBackgroundColor="#F9F8FA"
+                app:cardCornerRadius="@dimen/_100sdp"
+                app:contentPadding="@dimen/_10sdp">
+
+                <ImageView
+                    android:id="@+id/customer_img_vu"
+                    android:layout_width="@dimen/_130sdp"
+                    android:layout_height="@dimen/_130sdp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/cam_ic" />
+
+            </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/helvetica_bold"
+                android:gravity="center"
+                android:text="Mohammad"
+                android:textColor="@color/lightGreyTextColor"
+                android:textSize="@dimen/_16sdp" />
+
+            <ImageView
+                android:id="@+id/qr_img"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="@dimen/_200sdp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:gravity="center"
+                android:scaleType="centerInside"
+                android:src="@drawable/qr" />
+
+            <TextView
+                android:id="@+id/tv_reset_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:fontFamily="@font/helvetica"
+                android:gravity="center"
+                android:text="Show this QR code to the employee for scanning to have your car parked."
+                android:textColor="@color/lightGreyTextColor"
+                android:textSize="@dimen/_16sdp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btn_go_back"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        app:cardCornerRadius="@dimen/_5sdp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        app:cardElevation="0dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@color/appColor" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/helvetica_bold"
+            android:gravity="center"
+            android:text="Go Back"
+            android:textColor="@color/whiteColor"
+            android:textSize="@dimen/_16sdp" />
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
+

@@ -4,13 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import androidx.constraintlayout.widget.ConstraintLayout;
+
 import ae.valeto.base.BaseActivity;
-import ae.valeto.customer.CustomerMainTabsActivity;
 import ae.valeto.databinding.ActivityLoginBinding;
 import ae.valeto.signup.CustomerSignupActivity;
-import ae.valeto.util.Constants;
-import ae.valeto.util.Functions;
 import ae.valeto.util.KeyboardUtils;
 
 

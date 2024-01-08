@@ -9,36 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.google.gson.Gson;
-import com.shashank.sony.fancytoastlib.FancyToast;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.net.UnknownHostException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
-import ae.valeto.R;
 import ae.valeto.activities.ParkingDetailsActivity;
 import ae.valeto.adapters.ParkingAdapter;
 import ae.valeto.base.BaseFragment;
-import ae.valeto.customer.CustomerMainTabsActivity;
+import ae.valeto.activities.CustomerMainTabsActivity;
 import ae.valeto.databinding.FragmentParkingListBinding;
 import ae.valeto.models.Parking;
 import ae.valeto.util.AppManager;
-import ae.valeto.util.Constants;
-import ae.valeto.util.Functions;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class ParkingListFragment extends BaseFragment implements View.OnClickListener {
