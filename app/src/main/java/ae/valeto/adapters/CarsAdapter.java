@@ -10,24 +10,26 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.List;
-import ae.valeto.R;
-import ae.valeto.models.Parking;
-import co.lujun.androidtagview.TagContainerLayout;
 
-public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.ViewHolder> {
+import java.util.List;
+
+import ae.valeto.R;
+import ae.valeto.models.Cars;
+import ae.valeto.models.Parking;
+
+public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.ViewHolder> {
 
     private final Context context;
-    private final List<Parking> parkingList;
+    private final List<Cars> carsList;
     private ItemClickListener itemClickListener;
 
     private final String selectedId = "";
 
     private final int selectedIndex = -1;
 
-    public ParkingAdapter(Context context, List<Parking> parkingList) {
+    public CarsAdapter(Context context, List<Cars> carsList) {
         this.context = context;
-        this.parkingList = parkingList;
+        this.carsList = carsList;
     }
 
 
@@ -39,7 +41,7 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.customer_parking_list_adapter, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cars_adapter, parent, false);
         return new ViewHolder(view);
 
     }
@@ -86,23 +88,23 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.ViewHold
 //            }
 
 
-            holder.layout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (itemClickListener != null) {
-                        itemClickListener.itemClicked(v, holder.getAdapterPosition());
-                    }
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (itemClickListener != null) {
+                    itemClickListener.itemClicked(v, holder.getAdapterPosition());
                 }
-            });
+            }
+        });
 
 
-        }
+    }
 
 
-        @Override
-        public int getItemCount () {
-            return parkingList.size();
-        }
+    @Override
+    public int getItemCount () {
+        return carsList.size();
+    }
 
 
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -128,8 +130,8 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.ViewHold
 
 
 
-        public interface ItemClickListener {
-            void itemClicked(View view, int pos);
-        }
+    public interface ItemClickListener {
+        void itemClicked(View view, int pos);
+    }
 
 }

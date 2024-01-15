@@ -31,9 +31,9 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/helvetica_neue_black"
                 android:gravity="start"
-                android:text="Select the duration"
+                android:text="Add New Car"
                 android:textColor="@color/blackColor"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="@dimen/_30sdp"
                 android:layout_marginStart="@dimen/_30sdp" />
@@ -41,60 +41,48 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_50sdp"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_30sdp"
                 android:layout_marginStart="@dimen/_30sdp"
                 android:layout_marginEnd="@dimen/_30sdp"
                 android:background="@drawable/rounded_corner_bg_white">
 
-                <TextView
+                <EditText
+                    android:id="@+id/et_car_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
-                    android:fontFamily="@font/helvetica"
-                    android:textSize="@dimen/_16sdp"
-                    android:text="Immediately"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:gravity="center_vertical" />
+                    android:fontFamily="@font/helvetica_bold"
+                    android:hint="Enter car name"
+                    android:inputType="text"
+                    android:textColor="@color/appColor"
+                    android:textCursorDrawable="@color/appColor"
+                    android:textSize="@dimen/_16sdp" />
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_50sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_30sdp"
                 android:layout_marginStart="@dimen/_30sdp"
                 android:layout_marginEnd="@dimen/_30sdp"
                 android:background="@drawable/rounded_corner_bg_white">
 
-                <TextView
+                <EditText
+                    android:id="@+id/et_car_number"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
-                    android:fontFamily="@font/helvetica"
-                    android:textSize="@dimen/_16sdp"
-                    android:text="Within 10 minutes"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:gravity="center_vertical" />
+                    android:fontFamily="@font/helvetica_bold"
+                    android:hint="Enter car number"
+                    android:inputType="text"
+                    android:textColor="@color/appColor"
+                    android:textCursorDrawable="@color/appColor"
+                    android:textSize="@dimen/_16sdp" />
 
             </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/_50sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:layout_marginStart="@dimen/_30sdp"
-                android:layout_marginEnd="@dimen/_30sdp"
-                android:background="@drawable/rounded_corner_bg_white">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@null"
-                    android:fontFamily="@font/helvetica"
-                    android:textSize="@dimen/_16sdp"
-                    android:text="Within 15 minutes"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:gravity="center_vertical" />
 
-            </RelativeLayout>
             <androidx.cardview.widget.CardView
                 android:id="@+id/btn_go_back"
                 android:layout_width="match_parent"

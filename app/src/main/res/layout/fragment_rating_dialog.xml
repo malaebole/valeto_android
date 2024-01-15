@@ -112,9 +112,9 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/helvetica_bold"
                     android:gravity="center"
-                    android:text="How's the paring?"
+                    android:text="How's the parking?"
                     android:textColor="@color/blackColor"
-                    android:textSize="@dimen/_35sdp" />
+                    android:textSize="@dimen/_30sdp" />
 
                 <com.hedgehog.ratingbar.RatingBar
                     android:id="@+id/rating_bar"

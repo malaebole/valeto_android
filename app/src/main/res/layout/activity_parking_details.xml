@@ -81,13 +81,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:foreground="?attr/selectableItemBackgroundBorderless"
-                app:cardBackgroundColor="@color/whiteColor"
-                app:cardCornerRadius="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
+                app:cardBackgroundColor="@color/whiteColor"
                 app:cardElevation="4dp"
+                app:cardCornerRadius="@dimen/_15sdp"
                 app:contentPaddingBottom="@dimen/_10sdp">
 
                 <LinearLayout

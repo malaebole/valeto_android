@@ -202,7 +202,7 @@
             </LinearLayout>
 
             <RelativeLayout
-                android:id="@+id/real_lineup"
+                android:id="@+id/profile_vu"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_45sdp"
                 android:paddingStart="@dimen/_25sdp"
@@ -227,7 +227,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/shop_vu"
+                android:id="@+id/cars_vu"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_45sdp"
                 android:paddingStart="@dimen/_25sdp"
@@ -252,7 +252,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/comparison_vu"
+                android:id="@+id/active_ticket_vu"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_45sdp"
                 android:paddingStart="@dimen/_25sdp"
@@ -277,7 +277,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/group_vu"
+                android:id="@+id/closed_ticket_vu"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_45sdp"
                 android:paddingStart="@dimen/_25sdp"
@@ -302,7 +302,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/game_history_vu"
+                android:id="@+id/terms_and_conditions_vu"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_45sdp"
                 android:paddingStart="@dimen/_25sdp"
@@ -327,7 +327,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/use_vu"
+                android:id="@+id/privacy_and_policy_vu"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_45sdp"
                 android:paddingStart="@dimen/_25sdp"

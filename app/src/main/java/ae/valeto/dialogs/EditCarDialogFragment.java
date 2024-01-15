@@ -11,21 +11,20 @@ import android.view.ViewGroup;
 
 import ae.valeto.R;
 import ae.valeto.databinding.FragmentDurationDialogBinding;
-import ae.valeto.databinding.FragmentScanSuccessPopupBinding;
+import ae.valeto.databinding.FragmentEditCarDialogBinding;
 
+public class EditCarDialogFragment extends DialogFragment implements View.OnClickListener{
 
-public class DurationDialogFragment extends DialogFragment implements View.OnClickListener{
-
-    private FragmentDurationDialogBinding binding;
+    private FragmentEditCarDialogBinding binding;
     private ResultDialogCallback dialogCallback;
     private String photoUrl = "";
 
 
-    public DurationDialogFragment() {
+    public EditCarDialogFragment() {
         // Required empty public constructor
     }
 
-    public DurationDialogFragment(String photoUrl) {
+    public EditCarDialogFragment(String photoUrl) {
         this.photoUrl = photoUrl;
     }
 
@@ -44,7 +43,7 @@ public class DurationDialogFragment extends DialogFragment implements View.OnCli
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentDurationDialogBinding.inflate(inflater, container, false);
+        binding = FragmentEditCarDialogBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         getDialog().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);

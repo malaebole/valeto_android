@@ -76,7 +76,6 @@ public class CustomerMainTabsActivity extends BaseActivity {
     public void notificationsClicked() {
         if (!Functions.getPrefValue(getContext(), Constants.kIsSignIn).equalsIgnoreCase("1")) {
             Functions.showToast(getContext(), "Please Login First", FancyToast.ERROR, FancyToast.LENGTH_SHORT);
-            return;
         }
 //        startActivity(new Intent(getContext(), OleNotificationsActivity.class));
     }

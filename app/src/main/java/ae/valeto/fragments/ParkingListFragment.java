@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import ae.valeto.activities.ActiveTicketDetailActivity;
 import ae.valeto.activities.ParkingDetailsActivity;
 import ae.valeto.adapters.ParkingAdapter;
 import ae.valeto.base.BaseFragment;
@@ -46,6 +47,7 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
 
         binding.relNotif.setOnClickListener(this);
         binding.relMenu.setOnClickListener(this);
+        binding.activeTicketVu.setOnClickListener(this);
 
         return view;
     }
@@ -78,9 +80,14 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
         if (v == binding.relNotif) {
             notifClicked();
         }
+        else if (v == binding.activeTicketVu) {
+
+            Intent intent = new Intent(getActivity(), ActiveTicketDetailActivity.class);
+            startActivity(intent);
+
+        }
 
     }
-
 
 
     private void notifClicked() {
