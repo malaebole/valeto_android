@@ -7,24 +7,24 @@
     tools:context=".activities.LoginActivity"
     android:background="@color/bgVuColor">
 
-<!--    <RelativeLayout-->
-<!--        android:id="@+id/login_bar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="@dimen/_40sdp"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_marginTop="@dimen/_25sdp">-->
+    <!--    <RelativeLayout-->
+    <!--        android:id="@+id/login_bar"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="@dimen/_40sdp"-->
+    <!--        android:layout_centerHorizontal="true"-->
+    <!--        android:layout_marginTop="@dimen/_25sdp">-->
 
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_centerInParent="true"-->
-<!--            android:fontFamily="@font/helvetica"-->
-<!--            android:text="Login"-->
-<!--            android:textColor="@color/appColor"-->
-<!--            android:textSize="@dimen/_25sdp"-->
-<!--            android:textStyle="bold" />-->
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_centerInParent="true"-->
+    <!--            android:fontFamily="@font/helvetica"-->
+    <!--            android:text="Login"-->
+    <!--            android:textColor="@color/appColor"-->
+    <!--            android:textSize="@dimen/_25sdp"-->
+    <!--            android:textStyle="bold" />-->
 
-<!--    </RelativeLayout>-->
+    <!--    </RelativeLayout>-->
     <ImageView
         android:id="@+id/img_charac"
         android:layout_width="match_parent"
@@ -83,7 +83,8 @@
                 android:inputType="textEmailAddress"
                 android:fontFamily="@font/helvetica"
                 android:textColor="@color/appColor"
-                android:textCursorDrawable="@color/appColor" />
+                android:cursorVisible="true"
+                android:textCursorDrawable="@drawable/green_cursor_drawable" />
 
         </RelativeLayout>
         <RelativeLayout
@@ -104,7 +105,8 @@
                 android:textSize="@dimen/_16sdp"
                 android:fontFamily="@font/helvetica"
                 android:textColor="@color/appColor"
-                android:textCursorDrawable="@color/appColor" />
+                android:cursorVisible="true"
+                android:textCursorDrawable="@drawable/green_cursor_drawable"/>
 
         </RelativeLayout>
         <androidx.cardview.widget.CardView

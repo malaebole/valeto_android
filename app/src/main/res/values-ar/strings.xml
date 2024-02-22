@@ -2,4 +2,7 @@
 <resources>
     <string name="app_name">valeto</string>
     <string name="forget_password"><u>Forget password?</u></string>
+    <string name="error_occured">Error occurred</string>
+    <string name="check_internet_connection">Check your internet connection</string>
+
 </resources>

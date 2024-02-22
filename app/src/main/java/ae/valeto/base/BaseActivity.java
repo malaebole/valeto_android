@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -63,19 +64,19 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (!Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kLineupModule)) {
-            LocalBroadcastManager.getInstance(this).registerReceiver(movetoRatingReceiver, new IntentFilter("move_to_rating"));
-        }
+//        if (!Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kLineupModule)) {
+//            LocalBroadcastManager.getInstance(this).registerReceiver(movetoRatingReceiver, new IntentFilter("move_to_rating"));
+//        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if (!Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kLineupModule)) {
-            if (movetoRatingReceiver != null) {
-                LocalBroadcastManager.getInstance(this).unregisterReceiver(movetoRatingReceiver);
-            }
-        }
+//        if (!Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kLineupModule)) {
+//            if (movetoRatingReceiver != null) {
+//                LocalBroadcastManager.getInstance(this).unregisterReceiver(movetoRatingReceiver);
+//            }
+//        }
 
     }
 
@@ -141,38 +142,42 @@ public class BaseActivity extends AppCompatActivity {
 //        dialogFragment.show(fragmentTransaction, "EmpReviewFilterDialogFragment");
 //    }
 
-    protected int getRandomX(int viewWidth, float subVuW) {
-        Random random = new Random();
-        return random.nextInt(viewWidth-(int)subVuW);
+    protected void sendFcmTokenApi(String token) {
+        String uniqueID = Functions.getPrefValue(this, Constants.kDeviceUniqueId);
+        Call<ResponseBody> call = AppManager.getInstance().apiInterface.sendFcmToken(uniqueID, "android", token);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.body() != null) {
+                    try {
+                        JSONObject object = new JSONObject(response.body().string());
+                        if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
+
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 
-    protected int getRandomY(int viewHeight, float subVuH) {
-        Random random = new Random();
-        return random.nextInt(viewHeight-(int)subVuH);
-    }
-
-    public int getScreenWidth() {
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        return displayMetrics.widthPixels;
-    }
-
-    public int getScreenHeight() {
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        return displayMetrics.heightPixels;
-    }
-    protected void setBackground(ImageView imageView) {
-        if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kRefereeType)) {
-            //imageView.setImageResource(R.drawable.referee_bg);
-        }
-        else if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kOwnerType)) {
-           // imageView.setImageResource(R.drawable.owner_bg);
-        }
-        else {
-           // imageView.setImageResource(R.drawable.player_bg);
-        }
-    }
+//    protected void setBackground(ImageView imageView) {
+//        if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kRefereeType)) {
+//            //imageView.setImageResource(R.drawable.referee_bg);
+//        }
+//        else if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kOwnerType)) {
+//           // imageView.setImageResource(R.drawable.owner_bg);
+//        }
+//        else {
+//           // imageView.setImageResource(R.drawable.player_bg);
+//        }
+//    }
 
     public Activity getContext() {
         return this;
@@ -247,7 +252,6 @@ public class BaseActivity extends AppCompatActivity {
         //return the bitmap
         return returnedBitmap;
     }
-
     protected Uri saveBitmap(@NonNull final Context context, @NonNull final Bitmap bitmap) throws IOException {
 
         final ContentValues values = new ContentValues();
@@ -311,8 +315,6 @@ public class BaseActivity extends AppCompatActivity {
         }
         return "";
     }
-
-
     protected void getUnreadNotificationAPI(UnreadCountCallback callback) {
 //        Call<ResponseBody> call = AppManager.getInstance().apiInterface.unreadNotifCount(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID));
 //        call.enqueue(new Callback<ResponseBody>() {
@@ -342,8 +344,6 @@ public class BaseActivity extends AppCompatActivity {
 //            }
 //        });
     }
-
-
 
     public interface UnreadCountCallback {
         void unreadNotificationCount(int count);

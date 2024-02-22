@@ -6,7 +6,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.text.TextUtils;
+import android.util.Patterns;
+
 import com.google.gson.Gson;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import java.util.Locale;
 
@@ -28,16 +32,6 @@ public class Functions {
         else {
             return Constants.kEnLang;
         }
-    }
-    public static void setCurrentPage(Context context, String kCurrentPage) {
-        SharedPreferences prefs = context.getSharedPreferences(Constants.PREF_NAME, MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(Constants.kCurrentPage, kCurrentPage);
-        editor.apply();
-    }
-
-    public static String getCurrentPage(Context context, String kCurrentPage) {
-        return getPrefValue(context, Constants.kCurrentPage);
     }
 
 
@@ -108,50 +102,33 @@ public class Functions {
 //    }
 
 
-//    public static KProgressHUD showLoader(Context context, String image_processing) {
-//        return KProgressHUD.create(context)
-//                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-//                .setCancellable(false)
-//                .setBackgroundColor(context.getResources().getColor(R.color.blueColorNew))
-//                .setAnimationSpeed(2)
-//                .setDimAmount(0.5f)
-//                .show();
-//    }
-//    public static KProgressHUD showLoader(Context context) {
-//        return KProgressHUD.create(context)
-//                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-//                .setCancellable(false)
-//                .setBackgroundColor(Color.parseColor("#18707B"))
-//                .setAnimationSpeed(2)
-//                .setDimAmount(0.5f)
-//                .show();
-//    }
+    public static KProgressHUD showLoader(Context context, String image_processing) {
+        return KProgressHUD.create(context)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(false)
+                .setBackgroundColor(context.getResources().getColor(R.color.appColor))
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+                .show();
+    }
+    public static KProgressHUD showLoader(Context context) {
+        return KProgressHUD.create(context)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(false)
+                .setBackgroundColor(context.getResources().getColor(R.color.appColor))
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+                .show();
+    }
+    public static void hideLoader(KProgressHUD hud) {
+        if (hud != null) {
+            hud.dismiss();
+        }
+    }
+    public static boolean isValidEmail(CharSequence target) {
+        return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
+    }
 
-//    public void showLoader(Context context) {
-//        KProgressHUD hud = KProgressHUD.create(context)
-//                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-//                .setLabel("Loading...")
-//                .setCancellable(false)
-//                .setAnimationSpeed(2)
-//                .setDimAmount(0.5f);
-//
-//        if (!((Activity) context).isFinishing()) {
-//            hud.show();
-//        }
-//    }
-
-
-
-//    public static void hideLoader(KProgressHUD hud) {
-//        if (hud != null) {
-//            hud.dismiss();
-//        }
-//    }
-
-//    public static boolean isValidEmail(CharSequence target) {
-//        return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
-//    }
-//
 //    public static boolean isArabic(String text) {
 //        for (char charac : text.toCharArray()) {
 //            if (Character.UnicodeBlock.of(charac) == Character.UnicodeBlock.ARABIC) {

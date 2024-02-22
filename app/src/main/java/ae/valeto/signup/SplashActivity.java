@@ -12,12 +12,16 @@ import android.widget.TextView;
 
 import com.google.android.datatransport.backend.cct.BuildConfig;
 import com.google.gson.Gson;
+import com.kaopiz.kprogresshud.KProgressHUD;
+
 import org.json.JSONObject;
 
 import ae.valeto.R;
+import ae.valeto.activities.CustomerMainTabsActivity;
 import ae.valeto.activities.LoginActivity;
 import ae.valeto.base.BaseActivity;
 import ae.valeto.databinding.ActivitySplashBinding;
+import ae.valeto.models.UserInfo;
 import ae.valeto.util.AppManager;
 import ae.valeto.util.Constants;
 import ae.valeto.util.Functions;
@@ -42,7 +46,6 @@ public class SplashActivity extends BaseActivity {
         if (Functions.getAppLangStr(getContext()).isEmpty()) {
             Functions.setAppLang(getContext(), "en");
         }
-
         version_name = findViewById(R.id.version_text);
         PackageManager pm = getApplicationContext().getPackageManager();
         String pkgName = getApplicationContext().getPackageName();
@@ -51,7 +54,8 @@ public class SplashActivity extends BaseActivity {
             pkgInfo = pm.getPackageInfo(pkgName, 0);
             String ver = BuildConfig.VERSION_NAME;
             version_name.setText("Version "+pkgInfo.versionName);
-        } catch (PackageManager.NameNotFoundException e) {
+        }
+        catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
 
@@ -63,9 +67,8 @@ public class SplashActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         handler = new Handler();
-        handler.postDelayed(runnable, 2000);
+        handler.postDelayed(runnable, 1000);
     }
-
 
     public void devicesLoginLimit() {
 //        String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
@@ -106,46 +109,21 @@ public class SplashActivity extends BaseActivity {
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            Intent intent = new Intent(getContext(), LoginActivity.class);
-            startActivity(intent);
-            finish();
 
+            if (Functions.getPrefValue(getContext(), Constants.kIsSignIn).equalsIgnoreCase("1")) {
 
-
-//            if (Functions.getPrefValue(getContext(), Constants.kIsSignIn).equalsIgnoreCase("1")) {
-//                if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kPlayerType)) {
-//                    if (Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase("")) {
-//                       // Intent intent = new Intent(getContext(), ModuleOptionsActivity.class);
-//                       // startActivity(intent);
-//                    }
-//                    else if (Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kLineupModule))  {
-//                        Functions.setAppLang(getContext(), "en");
-//                        Functions.changeLanguage(getContext(),"en");
-//                        sendAppLangApi();
-//                       // Intent i = new Intent(getContext(), MainActivity.class);
-//                       // startActivity(i);
-//                       // finish();
-//
-//                    }else{
-//                       // Intent i = new Intent(getContext(), OlePlayerMainTabsActivity.class);
-//                       // startActivity(i);
-//                       // finish();
-//
-//                    }
-//                    //share link intent
-//                   // handleIntent(getIntent());
-//                } else if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kOwnerType)) {
-//                    devicesLoginLimit();
-//                }
-//
-//                getProfileAPI(false);
-//            }
-//            else {
-//               // Intent i = new Intent(getContext(), IntroSliderActivity.class);
-//               // startActivity(i);
-//               // finish();
-//            }
-//            checkUpdatesApi();
+                getProfileAPI(false);
+                Intent intent = new Intent(getContext(), CustomerMainTabsActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
+            else {
+                Intent i = new Intent(getContext(), LoginActivity.class);
+                startActivity(i);
+                finish();
+            }
+            checkUpdatesApi();
         }
     };
 
@@ -216,38 +194,31 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void getProfileAPI(boolean isLoader) {
-//        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
-//        Call<ResponseBody> call = AppManager.getInstance().apiInterface.getUserProfile(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(),Constants.kUserID),"", Functions.getPrefValue(getContext(), Constants.kAppModule));
-//        call.enqueue(new Callback<ResponseBody>() {
-//            @Override
-//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                Functions.hideLoader(hud);
-//                if (response.body() != null) {
-//                    try {
-//                        JSONObject object = new JSONObject(response.body().string());
-//                        if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
-//                            JSONObject obj = object.getJSONObject(Constants.kData);
-//                            Gson gson = new Gson();
-//                            UserInfo userInfo = gson.fromJson(obj.toString(), UserInfo.class);
-//                            SharedPreferences.Editor editor = getContext().getSharedPreferences(Constants.PREF_NAME, MODE_PRIVATE).edit();
-//                            editor.putString(Constants.kUserType, userInfo.getUserRole());
-//                            editor.putString(Constants.kCurrency, userInfo.getCurrency());
-//                            editor.apply();
-//
-//                            Functions.saveUserinfo(getContext(), userInfo);
-//                        }
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//
-//                    }
-//                }
-//                else {
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                Functions.hideLoader(hud);
-//            }
-//        });
+        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
+        Call<ResponseBody> call = AppManager.getInstance().apiInterface.getUserProfile();
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Functions.hideLoader(hud);
+                if (response.body() != null) {
+                    try {
+                        JSONObject object = new JSONObject(response.body().string());
+                        if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
+                            JSONObject obj = object.getJSONObject(Constants.kData);
+                            Gson gson = new Gson();
+                            UserInfo userInfo = gson.fromJson(obj.toString(), UserInfo.class);
+                            Functions.saveUserinfo(getContext(), userInfo);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Functions.hideLoader(hud);
+            }
+        });
     }
 }

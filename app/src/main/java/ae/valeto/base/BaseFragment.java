@@ -36,16 +36,16 @@ public class BaseFragment extends Fragment {
         }
     }
 
-    protected void setBackground(ImageView imageView) {
-        if (Functions.getPrefValue(getActivity(), Constants.kUserType).equalsIgnoreCase(Constants.kRefereeType)) {
-           // imageView.setImageResource(R.drawable.referee_bg);
-        }
-        else if (Functions.getPrefValue(getActivity(), Constants.kUserType).equalsIgnoreCase(Constants.kOwnerType)) {
-           // imageView.setImageResource(R.drawable.owner_bg);
-        }
-        else {
-           // imageView.setImageResource(R.drawable.player_bg);
-        }
-    }
+//    protected void setBackground(ImageView imageView) {
+//        if (Functions.getPrefValue(getActivity(), Constants.kUserType).equalsIgnoreCase(Constants.kRefereeType)) {
+//           // imageView.setImageResource(R.drawable.referee_bg);
+//        }
+//        else if (Functions.getPrefValue(getActivity(), Constants.kUserType).equalsIgnoreCase(Constants.kOwnerType)) {
+//           // imageView.setImageResource(R.drawable.owner_bg);
+//        }
+//        else {
+//           // imageView.setImageResource(R.drawable.player_bg);
+//        }
+//    }
 
 }

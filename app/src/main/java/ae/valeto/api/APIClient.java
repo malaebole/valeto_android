@@ -3,11 +3,13 @@ package ae.valeto.api;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import ae.valeto.MyApp;
+import ae.valeto.activities.LoginActivity;
 import ae.valeto.util.Constants;
 import ae.valeto.util.Functions;
 import okhttp3.Interceptor;
@@ -35,10 +37,14 @@ public class APIClient {
                         Request.Builder requestBuilder = chain.request().newBuilder()
                                 .addHeader("Accept", "application/json")
                                 .addHeader("Content-Type", "application/x-www-form-urlencoded")
-                                .addHeader("Authorization", "Bearer "+Functions.getPrefValue(MyApp.getAppContext(), Constants.kaccessToken));
+                                .addHeader("Authorization", "Bearer "+Functions.getPrefValue(MyApp.getAppContext(), Constants.kAccessToken));
                         Response response = chain.proceed(requestBuilder.build());
 
-//                        if (response.code() == 401){
+                        String ValetoAccessToken = Functions.getPrefValue(MyApp.getAppContext(), Constants.kAccessToken);
+                        Log.d("ValetoAccessToken",ValetoAccessToken);
+
+
+                        if (response.code() == 401){
 //                            SharedPreferences.Editor editor = sharedPreferences.edit();
 //                            editor.remove(Constants.kIsSignIn);
 //                            editor.remove(Constants.kUserInfo);
@@ -54,7 +60,8 @@ public class APIClient {
 //                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //                            MyApp.getAppContext().startActivity(intent);
-//                        }
+                        }
+
 
                         return response;
                     }
@@ -62,7 +69,7 @@ public class APIClient {
 
 
         retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.NODE_BASE_URL)
+                .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();

@@ -1,0 +1,4 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <size android:width="2dp" />
+    <solid android:color="@color/appColor" /> <!-- Change to your desired green color -->
+</shape>

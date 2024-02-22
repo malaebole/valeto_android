@@ -14,6 +14,7 @@ import androidx.annotation.RequiresApi;
 
 import java.util.UUID;
 
+import ae.valeto.signup.SplashActivity;
 import ae.valeto.util.Constants;
 import ae.valeto.util.Functions;
 
@@ -70,6 +71,14 @@ public class MyApp extends Application implements Application.ActivityLifecycleC
 
     @Override
     public void onActivityResumed(@NonNull Activity activity) {
+        if (activity instanceof SplashActivity) {
+//            OleInAppReviewManager.with(this)
+//                    .setInstallDays(5) // default 10, 0 means install day.
+//                    .setLaunchTimes(10) // default 10
+//                    .setRemindInterval(2) // default 1
+//                    .setDebug(false) // default false
+//                    .monitor();
+        }
     }
 
     @Override

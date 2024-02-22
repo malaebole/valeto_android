@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
+
+
 }
 
 android {
@@ -79,7 +81,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
 
     // progress hud
-//    implementation 'com.kaopiz:kprogresshud:1.1.0'
+    implementation 'com.kaopiz:kprogresshud:1.2.0'
 
 
     // Fancy toast
@@ -107,6 +109,15 @@ dependencies {
 
     // rating
     implementation 'com.hedgehog.ratingbar:app:1.1.2'
+
+    // runtime permission
+    implementation 'com.nabinbhandari.android:permissions:3.8'
+
+    // image picker
+    implementation 'com.github.jkwiecien:EasyImage:3.0.3'
+
+    // cropper
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
 
 
 
