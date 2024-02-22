@@ -15,10 +15,12 @@ import java.util.List;
 import ae.valeto.activities.ActiveTicketDetailActivity;
 import ae.valeto.activities.ParkingDetailsActivity;
 import ae.valeto.adapters.ParkingAdapter;
+import ae.valeto.adapters.ParkingCityAdapter;
 import ae.valeto.base.BaseFragment;
 import ae.valeto.activities.CustomerMainTabsActivity;
 import ae.valeto.databinding.FragmentParkingListBinding;
 import ae.valeto.models.Parking;
+import ae.valeto.models.ParkingCity;
 import ae.valeto.util.AppManager;
 
 
@@ -26,7 +28,12 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
 
     private FragmentParkingListBinding binding;
     private final List<Parking> parkingList = new ArrayList<>();
+    private final List<ParkingCity> parkingCityList = new ArrayList<>();
+    private ParkingCityAdapter parkingCityAdapter;
     private ParkingAdapter parkingAdapter;
+
+    private String selectedClubId = "";
+    private int selectedIndex = 0;
 
     public ParkingListFragment() {
         //Required empty public constructor
@@ -38,6 +45,13 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
 
         binding = FragmentParkingListBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+
+
+        LinearLayoutManager ParkingCityNameLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        binding.parkingCityRecyclerVu.setLayoutManager(ParkingCityNameLayoutManager);
+        parkingCityAdapter = new ParkingCityAdapter(getContext(), parkingCityList);
+        parkingCityAdapter.setItemClickListener(parkingNameClickListener);
+        binding.parkingCityRecyclerVu.setAdapter(parkingCityAdapter);
 
         LinearLayoutManager customerParkingListLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         binding.parkingRecyclerVu.setLayoutManager(customerParkingListLayoutManager);
@@ -52,6 +66,15 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
         return view;
     }
 
+    ParkingCityAdapter.ItemClickListener parkingNameClickListener = new ParkingCityAdapter.ItemClickListener() {
+        @Override
+        public void itemClicked(View view, int pos) {
+            selectedIndex = pos;
+            //selectedClubId = parkingCityList.get(selectedIndex).getId(); //check this
+            //parkingCityAdapter.setSelectedId(selectedClubId);
+            //populateClubData(selectedIndex);
+        }
+    };
 
     ParkingAdapter.ItemClickListener itemClickListener = new ParkingAdapter.ItemClickListener() {
         @Override
@@ -61,6 +84,8 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
 //            populateClubData(pos);
         }
     };
+
+
 
     @Override
     public void onDestroyView() {

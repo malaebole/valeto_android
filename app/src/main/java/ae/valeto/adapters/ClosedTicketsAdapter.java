@@ -54,11 +54,9 @@ public class ClosedTicketsAdapter extends RecyclerView.Adapter<ClosedTicketsAdap
     class ViewHolder extends RecyclerView.ViewHolder{
 
 
-        TagContainerLayout tagContainerLayout;
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tagContainerLayout = itemView.findViewById(R.id.tag);
+
 
         }
     }

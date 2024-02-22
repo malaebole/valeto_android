@@ -37,6 +37,7 @@ public class APIClient {
                                 .addHeader("Content-Type", "application/x-www-form-urlencoded")
                                 .addHeader("Authorization", "Bearer "+Functions.getPrefValue(MyApp.getAppContext(), Constants.kaccessToken));
                         Response response = chain.proceed(requestBuilder.build());
+
 //                        if (response.code() == 401){
 //                            SharedPreferences.Editor editor = sharedPreferences.edit();
 //                            editor.remove(Constants.kIsSignIn);

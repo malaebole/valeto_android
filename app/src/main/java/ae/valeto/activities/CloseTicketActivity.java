@@ -8,17 +8,12 @@ import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import ae.valeto.R;
 import ae.valeto.adapters.ClosedTicketsAdapter;
-import ae.valeto.adapters.FacilitiesAdapter;
 import ae.valeto.base.BaseActivity;
 import ae.valeto.databinding.ActivityCloseTicketBinding;
 import ae.valeto.models.ClosedTickets;
-import ae.valeto.models.Facilities;
 
 public class CloseTicketActivity extends BaseActivity implements View.OnClickListener {
-
 
     private ActivityCloseTicketBinding binding;
 
