@@ -105,8 +105,6 @@
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
-
-
     <androidx.cardview.widget.CardView
         android:id="@+id/rel_main"
         android:layout_width="match_parent"
@@ -123,286 +121,296 @@
         app:cardCornerRadius="@dimen/_15sdp"
         app:cardElevation="2dp">
 
-        <!--        <ScrollView-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            android:scrollbars="none">-->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/rel_main_data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:elevation="@dimen/_8sdp"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
-                app:cardBackgroundColor="#F9F8FA"
-                app:cardCornerRadius="@dimen/_100sdp"
-                app:contentPadding="@dimen/_10sdp">
-
-                <ImageView
-                    android:id="@+id/customer_img_vu"
-                    android:layout_width="@dimen/_130sdp"
-                    android:layout_height="@dimen/_130sdp"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/cam_ic" />
-
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:ellipsize="end"
-                android:fontFamily="@font/helvetica_bold"
-                android:lines="1"
-                android:text="Mohammad"
-                android:textColor="@color/lightGreyTextColor"
-                android:textSize="18sp" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/helvetica_bold"
-                    android:lines="1"
-                    android:text="Rewards: "
-                    android:textColor="@color/appColor"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tv_reward"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/helvetica_bold"
-                    android:lines="1"
-                    android:text="2345"
-                    android:textColor="@color/appColor"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-
-            </LinearLayout>
-
-            <RelativeLayout
-                android:id="@+id/profile_vu"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_45sdp"
-                android:paddingStart="@dimen/_25sdp"
-                android:paddingEnd="@dimen/_25sdp">
+                android:layout_height="match_parent"
+                android:scrollbars="none">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:fontFamily="@font/helvetica_bold"
-                    android:text="My Profile"
-                    android:textColor="@color/lightGreyTextColor"
-                    android:textSize="@dimen/_16sdp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/separatorColor" />
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/rel_main_data"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="@dimen/_20sdp"
+                                android:layout_marginBottom="@dimen/_10sdp"
+                                android:elevation="@dimen/_8sdp"
+                                android:foreground="?attr/selectableItemBackgroundBorderless"
+                                app:cardBackgroundColor="#F9F8FA"
+                                app:cardCornerRadius="@dimen/_100sdp"
+                                app:contentPadding="@dimen/_10sdp">
 
-            </RelativeLayout>
+                                <ImageView
+                                    android:id="@+id/img_vu"
+                                    android:layout_width="@dimen/_130sdp"
+                                    android:layout_height="@dimen/_130sdp"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/cam_ic" />
 
-            <RelativeLayout
-                android:id="@+id/cars_vu"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_45sdp"
-                android:paddingStart="@dimen/_25sdp"
-                android:paddingEnd="@dimen/_25sdp">
+                            </androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:fontFamily="@font/helvetica_bold"
-                    android:text="My Cars"
-                    android:textColor="@color/lightGreyTextColor"
-                    android:textSize="@dimen/_16sdp" />
+                            <TextView
+                                android:id="@+id/tv_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/helvetica_bold"
+                                android:lines="1"
+                                android:text="Mohammad"
+                                android:textColor="@color/lightGreyTextColor"
+                                android:textSize="18sp" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/separatorColor" />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:orientation="horizontal">
 
-            </RelativeLayout>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:fontFamily="@font/helvetica_bold"
+                                    android:lines="1"
+                                    android:text="Rewards: "
+                                    android:textColor="@color/appColor"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
 
-            <RelativeLayout
-                android:id="@+id/active_ticket_vu"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_45sdp"
-                android:paddingStart="@dimen/_25sdp"
-                android:paddingEnd="@dimen/_25sdp">
+                                <TextView
+                                    android:id="@+id/tv_reward"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:fontFamily="@font/helvetica_bold"
+                                    android:lines="1"
+                                    android:text="2345"
+                                    android:textColor="@color/appColor"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:fontFamily="@font/helvetica_bold"
-                    android:text="Active Tickets"
-                    android:textColor="@color/lightGreyTextColor"
-                    android:textSize="@dimen/_16sdp" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/separatorColor" />
+                            </LinearLayout>
 
-            </RelativeLayout>
+                            <TextView
+                                android:id="@+id/tv_email_verify"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/helvetica_bold"
+                                android:lines="1"
+                                android:text="@string/verify_email"
+                                android:textColor="@color/red"
+                                android:textSize="14sp" />
 
-            <RelativeLayout
-                android:id="@+id/closed_ticket_vu"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_45sdp"
-                android:paddingStart="@dimen/_25sdp"
-                android:paddingEnd="@dimen/_25sdp">
+                            <RelativeLayout
+                                android:id="@+id/profile_vu"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_45sdp"
+                                android:paddingStart="@dimen/_25sdp"
+                                android:paddingEnd="@dimen/_25sdp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:fontFamily="@font/helvetica_bold"
-                    android:text="Closed Tickets"
-                    android:textColor="@color/lightGreyTextColor"
-                    android:textSize="@dimen/_16sdp" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:fontFamily="@font/helvetica_bold"
+                                    android:text="My Profile"
+                                    android:textColor="@color/lightGreyTextColor"
+                                    android:textSize="@dimen/_16sdp" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/separatorColor" />
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_1sdp"
+                                    android:layout_alignParentBottom="true"
+                                    android:background="@color/separatorColor" />
 
-            </RelativeLayout>
+                            </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/terms_and_conditions_vu"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_45sdp"
-                android:paddingStart="@dimen/_25sdp"
-                android:paddingEnd="@dimen/_25sdp">
+                            <RelativeLayout
+                                android:id="@+id/cars_vu"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_45sdp"
+                                android:paddingStart="@dimen/_25sdp"
+                                android:paddingEnd="@dimen/_25sdp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:fontFamily="@font/helvetica_bold"
-                    android:text="Terms &amp; Conditions"
-                    android:textColor="@color/lightGreyTextColor"
-                    android:textSize="@dimen/_16sdp" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:fontFamily="@font/helvetica_bold"
+                                    android:text="My Cars"
+                                    android:textColor="@color/lightGreyTextColor"
+                                    android:textSize="@dimen/_16sdp" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/separatorColor" />
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_1sdp"
+                                    android:layout_alignParentBottom="true"
+                                    android:background="@color/separatorColor" />
 
-            </RelativeLayout>
+                            </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/privacy_and_policy_vu"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_45sdp"
-                android:paddingStart="@dimen/_25sdp"
-                android:paddingEnd="@dimen/_25sdp">
+                            <RelativeLayout
+                                android:id="@+id/active_ticket_vu"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_45sdp"
+                                android:paddingStart="@dimen/_25sdp"
+                                android:paddingEnd="@dimen/_25sdp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:fontFamily="@font/helvetica_bold"
-                    android:text="Privacy &amp; Policy"
-                    android:textColor="@color/lightGreyTextColor"
-                    android:textSize="@dimen/_16sdp" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:fontFamily="@font/helvetica_bold"
+                                    android:text="Active Tickets"
+                                    android:textColor="@color/lightGreyTextColor"
+                                    android:textSize="@dimen/_16sdp" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/separatorColor" />
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_1sdp"
+                                    android:layout_alignParentBottom="true"
+                                    android:background="@color/separatorColor" />
 
-            </RelativeLayout>
+                            </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/contact_vu"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_45sdp"
-                android:paddingStart="@dimen/_25sdp"
-                android:paddingEnd="@dimen/_25sdp">
+                            <RelativeLayout
+                                android:id="@+id/closed_ticket_vu"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_45sdp"
+                                android:paddingStart="@dimen/_25sdp"
+                                android:paddingEnd="@dimen/_25sdp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:fontFamily="@font/helvetica_bold"
-                    android:text="Contact Us"
-                    android:textColor="@color/lightGreyTextColor"
-                    android:textSize="@dimen/_16sdp" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:fontFamily="@font/helvetica_bold"
+                                    android:text="Closed Tickets"
+                                    android:textColor="@color/lightGreyTextColor"
+                                    android:textSize="@dimen/_16sdp" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/separatorColor" />
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_1sdp"
+                                    android:layout_alignParentBottom="true"
+                                    android:background="@color/separatorColor" />
 
-            </RelativeLayout>
+                            </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/logout_vu"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_45sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:paddingStart="@dimen/_25sdp"
-                android:paddingEnd="@dimen/_25sdp">
+                            <RelativeLayout
+                                android:id="@+id/terms_and_conditions_vu"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_45sdp"
+                                android:paddingStart="@dimen/_25sdp"
+                                android:paddingEnd="@dimen/_25sdp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:fontFamily="@font/helvetica_bold"
-                    android:text="Log Out"
-                    android:textColor="@color/red"
-                    android:textSize="@dimen/_16sdp" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:fontFamily="@font/helvetica_bold"
+                                    android:text="Terms &amp; Conditions"
+                                    android:textColor="@color/lightGreyTextColor"
+                                    android:textSize="@dimen/_16sdp" />
 
-            </RelativeLayout>
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_1sdp"
+                                    android:layout_alignParentBottom="true"
+                                    android:background="@color/separatorColor" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/privacy_and_policy_vu"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_45sdp"
+                                android:paddingStart="@dimen/_25sdp"
+                                android:paddingEnd="@dimen/_25sdp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:fontFamily="@font/helvetica_bold"
+                                    android:text="Privacy &amp; Policy"
+                                    android:textColor="@color/lightGreyTextColor"
+                                    android:textSize="@dimen/_16sdp" />
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_1sdp"
+                                    android:layout_alignParentBottom="true"
+                                    android:background="@color/separatorColor" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/contact_vu"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_45sdp"
+                                android:paddingStart="@dimen/_25sdp"
+                                android:paddingEnd="@dimen/_25sdp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:fontFamily="@font/helvetica_bold"
+                                    android:text="Contact Us"
+                                    android:textColor="@color/lightGreyTextColor"
+                                    android:textSize="@dimen/_16sdp" />
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_1sdp"
+                                    android:layout_alignParentBottom="true"
+                                    android:background="@color/separatorColor" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/logout_vu"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_45sdp"
+                                android:layout_marginBottom="@dimen/_10sdp"
+                                android:paddingStart="@dimen/_25sdp"
+                                android:paddingEnd="@dimen/_25sdp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:fontFamily="@font/helvetica_bold"
+                                    android:text="Log Out"
+                                    android:textColor="@color/red"
+                                    android:textSize="@dimen/_16sdp" />
+
+                            </RelativeLayout>
 
         </LinearLayout>
-        <!--        </ScrollView>-->
+
+            </ScrollView>
 
 
     </androidx.cardview.widget.CardView>
-
-
-
 
 </RelativeLayout>

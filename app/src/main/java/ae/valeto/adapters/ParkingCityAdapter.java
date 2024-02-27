@@ -22,7 +22,7 @@ public class ParkingCityAdapter extends RecyclerView.Adapter<ParkingCityAdapter.
     private final Context context;
     private final List<ParkingCity> list;
     private ItemClickListener itemClickListener;
-    private String selectedId = "";
+    private int selectedId;
     private int selectedIndex;
 
     public ParkingCityAdapter(Context context, List<ParkingCity> list) {
@@ -34,7 +34,7 @@ public class ParkingCityAdapter extends RecyclerView.Adapter<ParkingCityAdapter.
         this.itemClickListener = itemClickListener;
     }
 
-    public void setSelectedId(String selectedId) {
+    public void setSelectedId(int selectedId) {
         this.selectedId = selectedId;
         notifyDataSetChanged();
     }
@@ -54,19 +54,18 @@ public class ParkingCityAdapter extends RecyclerView.Adapter<ParkingCityAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ParkingCity parkingCity = list.get(position);
-        //holder.tvName.setText(parkingCity.getName());
-        //holder.tvName.setText(clubList.get(position).getName());
-        //|| selectedIndex == position
-//        if (list.get(position).getId().equalsIgnoreCase(selectedId)) {
-//            holder.cardView.setStrokeColor(context.getResources().getColor(R.color.yellowColor) );
-//            holder.cardView.setCardBackgroundColor(Color.parseColor("#7A000000"));
-//            holder.tvName.setTextColor(context.getResources().getColor(R.color.yellowColor));
-//        }
-//        else {
-//            holder.cardView.setStrokeColor(Color.parseColor("#005F56"));
-//            holder.cardView.setCardBackgroundColor(Color.TRANSPARENT);
-//            holder.tvName.setTextColor(Color.parseColor("#25A297"));
-//        }
+        holder.tvName.setText(parkingCity.getName());
+
+        if (parkingCity.getId() == selectedId) {
+            holder.cardView.setStrokeColor(context.getResources().getColor(R.color.yellowColor) );
+            holder.cardView.setCardBackgroundColor(Color.parseColor("#25A297"));
+            holder.tvName.setTextColor(context.getResources().getColor(R.color.yellowColor));
+        }
+        else {
+            holder.cardView.setStrokeColor(Color.parseColor("#005F56"));
+            holder.cardView.setCardBackgroundColor(Color.TRANSPARENT);
+            holder.tvName.setTextColor(Color.parseColor("#25A297"));
+        }
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -4,12 +4,15 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -48,44 +51,16 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+            Cars car = carsList.get(position);
 
-//
-//        }else if (getItemViewType(position) == TYPE_Club_List){
-//            CustomCLubNameHolder holder = (CustomCLubNameHolder)viewHolder;
-//            Club club = clubList.get(position);
-//            holder.tvName.setText(club.getName());
-//            if (clubList.get(position).getId().equalsIgnoreCase("0")) {
-//                holder.cardView.setStrokeColor(context.getResources().getColor(R.color.yellowColor));
-//                holder.cardView.setCardBackgroundColor(Color.parseColor("#7A000000"));
-//                holder.tvName.setTextColor(context.getResources().getColor(R.color.yellowColor));
-//            }
-//            else {
-//                holder.cardView.setStrokeColor(Color.parseColor("#204334"));
-//                holder.cardView.setCardBackgroundColor(Color.TRANSPARENT);
-//                holder.tvName.setTextColor(Color.parseColor("#204334"));
-//            }
-//            holder.cardView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    clubNameClicked.clubNameClick(v, holder.getAdapterPosition());
-//                }
-//            });
-//        }
-//        else {
-//        if (clubList.get(position).getId().equalsIgnoreCase(selectedId)) {
-//            ClubViewHolder holder = (ClubViewHolder)viewHolder;
-//            Club club = clubList.get(position);
-//            if (!club.getCoverPath().isEmpty()) {
-//                Glide.with(context).load(club.getCoverPath()).into(holder.imgBanner);
-//            }
-//            //holder.tvName.setText(club.getName());
-//            holder.tvLoc.setText(club.getCity().getName());
-//            if (club.getRating().isEmpty()) {
-//                holder.tvRate.setText("0.0");
-//            }
-//            else {
-//                holder.tvRate.setText(club.getRating());
-//            }
+            holder.tvCarNumber.setText(car.getPlateNumber());
+
+            if (!car.getName().isEmpty()){
+                holder.tvName.setText(car.getName());
+            }
+            if (!car.getPhoto().isEmpty()){
+                Glide.with(context).load(car.getPhoto()).into(holder.img);
+            }
 
 
         holder.layout.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +68,15 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.ViewHolder> {
             public void onClick(View v) {
                 if (itemClickListener != null) {
                     itemClickListener.itemClicked(v, holder.getAdapterPosition());
+                }
+            }
+        });
+
+        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (itemClickListener != null) {
+                    itemClickListener.deleteClicked(v, holder.getAdapterPosition());
                 }
             }
         });
@@ -110,20 +94,19 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.ViewHolder> {
     class ViewHolder extends RecyclerView.ViewHolder{
 
 
-        ImageView imgBanner;
-        TextView tvPrice, tvLoc, tvRate, tvParkingNew;
+        ImageView img,btnDelete;
+        TextView tvName, tvCarNumber;
         CardView layout;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imgBanner = itemView.findViewById(R.id.img_vu);
-            tvPrice = itemView.findViewById(R.id.tv_price);
-            tvLoc = itemView.findViewById(R.id.tv_loc);
-            tvRate = itemView.findViewById(R.id.tv_rate);
+            img = itemView.findViewById(R.id.img);
+            tvName = itemView.findViewById(R.id.tv_name);
+            tvCarNumber = itemView.findViewById(R.id.tv_car_number);
+            btnDelete = itemView.findViewById(R.id.btn_delete);
             layout = itemView.findViewById(R.id.rel_main);
-            tvParkingNew = itemView.findViewById(R.id.tv_parking_name);
 
         }
     }
@@ -132,6 +115,7 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.ViewHolder> {
 
     public interface ItemClickListener {
         void itemClicked(View view, int pos);
+        void deleteClicked(View view, int pos);
     }
 
 }

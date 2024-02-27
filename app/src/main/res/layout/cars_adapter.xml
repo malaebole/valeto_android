@@ -21,9 +21,9 @@
 
         <RelativeLayout
             android:id="@+id/top_layout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="100dp"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="start|center_horizontal"
             android:orientation="horizontal">
 
             <ImageView
@@ -45,7 +45,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/et_name"
+                    android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@null"
@@ -69,36 +69,38 @@
                     android:paddingEnd="@dimen/_5sdp">
 
                     <TextView
+                        android:id="@+id/tv_car_number"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:layout_marginBottom="@dimen/_5sdp"
-                        android:fontFamily="@font/helvetica_neue_black"
+                        android:fontFamily="@font/helvetica"
+                        android:textStyle="bold"
                         android:gravity="center"
                         android:scaleType="centerInside"
                         android:text="N DU 39478"
                         android:textColor="@color/blackColor"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp" />
 
 
                 </LinearLayout>
 
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/btn_delete"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:scaleType="centerInside"
-                android:src="@drawable/delete_bin"
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="20dp" />
+
 
         </RelativeLayout>
+        <ImageView
+            android:id="@+id/btn_delete"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:scaleType="centerInside"
+            android:src="@drawable/delete_bin"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            android:layout_gravity="end|center_vertical" />
 
     </androidx.cardview.widget.CardView>
 

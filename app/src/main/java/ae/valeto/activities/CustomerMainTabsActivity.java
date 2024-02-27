@@ -2,9 +2,16 @@ package ae.valeto.activities;
 
 import androidx.fragment.app.Fragment;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
+
+import com.bumptech.glide.Glide;
 import com.jpeng.jptabbar.OnTabSelectListener;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
@@ -18,9 +25,16 @@ import ae.valeto.fragments.ParkingListFragment;
 import ae.valeto.util.AppManager;
 import ae.valeto.util.Constants;
 import ae.valeto.util.Functions;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+
+import org.json.JSONObject;
 
 public class CustomerMainTabsActivity extends BaseActivity {
 
@@ -136,10 +150,40 @@ public class CustomerMainTabsActivity extends BaseActivity {
             binding.contentMainLay.contentMain.tabBar.getMiddleView().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getContext(), CustomerQrCodeActivity.class);
-                    startActivity(intent);
+                    generateQrCode(true);
                 }
             });
+    }
+
+    private void generateQrCode(boolean isLoader) {
+        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
+        Call<ResponseBody> call = AppManager.getInstance().apiInterface.generateQrCode();
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Functions.hideLoader(hud);
+                if (response.body() != null) {
+                    try {
+                        JSONObject object = new JSONObject(response.body().string());
+                        if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
+                            Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
+                            String base64String = object.getString(Constants.kData);
+                            Intent intent = new Intent(getContext(), CustomerQrCodeActivity.class);
+                            intent.putExtra("base64", base64String);
+                            startActivity(intent);
+
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Functions.hideLoader(hud);
+            }
+        });
     }
 
     public class PagerAdapter extends FragmentPagerAdapter {

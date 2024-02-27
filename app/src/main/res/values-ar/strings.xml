@@ -4,5 +4,7 @@
     <string name="forget_password"><u>Forget password?</u></string>
     <string name="error_occured">Error occurred</string>
     <string name="check_internet_connection">Check your internet connection</string>
+    <string name="verify_email"><u>Verify your email</u></string>
+
 
 </resources>

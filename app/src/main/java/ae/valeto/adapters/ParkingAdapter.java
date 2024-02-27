@@ -10,6 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 import ae.valeto.R;
 import ae.valeto.models.Parking;
@@ -47,53 +50,22 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-//
-//        }else if (getItemViewType(position) == TYPE_Club_List){
-//            CustomCLubNameHolder holder = (CustomCLubNameHolder)viewHolder;
-//            Club club = clubList.get(position);
-//            holder.tvName.setText(club.getName());
-//            if (clubList.get(position).getId().equalsIgnoreCase("0")) {
-//                holder.cardView.setStrokeColor(context.getResources().getColor(R.color.yellowColor));
-//                holder.cardView.setCardBackgroundColor(Color.parseColor("#7A000000"));
-//                holder.tvName.setTextColor(context.getResources().getColor(R.color.yellowColor));
-//            }
-//            else {
-//                holder.cardView.setStrokeColor(Color.parseColor("#204334"));
-//                holder.cardView.setCardBackgroundColor(Color.TRANSPARENT);
-//                holder.tvName.setTextColor(Color.parseColor("#204334"));
-//            }
-//            holder.cardView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    clubNameClicked.clubNameClick(v, holder.getAdapterPosition());
-//                }
-//            });
-//        }
-//        else {
-//        if (clubList.get(position).getId().equalsIgnoreCase(selectedId)) {
-//            ClubViewHolder holder = (ClubViewHolder)viewHolder;
-//            Club club = clubList.get(position);
-//            if (!club.getCoverPath().isEmpty()) {
-//                Glide.with(context).load(club.getCoverPath()).into(holder.imgBanner);
-//            }
-//            //holder.tvName.setText(club.getName());
-//            holder.tvLoc.setText(club.getCity().getName());
-//            if (club.getRating().isEmpty()) {
-//                holder.tvRate.setText("0.0");
-//            }
-//            else {
-//                holder.tvRate.setText(club.getRating());
-//            }
+        Parking parking = parkingList.get(position);
+        Glide.with(context).load(parking.getPhoto()).into(holder.imgBanner);
+        holder.tvPrice.setText("AED " + parking.getPrice() + "/hr");
+        holder.tvLoc.setText(parking.getDistance() +" "+ parking.getLocation());
+        holder.tvParkingName.setText(parking.getName());
+        holder.tvRate.setText(String.valueOf(parking.getRating()));
 
 
-            holder.layout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (itemClickListener != null) {
-                        itemClickListener.itemClicked(v, holder.getAdapterPosition());
-                    }
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (itemClickListener != null) {
+                    itemClickListener.itemClicked(v, holder.getAdapterPosition());
                 }
-            });
+            }
+        });
 
 
         }
@@ -109,7 +81,7 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.ViewHold
 
 
         ImageView imgBanner;
-        TextView tvPrice, tvLoc, tvRate, tvParkingNew;
+        TextView tvPrice, tvLoc, tvRate, tvParkingName;
         CardView layout;
 
 
@@ -121,7 +93,7 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.ViewHold
             tvLoc = itemView.findViewById(R.id.tv_loc);
             tvRate = itemView.findViewById(R.id.tv_rate);
             layout = itemView.findViewById(R.id.rel_main);
-            tvParkingNew = itemView.findViewById(R.id.tv_parking_name);
+            tvParkingName = itemView.findViewById(R.id.tv_parking_name);
 
         }
     }

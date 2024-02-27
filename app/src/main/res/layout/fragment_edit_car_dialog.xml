@@ -8,18 +8,18 @@
         tools:context=".dialogs.EditCarDialogFragment">
 
         <androidx.cardview.widget.CardView
-        android:id="@+id/rel_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_30sdp"
-        android:layout_marginEnd="@dimen/_30sdp"
-        android:layout_marginBottom="@dimen/_30sdp"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:layout_centerInParent="true"
-        android:foreground="?attr/selectableItemBackgroundBorderless"
-        app:cardBackgroundColor="@color/whiteColor"
-        app:cardCornerRadius="@dimen/_15sdp"
-        app:cardElevation="4dp">
+            android:id="@+id/rel_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:layout_marginBottom="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_centerInParent="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            app:cardBackgroundColor="@color/whiteColor"
+            app:cardCornerRadius="@dimen/_15sdp"
+            app:cardElevation="4dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,6 +38,35 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="@dimen/_30sdp"
                 android:layout_marginStart="@dimen/_30sdp" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_30sdp"
+                android:background="@drawable/rounded_corner_bg_white">
+
+                <EditText
+                    android:id="@+id/et_car_model"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:fontFamily="@font/helvetica_bold"
+                    android:hint="Select car model"
+                    android:inputType="none"
+                    android:textColor="@color/appColor"
+                    android:focusableInTouchMode="false"
+                    android:focusable="false"
+                    android:textSize="@dimen/_16sdp"/>
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/arrow_head"/>
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -85,7 +114,7 @@
 
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/btn_go_back"
+                android:id="@+id/btn_confirm"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_50sdp"
                 app:cardCornerRadius="@dimen/_5sdp"

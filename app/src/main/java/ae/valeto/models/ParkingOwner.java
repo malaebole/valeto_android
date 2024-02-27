@@ -3,13 +3,16 @@ package ae.valeto.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ParkingCity {
+public class ParkingOwner {
     @SerializedName("id")
     @Expose
     private Integer id;
     @SerializedName("name")
     @Expose
     private String name;
+    @SerializedName("phone")
+    @Expose
+    private String phone;
 
     public Integer getId() {
         return id;
@@ -25,5 +28,13 @@ public class ParkingCity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

@@ -3,7 +3,7 @@ package ae.valeto.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ParkingCity {
+public class CarsBrand {
     @SerializedName("id")
     @Expose
     private Integer id;

@@ -92,7 +92,7 @@
                 app:contentPadding="@dimen/_10sdp">
 
                 <ImageView
-                    android:id="@+id/customer_img_vu"
+                    android:id="@+id/img_vu"
                     android:layout_width="@dimen/_130sdp"
                     android:layout_height="@dimen/_130sdp"
                     android:layout_gravity="center"

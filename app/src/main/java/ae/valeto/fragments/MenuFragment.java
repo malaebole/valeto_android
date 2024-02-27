@@ -1,27 +1,47 @@
 package ae.valeto.fragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.kaopiz.kprogresshud.KProgressHUD;
+import com.shashank.sony.fancytoastlib.FancyToast;
+
+import org.json.JSONObject;
+
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+
+import ae.valeto.activities.CloseTicketActivity;
 import ae.valeto.activities.CustomerMainTabsActivity;
+import ae.valeto.activities.LoginActivity;
 import ae.valeto.activities.MyCarsActivity;
 import ae.valeto.activities.ProfileActivity;
+import ae.valeto.activities.VerifyEmailActivity;
 import ae.valeto.adapters.ParkingAdapter;
 import ae.valeto.base.BaseFragment;
 import ae.valeto.databinding.FragmentMenuBinding;
 import ae.valeto.models.Parking;
+import ae.valeto.models.UserInfo;
 import ae.valeto.util.AppManager;
+import ae.valeto.util.Constants;
+import ae.valeto.util.Functions;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class MenuFragment extends BaseFragment implements View.OnClickListener {
 
     private FragmentMenuBinding binding;
-    private final List<Parking> parkingList = new ArrayList<>();
-    private ParkingAdapter parkingAdapter;
+    private UserInfo userInfo;
 
     public MenuFragment() {
         //Required empty public constructor
@@ -40,8 +60,9 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
         binding.privacyAndPolicyVu.setOnClickListener(this);
         binding.contactVu.setOnClickListener(this);
         binding.logoutVu.setOnClickListener(this);
-        binding.customerImgVu.setOnClickListener(this);
+        binding.imgVu.setOnClickListener(this);
         binding.relNotif.setOnClickListener(this);
+        binding.tvEmailVerify.setOnClickListener(this);
 
         return view;
     }
@@ -55,6 +76,19 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
+         userInfo = Functions.getUserinfo(getContext());
+         if (userInfo !=null){
+             Glide.with(getActivity()).load(userInfo.getPicture()).apply(RequestOptions.circleCropTransform()).into(binding.imgVu);
+             binding.tvName.setText(userInfo.getName());
+             if (userInfo.getEmailVerified().equalsIgnoreCase("no")){
+                 binding.tvEmailVerify.setVisibility(View.VISIBLE);
+             }
+             else {
+                 binding.tvEmailVerify.setVisibility(View.GONE);
+
+             }
+         }
+
         // setBadgeValue();
     }
 
@@ -85,17 +119,59 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
         else if (v == binding.logoutVu) {
             logoutClicked();
         }
-        else if (v == binding.customerImgVu) {
+        else if (v == binding.imgVu) {
             customerClicked();
         }
         else if (v == binding.relNotif) {
             notifClicked();
         }
+        else if (v == binding.tvEmailVerify) {
+            Intent intent = new Intent(getActivity(), VerifyEmailActivity.class);
+            startActivity(intent);
+//            verifyEmailClicked(true);
+        }
 
     }
 
-    private void closedTicketClicked() {
 
+
+//    private void verifyEmailClicked(boolean isLoader) {
+//        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
+//        Call<ResponseBody> call = AppManager.getInstance().apiInterface.sendOtp();
+//        call.enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                Functions.hideLoader(hud);
+//                if (response.body() != null) {
+//                    try {
+//                        JSONObject object = new JSONObject(response.body().string());
+//                        if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
+//
+//                            Intent intent = new Intent(getActivity(), VerifyEmailActivity.class);
+//                            startActivity(intent);
+//
+//                        }
+//                        else {
+//                            Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
+//                        }
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//
+//                    }
+//                }
+//            }
+//            @Override
+//            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                Functions.hideLoader(hud);
+//            }
+//        });
+//    }
+
+
+
+    private void closedTicketClicked() {
+        Intent intent = new Intent(getActivity(), CloseTicketActivity.class);
+        startActivity(intent);
     }
 
     private void termsAndConditionsClicked() {
@@ -111,6 +187,7 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void logoutClicked() {
+        logoutApi();
 
     }
 
@@ -149,5 +226,6 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
             binding.toolbarBadge.setVisibility(View.GONE);
         }
     }
+
 
 }

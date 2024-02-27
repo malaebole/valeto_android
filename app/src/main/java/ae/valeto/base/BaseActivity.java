@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -30,16 +31,21 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.kaopiz.kprogresshud.KProgressHUD;
+import com.shashank.sony.fancytoastlib.FancyToast;
+
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
+import ae.valeto.R;
 import ae.valeto.util.AppManager;
 import ae.valeto.util.Constants;
 import ae.valeto.util.Functions;
@@ -344,6 +350,9 @@ public class BaseActivity extends AppCompatActivity {
 //            }
 //        });
     }
+
+
+
 
     public interface UnreadCountCallback {
         void unreadNotificationCount(int count);
