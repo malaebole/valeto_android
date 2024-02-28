@@ -18,7 +18,7 @@ public class Cars {
     private CarsBrand brand;
     @SerializedName("model")
     @Expose
-    private CarsModel model;
+    private String model;
     @SerializedName("photo")
     @Expose
     private String photo;
@@ -58,11 +58,11 @@ public class Cars {
         this.brand = brand;
     }
 
-    public CarsModel getModel() {
+    public String getModel() {
         return model;
     }
 
-    public void setModel(CarsModel model) {
+    public void setModel(String model) {
         this.model = model;
     }
 

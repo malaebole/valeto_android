@@ -1,11 +1,20 @@
 package ae.valeto.fragments;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +62,11 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
 
     private String selectedClubId = "";
     private int selectedIndex = 0;
+    private int parkingCityId;
     private Location location;
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
+    private static final float MIN_DISTANCE_CHANGE_FOR_UPDATES = 10.0f; // 10 meters
+
 
     public ParkingListFragment() {
         //Required empty public constructor
@@ -67,8 +80,9 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
         View view = binding.getRoot();
 
 
-//        getLocationAndCallAPI();
-        getParkingList(parkingList.isEmpty());
+//        getParkingList(parkingList.isEmpty());
+
+        enableLocationUpdates();
 
 
         LinearLayoutManager ParkingCityNameLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -94,8 +108,12 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
         @Override
         public void itemClicked(View view, int pos) {
             parkingCityAdapter.setSelectedId(parkingCityList.get(pos).getId());
-            parkingAdapter.notifyDataSetChanged();
-//            populateClubData(selectedIndex);
+            parkingCityId = parkingCityList.get(pos).getId();
+            getParkingList(true, parkingCityId);
+
+
+
+//            parkingAdapter.notifyDataSetChanged();
         }
     };
 
@@ -103,8 +121,9 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
         @Override
         public void itemClicked(View view, int pos) {
             Intent intent = new Intent(getActivity(), ParkingDetailsActivity.class);
+            intent.putExtra("parking_id", parkingList.get(pos).getId());
             startActivity(intent);
-//            populateClubData(pos);
+            // populateClubData(pos);
         }
     };
 
@@ -119,7 +138,8 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
     @Override
     public void onResume() {
         super.onResume();
-        getParkingCityList(parkingCityList.isEmpty());
+        getLocationAndCallAPI();
+        getParkingCityList(false);
         setBadgeValue();
     }
 
@@ -160,15 +180,15 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
 //    }
 
 
-    private void getParkingList(boolean isLoader) {
+    private void getParkingList(boolean isLoader, int cityId) {
         Call<ResponseBody> call;
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
 //        call = AppManager.getInstance().apiInterface.getParkingList(latitude,longitude);
         if (location == null) {
-            call = AppManager.getInstance().apiInterface.getParkingList(0, 0);
+            call = AppManager.getInstance().apiInterface.getParkingList(cityId,0, 0);
         }
         else {
-            call = AppManager.getInstance().apiInterface.getParkingList(location.getLatitude(), location.getLongitude());
+            call = AppManager.getInstance().apiInterface.getParkingList(cityId, location.getLatitude(), location.getLongitude());
         }
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -190,7 +210,6 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
 
                             myTicket = new Gson().fromJson(object.getString("my_ticket"), MyTicket.class);
                             populateMyTicket();
-                            parkingAdapter.notifyDataSetChanged();
 
                         }
 
@@ -252,6 +271,12 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
                             JSONArray arr = object.getJSONArray(Constants.kData);
                             Gson gson = new Gson();
                             parkingCityList.clear();
+
+                            ParkingCity allParkingCity = new ParkingCity();
+                            allParkingCity.setId(0);
+                            allParkingCity.setName("All");
+                            parkingCityList.add(allParkingCity);
+
                             for (int i = 0; i < arr.length(); i++) {
                                 ParkingCity parkingCity = gson.fromJson(arr.get(i).toString(), ParkingCity.class);
                                 parkingCityList.add(parkingCity);
@@ -288,24 +313,74 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
     if (myTicket.getId() != null){
             binding.activeTicketVu.setVisibility(View.VISIBLE);
         }
+        parkingAdapter.notifyDataSetChanged();
     }
+
+    private void enableLocationUpdates() {
+        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
+        // Check if GPS provider is enabled
+        boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+        if (!isGPSEnabled) {
+            // GPS provider is not enabled, prompt user to enable it
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage("Location services are disabled. Please enable them to see nearest parking's.")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // Open location settings to allow the user to enable location services
+                            startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // User declined, inform the user about the necessity of location services or handle the situation accordingly
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+        } else {
+            // GPS provider is enabled, proceed with requesting location updates
+            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                getLocationAndCallAPI();
+            }
+            //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, locationListener);
+        }
+    }
+
+//    private LocationListener locationListener = new LocationListener() {
+//        @Override
+//        public void onLocationChanged(Location location) {
+//            // Handle location updates
+//            double latitude = location.getLatitude();
+//            double longitude = location.getLongitude();
+//            // Do something with latitude and longitude
+//        }
+//
+//        @Override
+//        public void onStatusChanged(String provider, int status, Bundle extras) {}
+//
+//        @Override
+//        public void onProviderEnabled(String provider) {}
+//
+//        @Override
+//        public void onProviderDisabled(String provider) {}
+//    };
+
+
 
     private void getLocationAndCallAPI() {
         new AirLocation(getActivity(), true, false, new AirLocation.Callbacks() {
             @Override
             public void onSuccess(Location loc) {
-                // do something
                 location = loc;
-//                pageNo = 1;
-                getParkingList(parkingList.isEmpty());
+                getParkingList(parkingList.isEmpty(), parkingCityId);
             }
 
             @Override
             public void onFailed(AirLocation.LocationFailedEnum locationFailedEnum) {
-                // do something
-//                binding.pullRefresh.setRefreshing(false);
-//                pageNo = 1;
-                getParkingList(parkingList.isEmpty());
+                getParkingList(false,parkingCityId);
             }
         });
     }

@@ -51,7 +51,9 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         Parking parking = parkingList.get(position);
-        Glide.with(context).load(parking.getPhoto()).into(holder.imgBanner);
+        if (!parking.getPhoto().isEmpty()){
+            Glide.with(context).load(parking.getPhoto()).into(holder.imgBanner);
+        }
         holder.tvPrice.setText("AED " + parking.getPrice() + "/hr");
         holder.tvLoc.setText(parking.getDistance() +" "+ parking.getLocation());
         holder.tvParkingName.setText(parking.getName());

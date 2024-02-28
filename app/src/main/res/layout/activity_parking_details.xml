@@ -279,6 +279,7 @@
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/direction_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:foreground="?attr/selectableItemBackgroundBorderless"
@@ -362,7 +363,6 @@
                     </LinearLayout>
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/direction_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -447,19 +447,76 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/facilities_recycler_vu"
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/facilities_recycler_vu"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginEnd="10dp"-->
+<!--                    android:layout_marginBottom="@dimen/_10sdp"-->
+<!--                    android:layoutDirection="locale"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:scrollbars="none"-->
+<!--                    android:layout_below="@+id/tv_facilities"/>-->
+<!--                <com.google.android.material.chip.ChipGroup-->
+<!--                    android:id="@+id/chip_group"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:singleLine="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginEnd="10dp"-->
+<!--                    android:layout_marginBottom="@dimen/_10sdp"-->
+<!--                    android:layoutDirection="locale"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:scrollbars="none"-->
+<!--                    android:layout_below="@+id/tv_facilities">-->
+
+<!--                </com.google.android.material.chip.ChipGroup>-->
+
+
+<!--                <co.lujun.androidtagview.TagContainerLayout-->
+<!--                    android:id="@+id/tags"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_below="@+id/tv_facilities"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:layout_marginStart="0dp"-->
+<!--                    android:layout_marginTop="0dp"-->
+<!--                    android:layout_marginEnd="0dp"-->
+<!--                    android:layout_marginBottom="0dp"-->
+<!--                    android:background="@android:color/transparent"-->
+<!--                    android:layoutDirection="locale"-->
+<!--                    android:padding="10dp"-->
+<!--                    app:container_enable_drag="false"-->
+<!--                    app:horizontal_interval="10dp"-->
+<!--                    app:tag_background="#E2E6EA"-->
+<!--                    app:tag_background_color="#E2E6EA"-->
+<!--                    app:tag_clickable="true"-->
+<!--                    app:tag_text_color="#7A7E83"-->
+<!--                    app:vertical_interval="10dp" />-->
+
+                <okqapps.com.tagslayout.TagsLayout
+                    android:id="@+id/tagsLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="5dp"
+                    android:gravity="left"
+                    android:layout_below="@+id/tv_facilities"
                     android:layout_alignParentStart="true"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:background="@android:color/transparent"
                     android:layoutDirection="locale"
-                    android:orientation="horizontal"
-                    android:scrollbars="none"
-                    android:layout_below="@+id/tv_facilities"/>
+                    android:padding="10dp"/>
+
+
 
             </RelativeLayout>
 

@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.Collections;
 import java.util.List;
 import ae.valeto.R;
 import ae.valeto.models.Facilities;
@@ -37,8 +39,16 @@ public class FacilitiesAdapter extends RecyclerView.Adapter<FacilitiesAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-//        List<String> tags = list.getTags();
+//        List<String> tags = Collections.singletonList(list.get(position).getName());
 //        holder.tagContainerLayout.setTags(tags);
+
+
+
+//
+////        List<String> tags = list.getTags();
+//        for (int i=0; i<list.size(); i++){
+//            holder.tagContainerLayout.setTags(list.get(i).getName());
+//        }
 
     }
 

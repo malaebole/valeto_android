@@ -3,6 +3,8 @@ package ae.valeto.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Parking {
     @SerializedName("id")
     @Expose
@@ -31,6 +33,12 @@ public class Parking {
     @SerializedName("owner")
     @Expose
     private ParkingOwner owner;
+    @SerializedName("facilites")
+    @Expose
+    private List<Facilities> facilites;
+    @SerializedName("currency")
+    @Expose
+    private String currency;
     @SerializedName("distance")
     @Expose
     private String distance;
@@ -108,6 +116,22 @@ public class Parking {
 
     public void setOwner(ParkingOwner owner) {
         this.owner = owner;
+    }
+
+    public List<Facilities> getFacilites() {
+        return facilites;
+    }
+
+    public void setFacilites(List<Facilities> facilites) {
+        this.facilites = facilites;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
     public String getDistance() {

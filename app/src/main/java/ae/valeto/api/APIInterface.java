@@ -114,7 +114,8 @@ public interface APIInterface {
     Call<ResponseBody> makeMyCarReady();
 
     @GET("user/parking")
-    Call<ResponseBody> getParkingList(@Query("latitude") double latitude,
+    Call<ResponseBody> getParkingList(@Query("city_id") int cityId,
+                                      @Query("latitude") double latitude,
                                       @Query("longitude") double longitude);
 
     @GET("user/parking/{id}")
