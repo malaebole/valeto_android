@@ -269,6 +269,7 @@
                             android:textSize="16sp" />
 
                         <TextView
+                            android:id="@+id/tv_price"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="@dimen/_5sdp"
@@ -294,6 +295,7 @@
                         android:paddingEnd="@dimen/_5sdp">
 
                         <TextView
+                            android:id="@+id/tv_car_number"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
@@ -322,7 +324,6 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/bottom_layout"
                 android:layout_alignParentEnd="true"
-
                 android:layout_gravity="center_vertical|end"
                 android:layout_marginStart="100dp"
                 android:layout_marginEnd="@dimen/_10sdp"
@@ -389,7 +390,7 @@
                     android:layout_marginEnd="@dimen/_20sdp" />
 
                 <TextView
-                    android:id="@+id/tv_ticket_price"
+                    android:id="@+id/tv_parking_price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/helvetica"

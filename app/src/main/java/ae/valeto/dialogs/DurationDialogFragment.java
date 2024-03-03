@@ -1,5 +1,6 @@
 package ae.valeto.dialogs;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
@@ -18,16 +19,16 @@ public class DurationDialogFragment extends DialogFragment implements View.OnCli
 
     private FragmentDurationDialogBinding binding;
     private ResultDialogCallback dialogCallback;
-    private String photoUrl = "";
+    private String time = "";
 
 
     public DurationDialogFragment() {
         // Required empty public constructor
     }
 
-    public DurationDialogFragment(String photoUrl) {
-        this.photoUrl = photoUrl;
-    }
+//    public DurationDialogFragment(String photoUrl) {
+//        this.photoUrl = photoUrl;
+//    }
 
     public void setDialogCallback(ResultDialogCallback dialogCallback) {
         this.dialogCallback = dialogCallback;
@@ -49,8 +50,10 @@ public class DurationDialogFragment extends DialogFragment implements View.OnCli
         getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         getDialog().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
-        //binding.btnClose.setOnClickListener(this);
-        //Glide.with(getActivity()).load(photoUrl).into(binding.shirtImgVuAd);
+        binding.layImd.setOnClickListener(this);
+        binding.lay10.setOnClickListener(this);
+        binding.lay15.setOnClickListener(this);
+        binding.btnConfirm.setOnClickListener(this);
 
         return view;
     }
@@ -63,17 +66,53 @@ public class DurationDialogFragment extends DialogFragment implements View.OnCli
 
 
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public void onClick(View v) {
-//        if (v == binding.btnClose){
-//            this.dismiss();
-//        }
+        if (v == binding.layImd){
+
+            binding.layImd.setBackground(getContext().getResources().getDrawable(R.drawable.rounded_corner_bg_green_selected));
+            binding.lay10.setBackground(getContext().getResources().getDrawable(R.drawable.rounded_corner_bg_white));
+            binding.lay15.setBackground(getContext().getResources().getDrawable(R.drawable.rounded_corner_bg_white));
+            binding.etImd.setTextColor(getContext().getResources().getColor(R.color.appColor));
+            binding.et10.setTextColor(getContext().getResources().getColor(R.color.black30Color));
+            binding.et15.setTextColor(getContext().getResources().getColor(R.color.black30Color));
+            time = binding.etImd.getText().toString();
+
+        }
+        else if (v == binding.lay10) {
+            binding.layImd.setBackground(getContext().getResources().getDrawable(R.drawable.rounded_corner_bg_white));
+            binding.lay10.setBackground(getContext().getResources().getDrawable(R.drawable.rounded_corner_bg_green_selected));
+            binding.lay15.setBackground(getContext().getResources().getDrawable(R.drawable.rounded_corner_bg_white));
+            binding.etImd.setTextColor(getContext().getResources().getColor(R.color.black30Color));
+            binding.et10.setTextColor(getContext().getResources().getColor(R.color.appColor));
+            binding.et15.setTextColor(getContext().getResources().getColor(R.color.black30Color));
+            time = binding.et10.getText().toString();
+
+
+        }
+        else if (v == binding.lay15) {
+            binding.layImd.setBackground(getContext().getResources().getDrawable(R.drawable.rounded_corner_bg_white));
+            binding.lay10.setBackground(getContext().getResources().getDrawable(R.drawable.rounded_corner_bg_white));
+            binding.lay15.setBackground(getContext().getResources().getDrawable(R.drawable.rounded_corner_bg_green_selected));
+            binding.etImd.setTextColor(getContext().getResources().getColor(R.color.black30Color));
+            binding.et10.setTextColor(getContext().getResources().getColor(R.color.black30Color));
+            binding.et15.setTextColor(getContext().getResources().getColor(R.color.appColor));
+            time = binding.et15.getText().toString();
+
+
+        }
+        else if (v == binding.btnConfirm) {
+
+            dialogCallback.didSubmitResult(this, time);
+
+        }
 
     }
 
 
     public interface ResultDialogCallback {
-        void didSubmitResult(DialogFragment df);
+        void didSubmitResult(DialogFragment df, String time);
     }
 
 

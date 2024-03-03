@@ -171,6 +171,7 @@
                     android:textSize="21sp" />
 
                 <TextView
+                    android:id="@+id/tv_price"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/_5sdp"
@@ -209,7 +210,7 @@
                     android:paddingBottom="@dimen/_10sdp">
 
                     <ImageView
-                        android:id="@+id/imageView2"
+                        android:id="@+id/car_img"
                         android:layout_width="@dimen/_70sdp"
                         android:layout_height="@dimen/_70sdp"
                         android:layout_alignParentStart="true"
@@ -228,6 +229,7 @@
                         android:layout_centerInParent="true">
 
                         <TextView
+                            android:id="@+id/tv_car_number"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
@@ -324,7 +326,7 @@
                             android:textSize="12sp" />
 
                         <TextView
-                            android:id="@+id/tv_parkedby_name"
+                            android:id="@+id/tv_parked_by"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
@@ -645,19 +647,36 @@
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/facilities_recycler_vu"
+<!--                    <androidx.recyclerview.widget.RecyclerView-->
+<!--                        android:id="@+id/facilities_recycler_vu"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_alignParentStart="true"-->
+<!--                        android:layout_marginStart="10dp"-->
+<!--                        android:layout_marginTop="10dp"-->
+<!--                        android:layout_marginEnd="10dp"-->
+<!--                        android:layout_marginBottom="@dimen/_10sdp"-->
+<!--                        android:layoutDirection="locale"-->
+<!--                        android:orientation="horizontal"-->
+<!--                        android:scrollbars="none"-->
+<!--                        android:layout_below="@+id/tv_facilities"/>-->
+
+                    <okqapps.com.tagslayout.TagsLayout
+                        android:id="@+id/tagsLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_facilities"
                         android:layout_alignParentStart="true"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@android:color/transparent"
+                        android:gravity="left"
                         android:layoutDirection="locale"
-                        android:orientation="horizontal"
-                        android:scrollbars="none"
-                        android:layout_below="@+id/tv_facilities"/>
+                        android:padding="10dp" />
+
 
                 </RelativeLayout>
 

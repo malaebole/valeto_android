@@ -503,18 +503,17 @@
                     android:id="@+id/tagsLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_margin="5dp"
-                    android:gravity="left"
                     android:layout_below="@+id/tv_facilities"
                     android:layout_alignParentStart="true"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginEnd="0dp"
-                    android:layout_marginBottom="0dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
                     android:background="@android:color/transparent"
+                    android:gravity="left"
                     android:layoutDirection="locale"
-                    android:padding="10dp"/>
+                    android:padding="10dp" />
 
 
 

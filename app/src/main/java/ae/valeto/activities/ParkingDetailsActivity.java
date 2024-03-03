@@ -63,7 +63,7 @@ public class ParkingDetailsActivity extends BaseActivity implements View.OnClick
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null){
-            parkingId = bundle.getInt("parking_id",0);
+            parkingId = bundle.getInt("parking_id");
         }
 
         getSingleUserParking(true);
@@ -108,27 +108,6 @@ public class ParkingDetailsActivity extends BaseActivity implements View.OnClick
 
                         }
 
-//                            oleClubNameAdapter.setSelectedIndex(selectedIndex);
-//                            selectedClubId = clubList.get(selectedIndex).getId();
-//                            oleClubNameAdapter.setSelectedId(selectedClubId);
-//                            populateClubData(selectedIndex);
-
-//                            if (clubList.size() > 0) {
-//                                clubList.add(1, null);
-//                            }
-
-//                            if (clubList.isEmpty()) {
-//                                binding.noStadiumVu.setVisibility(View.VISIBLE);
-//                            }
-//                            else {
-//                                binding.noStadiumVu.setVisibility(View.GONE);
-//                            }
-                        //adapter.setAvailable(isFootball, isPadel);
-                        //adapter.notifyDataSetChanged();
-//                        }
-//                        else {
-//                            binding.noStadiumVu.setVisibility(View.VISIBLE);
-//                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
@@ -155,7 +134,7 @@ public class ParkingDetailsActivity extends BaseActivity implements View.OnClick
     private void populateParkingData(){
         binding.tvRate.setText(String.valueOf(parking.getRating()));
         if (!parking.getPhoto().isEmpty()){
-            Glide.with(getContext()).load(parking.getPhoto()).into(binding.imgVu);
+            Glide.with(getApplicationContext()).load(parking.getPhoto()).into(binding.imgVu);
         }
         binding.tvParkingName.setText(parking.getName());
         binding.tvPrice.setText(parking.getCurrency()+ parking.getPrice() + "/hr");

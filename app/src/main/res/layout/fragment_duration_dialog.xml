@@ -40,6 +40,7 @@
                 android:layout_marginStart="@dimen/_30sdp" />
 
             <RelativeLayout
+                android:id="@+id/lay_imd"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_50sdp"
                 android:layout_marginTop="@dimen/_10sdp"
@@ -48,17 +49,20 @@
                 android:background="@drawable/rounded_corner_bg_white">
 
                 <TextView
+                    android:id="@+id/et_imd"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:fontFamily="@font/helvetica"
                     android:textSize="@dimen/_16sdp"
-                    android:text="Immediately"
+                    android:textColor="@color/black30Color"
+                    android:text="immediately"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:gravity="center_vertical" />
 
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/lay_10"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_50sdp"
                 android:layout_marginTop="@dimen/_20sdp"
@@ -67,17 +71,20 @@
                 android:background="@drawable/rounded_corner_bg_white">
 
                 <TextView
+                    android:id="@+id/et_10"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:fontFamily="@font/helvetica"
                     android:textSize="@dimen/_16sdp"
-                    android:text="Within 10 minutes"
+                    android:textColor="@color/black30Color"
+                    android:text="10 minutes"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:gravity="center_vertical" />
 
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/lay_15"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_50sdp"
                 android:layout_marginTop="@dimen/_20sdp"
@@ -86,18 +93,20 @@
                 android:background="@drawable/rounded_corner_bg_white">
 
                 <TextView
+                    android:id="@+id/et_15"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:fontFamily="@font/helvetica"
                     android:textSize="@dimen/_16sdp"
-                    android:text="Within 15 minutes"
+                    android:text="15 minutes"
+                    android:textColor="@color/black30Color"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:gravity="center_vertical" />
 
             </RelativeLayout>
             <androidx.cardview.widget.CardView
-                android:id="@+id/btn_go_back"
+                android:id="@+id/btn_confirm"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_50sdp"
                 app:cardCornerRadius="@dimen/_5sdp"

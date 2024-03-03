@@ -27,8 +27,14 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.UnknownHostException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import ae.valeto.R;
 import ae.valeto.activities.ActiveTicketDetailActivity;
@@ -109,11 +115,8 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
         public void itemClicked(View view, int pos) {
             parkingCityAdapter.setSelectedId(parkingCityList.get(pos).getId());
             parkingCityId = parkingCityList.get(pos).getId();
-            getParkingList(true, parkingCityId);
-
-
-
-//            parkingAdapter.notifyDataSetChanged();
+//            getParkingList(true, parkingCityId);
+            parkingAdapter.notifyDataSetChanged();
         }
     };
 
@@ -139,7 +142,6 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
     public void onResume() {
         super.onResume();
         getLocationAndCallAPI();
-        getParkingCityList(false);
         setBadgeValue();
     }
 
@@ -151,6 +153,7 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
         else if (v == binding.activeTicketVu) {
 
             Intent intent = new Intent(getActivity(), ActiveTicketDetailActivity.class);
+            intent.putExtra("ticket_id", myTicket.getId());
             startActivity(intent);
 
         }
@@ -198,7 +201,9 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
                     try {
                         JSONObject object = new JSONObject(response.body().string());
                         if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
-                            JSONArray arr = object.getJSONArray(Constants.kData);
+                            JSONObject data = object.getJSONObject(Constants.kData);
+
+                            JSONArray arr = data.getJSONArray("parking");
                             Gson gson = new Gson();
                             parkingList.clear();
                             AppManager.getInstance().parkings.clear();
@@ -208,68 +213,8 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
                                 AppManager.getInstance().parkings.add(parking);
                             }
 
-                            myTicket = new Gson().fromJson(object.getString("my_ticket"), MyTicket.class);
-                            populateMyTicket();
-
-                        }
-
-//                            oleClubNameAdapter.setSelectedIndex(selectedIndex);
-//                            selectedClubId = clubList.get(selectedIndex).getId();
-//                            oleClubNameAdapter.setSelectedId(selectedClubId);
-//                            populateClubData(selectedIndex);
-
-//                            if (clubList.size() > 0) {
-//                                clubList.add(1, null);
-//                            }
-
-//                            if (clubList.isEmpty()) {
-//                                binding.noStadiumVu.setVisibility(View.VISIBLE);
-//                            }
-//                            else {
-//                                binding.noStadiumVu.setVisibility(View.GONE);
-//                            }
-                            //adapter.setAvailable(isFootball, isPadel);
-                            //adapter.notifyDataSetChanged();
-//                        }
-//                        else {
-//                            binding.noStadiumVu.setVisibility(View.VISIBLE);
-//                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
-                    }
-                }
-                else {
-                    Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Functions.hideLoader(hud);
-                if (t instanceof UnknownHostException) {
-                    Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
-                    Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
-                }
-            }
-        });
-    }
-    private void getParkingCityList(boolean isLoader) {
-        Call<ResponseBody> call;
-        KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
-        call = AppManager.getInstance().apiInterface.getParkingCities();
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Functions.hideLoader(hud);
-                if (response.body() != null) {
-                    try {
-                        JSONObject object = new JSONObject(response.body().string());
-                        if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
-                            JSONArray arr = object.getJSONArray(Constants.kData);
-                            Gson gson = new Gson();
+                            JSONArray citiesArr = data.getJSONArray("cities");
+                            Gson gson1 = new Gson();
                             parkingCityList.clear();
 
                             ParkingCity allParkingCity = new ParkingCity();
@@ -278,11 +223,13 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
                             parkingCityList.add(allParkingCity);
 
                             for (int i = 0; i < arr.length(); i++) {
-                                ParkingCity parkingCity = gson.fromJson(arr.get(i).toString(), ParkingCity.class);
+                                ParkingCity parkingCity = gson1.fromJson(citiesArr.get(i).toString(), ParkingCity.class);
                                 parkingCityList.add(parkingCity);
                             }
                             parkingCityAdapter.setSelectedId(parkingCityList.get(0).getId());
-                            parkingCityAdapter.notifyDataSetChanged();
+
+                            myTicket = new Gson().fromJson(data.getString("ticket"), MyTicket.class);
+                            populateMyTicket();
 
                         }
 
@@ -312,9 +259,95 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
     private void populateMyTicket() {
     if (myTicket.getId() != null){
             binding.activeTicketVu.setVisibility(View.VISIBLE);
+            binding.tvCarNumber.setText(myTicket.getCar().getPlateNumber());
+            binding.tvParkingName.setText(myTicket.getParking().getName());
+            binding.tvParkingPrice.setText("AED " + myTicket.getParking().getPrice()+ "/hr");
+
+            TicketTimer ticketTimer = new TicketTimer(myTicket.getStartTime(), Double.parseDouble(myTicket.getParking().getPrice()));
+            ticketTimer.start();
         }
+
+
         parkingAdapter.notifyDataSetChanged();
+        parkingCityAdapter.notifyDataSetChanged();
+
     }
+
+
+    private class TicketTimer {
+        private static final String TIME_FORMAT = "dd/MM/yyyy hh:mma";
+        private static final long TICK_INTERVAL = 1000; // Update timer every second
+
+        private Date startTime;
+        private Timer timer;
+        private double parkingPrice;
+
+        public TicketTimer(String startTimeString, double parkingPrice) {
+            this.parkingPrice = parkingPrice;
+            try {
+                this.startTime = new SimpleDateFormat(TIME_FORMAT, Locale.getDefault()).parse(startTimeString);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public void start() {
+            timer = new Timer();
+            timer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    updateTimer();
+                }
+            }, 0, TICK_INTERVAL);
+        }
+
+        public void stop() {
+            if (timer != null) {
+                timer.cancel();
+                timer = null;
+            }
+        }
+
+        private void updateTimer() {
+            Date currentTime = new Date();
+            long elapsedTime = currentTime.getTime() - startTime.getTime();
+            long hours = elapsedTime / (60 * 60 * 1000);
+            long minutes = (elapsedTime / (60 * 1000)) % 60;
+            long seconds = (elapsedTime / 1000) % 60;
+
+            // Convert numerical values to strings with leading zeros
+            String hoursString = String.format(Locale.getDefault(), "%02d", hours);
+            String minutesString = String.format(Locale.getDefault(), "%02d", minutes);
+            String secondsString = String.format(Locale.getDefault(), "%02d", seconds);
+
+            // Update UI with hours, minutes, and seconds on the main UI thread
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    binding.hours.setText(hoursString);
+                    binding.minutes.setText(minutesString);
+                    binding.seconds.setText(secondsString);
+                }
+            });
+
+            double price = calculatePrice(elapsedTime);
+            // Update UI with calculated price on the main UI thread
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    binding.tvPrice.setText(String.format(Locale.getDefault(), "%.2f", price));
+                }
+            });
+        }
+
+
+
+        private double calculatePrice(long elapsedTime) {
+            double totalMinutes = elapsedTime / (60 * 1000);
+            return (parkingPrice / 60) * totalMinutes;
+        }
+    }
+
 
     private void enableLocationUpdates() {
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);

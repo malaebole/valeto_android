@@ -65,6 +65,7 @@ public interface APIInterface {
                                       @Field("new_password") String newPassword);
 
 
+
     //User car Apis
 
 
@@ -100,8 +101,6 @@ public interface APIInterface {
 
     //User Parking Apis
 
-    @GET("user/parking/cities")
-    Call<ResponseBody> getParkingCities();
 
     @GET("user/tickets/closed")
     Call<ResponseBody> getUserClosedTickets();
@@ -109,9 +108,10 @@ public interface APIInterface {
 
     @GET("user/tickets/{id}")
     Call<ResponseBody> getSingleUserTicket(@Path("id") int id);
-
+    @FormUrlEncoded
     @POST("user/tickets/make-car-ready")
-    Call<ResponseBody> makeMyCarReady();
+    Call<ResponseBody> makeMyCarReady(@Field("ticket_id") int ticketId,
+                                      @Field("make_ready_in") String makeItReadyIn);
 
     @GET("user/parking")
     Call<ResponseBody> getParkingList(@Query("city_id") int cityId,
@@ -120,10 +120,9 @@ public interface APIInterface {
 
     @GET("user/parking/{id}")
     Call<ResponseBody> getSingleUserParking(@Path("id") int id);
-
+    @FormUrlEncoded
     @POST("user/parking/add-review")
     Call<ResponseBody> addParkingReview(@Field("parking_id") String parkingId,
                                         @Field("stars") String stars,
                                         @Field("comments") String comments);
-
 }
