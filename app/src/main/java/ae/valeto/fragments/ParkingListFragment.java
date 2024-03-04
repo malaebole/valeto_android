@@ -228,8 +228,15 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
                             }
                             parkingCityAdapter.setSelectedId(parkingCityList.get(0).getId());
 
-                            myTicket = new Gson().fromJson(data.getString("ticket"), MyTicket.class);
-                            populateMyTicket();
+                            if (data.has("ticket")) {
+                                myTicket = new Gson().fromJson(data.getString("ticket"), MyTicket.class);
+                                populateMyTicket();
+                            }
+
+
+                            parkingAdapter.notifyDataSetChanged();
+                            parkingCityAdapter.notifyDataSetChanged();
+
 
                         }
 
@@ -266,10 +273,6 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
             TicketTimer ticketTimer = new TicketTimer(myTicket.getStartTime(), Double.parseDouble(myTicket.getParking().getPrice()));
             ticketTimer.start();
         }
-
-
-        parkingAdapter.notifyDataSetChanged();
-        parkingCityAdapter.notifyDataSetChanged();
 
     }
 

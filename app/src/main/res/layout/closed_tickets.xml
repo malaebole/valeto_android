@@ -7,9 +7,9 @@
 
 
     <RelativeLayout
-        android:id="@+id/active_ticket_vu"
+        android:id="@+id/ticket_vu"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="170dp"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
@@ -20,13 +20,13 @@
         <LinearLayout
                 android:id="@+id/top_layout"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_20sdp"
                 android:orientation="vertical"
-                android:layout_height="100dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp">
 
                 <TextView
@@ -37,7 +37,7 @@
                     android:gravity="center"
                     android:text="Dubai Bay Parking"
                     android:textColor="#23272B"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -45,11 +45,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/helvetica"
-                    android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center"
                     android:text="1H 45M"
                     android:textColor="@color/appColor"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -57,99 +56,85 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/helvetica"
-                    android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center"
                     android:text="01/10/2024"
                     android:textColor="@color/lightGreyTextColor"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
             </LinearLayout>
-
-
 
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/bottom_layout"
-            android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="182dp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="25dp"
-            android:layout_toEndOf="@+id/top_layout"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="@dimen/_20sdp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end"
                 android:fontFamily="@font/helvetica"
-                android:layout_marginEnd="@dimen/_10sdp"
                 android:gravity="center"
                 android:text="AED 35"
                 android:textColor="@color/appColor"
-                android:textSize="16sp"
-                android:layout_gravity="end"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/add_player_vu"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_vu_status"
+                android:theme="@style/Theme.MaterialComponents.Light"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="#74C686"
-                app:cardCornerRadius="@dimen/_25sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_5sdp"
                 app:cardElevation="4dp"
-                android:layout_gravity="end"
-                android:layout_marginEnd="@dimen/_10sdp"
-                app:contentPadding="@dimen/_2sdp">
+                app:cardBackgroundColor="#E5FFEB"
+                app:strokeColor="#74C686"
+                app:strokeWidth="@dimen/_1sdp"
+                app:cardCornerRadius="@dimen/_18sdp"
+                android:layout_gravity="center_vertical|end">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    app:cardBackgroundColor="#E5FFEB"
-                    app:cardCornerRadius="@dimen/_20sdp"
-                    app:cardElevation="0dp">
+                <TextView
+                    android:id="@+id/tv_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#74C686"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:text="Paid"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:textSize="16sp"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="sans-serif-medium"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/helvetica_bold"
-                        android:text="Paid"
-                        android:textColor="#74C686"
-                        android:textSize="13sp" />
+            </com.google.android.material.card.MaterialCardView>
 
-                </androidx.cardview.widget.CardView>
-
-            </androidx.cardview.widget.CardView>
 
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/bottom_layout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/top_layout"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="5dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/car_number_ll"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="@dimen/_10sdp"
                 android:background="@drawable/rectangle_turn"
                 android:elevation="@dimen/_4sdp"
                 android:orientation="horizontal"
@@ -157,19 +142,21 @@
                 android:paddingEnd="@dimen/_5sdp">
 
                 <TextView
+                    android:id="@+id/tv_car_number"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
-                    android:fontFamily="@font/helvetica_neue_black"
+                    android:fontFamily="@font/helvetica"
+                    android:textStyle="bold"
                     android:gravity="center"
                     android:scaleType="centerInside"
                     android:text="N DU 39478"
                     android:textColor="@color/blackColor"
-                    android:textSize="12sp" />
+                    android:textSize="18sp" />
 
 
             </LinearLayout>

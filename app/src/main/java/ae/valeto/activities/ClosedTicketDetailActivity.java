@@ -22,11 +22,19 @@ public class ClosedTicketDetailActivity extends BaseActivity implements View.OnC
         setContentView(binding.getRoot());
         makeStatusbarTransperant();
 
+        binding.btnBack.setOnClickListener(this);
+
 
     }
 
     @Override
     public void onClick(View v) {
+        if (v == binding.btnBack){
+            finish();
+        }
+        else if () {
+
+        }
 
     }
 }

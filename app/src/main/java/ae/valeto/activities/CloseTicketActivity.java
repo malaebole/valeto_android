@@ -55,6 +55,8 @@ public class CloseTicketActivity extends BaseActivity implements View.OnClickLis
         closedTicketsAdapter.setItemClickListener(itemClickListener);
         binding.closeTicketsRecyclerVu.setAdapter(closedTicketsAdapter);
 
+        binding.btnBack.setOnClickListener(this);
+
 
     }
 
