@@ -68,10 +68,10 @@ public class ClosedTicketsAdapter extends RecyclerView.Adapter<ClosedTicketsAdap
         holder.tvTime.setText(ticket.getDuration());
         holder.tvCarNumber.setText(ticket.getCar().getPlateNumber());
         holder.tvPrice.setText(ticket.getCurrency() + " " +ticket.getPaidAmount());
-        holder.tvStatus.setText("Closed");
-        holder.cardView.setStrokeColor(Color.parseColor("#C82333"));
-        holder.cardView.setCardBackgroundColor(Color.parseColor("#FADDE0"));
-        holder.tvStatus.setTextColor(Color.parseColor("#C82333"));
+//        holder.tvStatus.setText("Closed");
+//        holder.cardView.setStrokeColor(Color.parseColor("#C82333"));
+//        holder.cardView.setCardBackgroundColor(Color.parseColor("#FADDE0"));
+//        holder.tvStatus.setTextColor(Color.parseColor("#C82333"));
 
 
         holder.layout.setOnClickListener(new View.OnClickListener() {

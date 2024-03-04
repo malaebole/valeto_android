@@ -99,7 +99,8 @@
                         android:inputType="number"
                         android:textColor="@color/appColor"
                         android:textCursorDrawable="@drawable/green_cursor_drawable"
-                        android:textSize="@dimen/_16sdp" />
+                        android:textSize="@dimen/_16sdp"
+                        />
 
                 </RelativeLayout>
             <TextView

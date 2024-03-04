@@ -144,6 +144,33 @@
                     android:text="How is the park? Give your rating to support this parking place."
                     android:textColor="@color/lightGreyTextColor"
                     android:textSize="@dimen/_16sdp" />
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:background="@drawable/rounded_corner_bg_white">
+
+                    <EditText
+                        android:id="@+id/et_comment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:fontFamily="@font/helvetica"
+                        android:hint="Type your comment here"
+                        android:paddingTop="@dimen/_5sdp"
+                        android:gravity="start"
+                        android:inputType="text"
+                        android:textColor="@color/appColor"
+                        android:textSize="@dimen/_16sdp"
+                        android:cursorVisible="true"
+                        android:textCursorDrawable="@drawable/green_cursor_drawable"/>
+
+                </RelativeLayout>
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/btn_submit"
                     android:layout_width="match_parent"

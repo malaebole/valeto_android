@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.UnknownHostException;
@@ -33,6 +34,7 @@ import ae.valeto.dialogs.DurationDialogFragment;
 import ae.valeto.fragments.ParkingListFragment;
 import ae.valeto.models.MyTicket;
 import ae.valeto.models.Parking;
+import ae.valeto.models.ParkingCity;
 import ae.valeto.util.AppManager;
 import ae.valeto.util.Constants;
 import ae.valeto.util.Functions;
@@ -61,7 +63,13 @@ public class ActiveTicketDetailActivity extends BaseActivity implements View.OnC
         if (bundle !=null){
            ticketId = bundle.getInt("ticket_id");
         }
-        getSingleUserTicket(true, ticketId);
+//        if (ticketId == 0){
+//            getParkingList(true,1);
+//        }else{
+            getSingleUserTicket(true, ticketId);
+//        }
+
+
 
         binding.btnBack.setOnClickListener(this);
         binding.callBtn.setOnClickListener(this);
@@ -165,15 +173,24 @@ public class ActiveTicketDetailActivity extends BaseActivity implements View.OnC
         });
     }
 
-
     private void populateMyTicket() {
         if (myTicket.getId() != null){
             binding.tvCarNumber.setText(myTicket.getCar().getPlateNumber());
             binding.tvParkingName.setText(myTicket.getParking().getName());
             binding.tvCurrency.setText(myTicket.getCurrency());
             binding.tvParkedBy.setText(myTicket.getActivatedBy().getName());
-            binding.tvSlot.setText(myTicket.getSlotNumber());
-            binding.tvKey.setText(myTicket.getKeyCode());
+            if (!myTicket.getSlotNumber().isEmpty()){
+                binding.tvSlot.setText(myTicket.getSlotNumber());
+            }else {
+                binding.tvSlot.setText("N/A");
+
+            }
+            if (!myTicket.getKeyCode().isEmpty()){
+                binding.tvKey.setText(myTicket.getKeyCode());
+            }else {
+                binding.tvKey.setText("N/A");
+
+            }
             binding.tvLoc.setText(myTicket.getParking().getLocation());
 
             List<TagItem> tagItems = new ArrayList<>();
@@ -188,8 +205,8 @@ public class ActiveTicketDetailActivity extends BaseActivity implements View.OnC
             binding.tagsLayout.initializeTags(this, tagItems);
 
 
-           TicketTimer ticketTimer = new TicketTimer(myTicket.getStartTime(), Double.parseDouble(myTicket.getParking().getPrice()));
-           ticketTimer.start();
+            TicketTimer ticketTimer = new TicketTimer(myTicket.getStartTime(), Double.parseDouble(myTicket.getParking().getPrice()));
+            ticketTimer.start();
         }
     }
 
@@ -291,6 +308,50 @@ public class ActiveTicketDetailActivity extends BaseActivity implements View.OnC
         dialogFragment.show(fragmentTransaction, "DurationDialogFragment");
 
     }
+
+//    private void getParkingList(boolean isLoader, int cityId) {
+//        Call<ResponseBody> call;
+//        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
+//        call = AppManager.getInstance().apiInterface.getParkingList(1,0,0);
+//        call.enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                Functions.hideLoader(hud);
+//                if (response.body() != null) {
+//                    try {
+//                        JSONObject object = new JSONObject(response.body().string());
+//                        if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
+//                            JSONObject data = object.getJSONObject(Constants.kData);
+//                            if (data.has("ticket")) {
+//                                myTicket = new Gson().fromJson(data.getString("ticket"), MyTicket.class);
+//                                ticketId = myTicket.getId();
+//                                getSingleUserTicket(false, ticketId);
+//                            }
+//
+//                        }
+//
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                        Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
+//                    }
+//                }
+//                else {
+//                    Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                Functions.hideLoader(hud);
+//                if (t instanceof UnknownHostException) {
+//                    Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
+//                }
+//                else {
+//                    Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
+//                }
+//            }
+//        });
+//    }
 
 
 

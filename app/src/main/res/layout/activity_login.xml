@@ -78,13 +78,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
-                android:hint="Enter your email"
-                android:textSize="@dimen/_16sdp"
-                android:inputType="textEmailAddress"
-                android:fontFamily="@font/helvetica"
-                android:textColor="@color/appColor"
                 android:cursorVisible="true"
-                android:textCursorDrawable="@drawable/green_cursor_drawable" />
+                android:fontFamily="@font/helvetica"
+                android:hint="Enter your email"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/appColor"
+                android:textCursorDrawable="@drawable/green_cursor_drawable"
+                android:textSize="@dimen/_16sdp" />
 
         </RelativeLayout>
         <RelativeLayout

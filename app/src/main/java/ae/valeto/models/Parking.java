@@ -33,9 +33,9 @@ public class Parking {
     @SerializedName("owner")
     @Expose
     private ParkingOwner owner;
-    @SerializedName("facilites")
+    @SerializedName("facilities")
     @Expose
-    private List<Facilities> facilites;
+    private List<Facilities> facilities;
     @SerializedName("currency")
     @Expose
     private String currency;
@@ -119,11 +119,11 @@ public class Parking {
     }
 
     public List<Facilities> getFacilites() {
-        return facilites;
+        return facilities;
     }
 
-    public void setFacilites(List<Facilities> facilites) {
-        this.facilites = facilites;
+    public void setFacilites(List<Facilities> facilities) {
+        this.facilities = facilities;
     }
 
     public String getCurrency() {

@@ -18,6 +18,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ae.valeto.activities.ActiveTicketDetailActivity;
 import ae.valeto.activities.CloseTicketActivity;
 import ae.valeto.activities.CustomerMainTabsActivity;
 import ae.valeto.activities.LoginActivity;
@@ -54,7 +55,7 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
 
         binding.profileVu.setOnClickListener(this);
         binding.carsVu.setOnClickListener(this);
-        binding.activeTicketVu.setOnClickListener(this);
+//        binding.activeTicketVu.setOnClickListener(this);
         binding.closedTicketVu.setOnClickListener(this);
         binding.termsAndConditionsVu.setOnClickListener(this);
         binding.privacyAndPolicyVu.setOnClickListener(this);
@@ -101,9 +102,9 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
         else if (v == binding.carsVu){
             carsClicked();
         }
-        else if (v == binding.activeTicketVu){
-            activeTicketClicked();
-        }
+//        else if (v == binding.activeTicketVu){
+//            activeTicketClicked();
+//        }
         else if (v == binding.closedTicketVu) {
             closedTicketClicked();
         }
@@ -195,9 +196,12 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
 
     }
 
-    private void activeTicketClicked() {
-
-    }
+//    private void activeTicketClicked() {
+//
+//        Intent intent = new Intent(getActivity(), ActiveTicketDetailActivity.class);
+//        startActivity(intent);
+//
+//    }
 
     private void carsClicked() {
         Intent intent = new Intent(getActivity(), MyCarsActivity.class);

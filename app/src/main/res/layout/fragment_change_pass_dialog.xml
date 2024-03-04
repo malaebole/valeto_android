@@ -56,8 +56,10 @@
                 android:hint="Enter old password"
                 android:inputType="text"
                 android:textColor="@color/appColor"
-                android:textCursorDrawable="@color/appColor"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_16sdp"
+                android:cursorVisible="true"
+                android:textCursorDrawable="@drawable/green_cursor_drawable"
+                />
 
         </RelativeLayout>
 
@@ -78,8 +80,9 @@
                 android:hint="Enter new password"
                 android:inputType="text"
                 android:textColor="@color/appColor"
-                android:textCursorDrawable="@color/appColor"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_16sdp"
+                android:cursorVisible="true"
+                android:textCursorDrawable="@drawable/green_cursor_drawable"/>
 
         </RelativeLayout>
 

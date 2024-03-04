@@ -180,17 +180,17 @@
 
                     <TextView
                         android:id="@+id/tv_date"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:fontFamily="@font/helvetica"
-                        android:gravity="center"
+                        android:gravity="start"
                         android:text="Arrived"
                         android:textColor="@color/lightGreyTextColor"
                         android:textSize="12sp" />
 
                     <TextView
-                        android:id="@+id/tv_name"
+                        android:id="@+id/tv_arrival_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/helvetica"
@@ -202,7 +202,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/tv_time"
+                        android:id="@+id/tv_arrival_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
@@ -210,8 +210,7 @@
                         android:gravity="center"
                         android:text="22 Oct, 2023"
                         android:textColor="@color/lightGreyTextColor"
-                        android:textSize="10sp"
-                      />
+                        android:textSize="10sp" />
 
 
                 </LinearLayout>
@@ -270,21 +269,21 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:fontFamily="@font/helvetica"
-                        android:gravity="center"
+                        android:gravity="end"
                         android:text="Exit"
                         android:textColor="@color/lightGreyTextColor"
                         android:textSize="12sp" />
 
                     <TextView
-                        android:id="@+id/tv__ex_time"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tv_ex_time"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/helvetica"
-                        android:gravity="center"
+                        android:gravity="end"
                         android:text="11:00 AM"
                         android:textColor="#23272B"
                         android:textSize="14sp"
@@ -293,11 +292,11 @@
 
                     <TextView
                         android:id="@+id/tv_ex_date"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:fontFamily="@font/helvetica"
-                        android:gravity="center"
+                        android:gravity="end"
                         android:text="22 Oct, 2023"
                         android:textColor="@color/lightGreyTextColor"
                         android:textSize="10sp" />
@@ -336,6 +335,7 @@
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/tv_parked_by"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/helvetica"
@@ -356,6 +356,7 @@
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/tv_vehicle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/helvetica"
@@ -375,6 +376,7 @@
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/tv_key"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/helvetica"
@@ -394,6 +396,7 @@
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/tv_duration"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/helvetica"
@@ -427,6 +430,7 @@
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/tv_delivered_by"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/helvetica"
@@ -447,6 +451,7 @@
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/tv_car_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/helvetica"
@@ -466,6 +471,7 @@
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/tv_slot"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/helvetica"
@@ -485,6 +491,7 @@
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/tv_paid"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/helvetica"
@@ -512,21 +519,20 @@
                 android:id="@+id/linearLayout8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/dot_line3"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
                 android:layout_marginEnd="30dp"
                 android:layout_marginBottom="20dp"
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/invoice_vu"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:scaleType="centerInside"
+                    android:scaleType="center"
                     android:src="@drawable/qr" />
 
 

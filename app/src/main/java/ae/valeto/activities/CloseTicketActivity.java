@@ -3,6 +3,7 @@ package ae.valeto.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -63,6 +64,9 @@ public class CloseTicketActivity extends BaseActivity implements View.OnClickLis
     ClosedTicketsAdapter.ItemClickListener itemClickListener = new ClosedTicketsAdapter.ItemClickListener() {
         @Override
         public void itemClicked(View view, int pos) {
+            Intent intent = new Intent(getContext(), ClosedTicketDetailActivity.class);
+            intent.putExtra("ticket_id", closedTicketsList.get(pos).getId());
+            startActivity(intent);
 
         }
     };

@@ -28,7 +28,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
-        android:background="@color/appColor"
+        android:background="@color/grayColor"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="@dimen/_15sdp"/>
 

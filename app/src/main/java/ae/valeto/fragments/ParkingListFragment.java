@@ -264,7 +264,7 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
     }
 
     private void populateMyTicket() {
-    if (myTicket.getId() != null){
+    if (myTicket != null){
             binding.activeTicketVu.setVisibility(View.VISIBLE);
             binding.tvCarNumber.setText(myTicket.getCar().getPlateNumber());
             binding.tvParkingName.setText(myTicket.getParking().getName());
@@ -272,6 +272,7 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
 
             TicketTimer ticketTimer = new TicketTimer(myTicket.getStartTime(), Double.parseDouble(myTicket.getParking().getPrice()));
             ticketTimer.start();
+
         }
 
     }
