@@ -24,20 +24,20 @@ public interface APIInterface {
                                     @Part("name") RequestBody name,
                                     @Part("email") RequestBody bibId,
                                     @Part("phone") RequestBody teamId,
-                                    @Part("password") RequestBody countryId);
+                                    @Part("password") RequestBody countryId); //clear
     @FormUrlEncoded
     @POST("auth/login")
     Call<ResponseBody> userLogin(@Field("email") String email,
-                                 @Field("password") String password);
+                                 @Field("password") String password);  // clear
     @FormUrlEncoded
     @POST("auth/verify-email")
-    Call<ResponseBody> verifyEmail(@Field("otp_code") String otpCode);
+    Call<ResponseBody> verifyEmail(@Field("otp_code") String otpCode); //clear
     @FormUrlEncoded
     @POST("auth/forgot-password")
-    Call<ResponseBody> forgetPassword(@Field("email") String email);
+    Call<ResponseBody> forgetPassword(@Field("email") String email); //clear
 
     @POST("auth/resend-otp")
-    Call<ResponseBody> sendOtp();
+    Call<ResponseBody> sendOtp(); //clear
 
 
     //user Apis
@@ -47,22 +47,22 @@ public interface APIInterface {
                                     @Field("device_type") String type,
                                     @Field("device_token") String token);
     @GET("user/profile")
-    Call<ResponseBody> getUserProfile();
+    Call<ResponseBody> getUserProfile(); //clear
     @FormUrlEncoded
     @POST("user/profile/logout")
-    Call<ResponseBody> userLogout(@Field("device_id") String deviceId);
+    Call<ResponseBody> userLogout(@Field("device_id") String deviceId); //clear
     @GET("user/profile/generate-qrcode")
-    Call<ResponseBody> generateQrCode();
+    Call<ResponseBody> generateQrCode();  //clear
     @Multipart
     @PUT("user/profile")
     Call<ResponseBody> updateUserProfile(@Part MultipartBody.Part file,
                                          @Part("name") RequestBody name,
                                          @Part("email") RequestBody email,
-                                         @Part("phone") RequestBody phone);
+                                         @Part("phone") RequestBody phone);  //clear
     @FormUrlEncoded
     @POST("user/profile/change-password")
     Call<ResponseBody> changePassword(@Field("old_password") String oldPassword,
-                                      @Field("new_password") String newPassword);
+                                      @Field("new_password") String newPassword); //clear
 
 
 
@@ -70,10 +70,10 @@ public interface APIInterface {
 
 
     @GET("user/cars")
-    Call<ResponseBody> getUserCars();
+    Call<ResponseBody> getUserCars(); //clear
 
     @GET("user/cars/brands-with-models")
-    Call<ResponseBody> getCarManufacturerList();
+    Call<ResponseBody> getCarManufacturerList(); //clear
 
     @GET("user/cars/{id}")
     Call<ResponseBody> getSingleUserCar(@Path("id") int id);
@@ -84,7 +84,7 @@ public interface APIInterface {
                                      @Part("name") RequestBody name,
                                      @Part("plate_number") RequestBody plateNumber,
                                      @Part("brand") RequestBody brand,
-                                     @Part("model") RequestBody model);
+                                     @Part("model") RequestBody model); //clear
 
     @Multipart
     @PUT("user/cars")
@@ -93,33 +93,33 @@ public interface APIInterface {
                                      @Part("name") RequestBody name,
                                      @Part("plate_number") RequestBody plateNumber,
                                      @Part("brand") RequestBody brand,
-                                     @Part("model") RequestBody model);
+                                     @Part("model") RequestBody model); //clear
 
     @DELETE("user/cars")
-    Call<ResponseBody> deleteUserCar(@Query("car_id") int carId);
+    Call<ResponseBody> deleteUserCar(@Query("car_id") int carId); //clear
 
 
     //User Parking Apis
 
 
     @GET("user/tickets/closed")
-    Call<ResponseBody> getUserClosedTickets();
+    Call<ResponseBody> getUserClosedTickets(); //clear
 
 
     @GET("user/tickets/{id}")
-    Call<ResponseBody> getSingleUserTicket(@Path("id") int id);
+    Call<ResponseBody> getSingleUserTicket(@Path("id") int id); //clear
     @FormUrlEncoded
     @POST("user/tickets/make-car-ready")
     Call<ResponseBody> makeMyCarReady(@Field("ticket_id") int ticketId,
-                                      @Field("make_ready_in") String makeItReadyIn);
+                                      @Field("make_ready_in") String makeItReadyIn); //clear
 
     @GET("user/parking")
     Call<ResponseBody> getParkingList(@Query("city_id") int cityId,
                                       @Query("latitude") double latitude,
-                                      @Query("longitude") double longitude);
+                                      @Query("longitude") double longitude); //clear
 
     @GET("user/parking/{id}")
-    Call<ResponseBody> getSingleUserParking(@Path("id") int id);
+    Call<ResponseBody> getSingleUserParking(@Path("id") int id); //clear
     @FormUrlEncoded
     @POST("user/parking/add-review")
     Call<ResponseBody> addParkingReview(@Field("parking_id") String parkingId,

@@ -94,10 +94,12 @@ public class CloseTicketActivity extends BaseActivity implements View.OnClickLis
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
+                        Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
+                }else {
+                    Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);

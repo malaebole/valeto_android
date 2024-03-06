@@ -108,6 +108,8 @@ public class MyCarsActivity extends BaseActivity implements View.OnClickListener
                                 carsAdapter.notifyDataSetChanged();
                             }
 
+                        }else {
+                            Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
                         }
 
                     } catch (Exception e) {
@@ -196,6 +198,7 @@ public class MyCarsActivity extends BaseActivity implements View.OnClickListener
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
+                        Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
                 }
             }
@@ -225,18 +228,26 @@ public class MyCarsActivity extends BaseActivity implements View.OnClickListener
                         if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
                             Functions.showToast(getContext(),"Car Deleted Successfully!", FancyToast.SUCCESS);
                             removeCarFromList(carId);
-
-
+                        }else {
+                            Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
+                        Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
 
                     }
+                }else {
+                    Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
+                if (t instanceof UnknownHostException) {
+                    Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
+                } else {
+                    Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
+                }
             }
         });
     }

@@ -72,6 +72,7 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
     private Location location;
     private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
     private static final float MIN_DISTANCE_CHANGE_FOR_UPDATES = 10.0f; // 10 meters
+    TicketTimer ticketTimer;
 
 
     public ParkingListFragment() {
@@ -113,10 +114,26 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
     ParkingCityAdapter.ItemClickListener parkingNameClickListener = new ParkingCityAdapter.ItemClickListener() {
         @Override
         public void itemClicked(View view, int pos) {
-            parkingCityAdapter.setSelectedId(parkingCityList.get(pos).getId());
-            parkingCityId = parkingCityList.get(pos).getId();
+
+
+            if (parkingCityList.get(pos) != null){
+
+                parkingCityId = parkingCityList.get(pos).getId();
 //            getParkingList(true, parkingCityId);
+
+            }
             parkingAdapter.notifyDataSetChanged();
+            parkingCityAdapter.setSelectedIndex(pos);
+
+
+
+
+
+
+
+
+
+
         }
     };
 
@@ -136,6 +153,7 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        ticketTimer.stop();
     }
 
     @Override
@@ -216,17 +234,20 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
                             JSONArray citiesArr = data.getJSONArray("cities");
                             Gson gson1 = new Gson();
                             parkingCityList.clear();
+//
+//                            ParkingCity allParkingCity = new ParkingCity();
+//                            parkingCityList.add(0,null);
+//                            parkingCityList.get(0).setId(0);
+//                            parkingCityList.add(allParkingCity);
 
-                            ParkingCity allParkingCity = new ParkingCity();
-                            allParkingCity.setId(0);
-                            allParkingCity.setName("All");
-                            parkingCityList.add(allParkingCity);
 
-                            for (int i = 0; i < arr.length(); i++) {
+
+                            for (int i = 0; i < citiesArr.length(); i++) {
                                 ParkingCity parkingCity = gson1.fromJson(citiesArr.get(i).toString(), ParkingCity.class);
                                 parkingCityList.add(parkingCity);
                             }
-                            parkingCityAdapter.setSelectedId(parkingCityList.get(0).getId());
+                            parkingCityList.add(0, null);
+                            parkingCityAdapter.setSelectedIndex(0);
 
                             if (data.has("ticket")) {
                                 myTicket = new Gson().fromJson(data.getString("ticket"), MyTicket.class);
@@ -238,6 +259,8 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
                             parkingCityAdapter.notifyDataSetChanged();
 
 
+                        }else {
+                            Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
                         }
 
                     } catch (Exception e) {
@@ -270,7 +293,7 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
             binding.tvParkingName.setText(myTicket.getParking().getName());
             binding.tvParkingPrice.setText("AED " + myTicket.getParking().getPrice()+ "/hr");
 
-            TicketTimer ticketTimer = new TicketTimer(myTicket.getStartTime(), Double.parseDouble(myTicket.getParking().getPrice()));
+            ticketTimer = new TicketTimer(myTicket.getStartTime(), Double.parseDouble(myTicket.getParking().getPrice()));
             ticketTimer.start();
 
         }

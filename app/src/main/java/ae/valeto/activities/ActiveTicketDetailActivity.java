@@ -107,6 +107,8 @@ public class ActiveTicketDetailActivity extends BaseActivity implements View.OnC
                             myTicket = gson.fromJson(obj.toString(), MyTicket.class);
                             populateMyTicket();
 
+                        }else {
+                            Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
                         }
 
                     } catch (Exception e) {
@@ -148,6 +150,8 @@ public class ActiveTicketDetailActivity extends BaseActivity implements View.OnC
                             binding.btnMakeCarReady.setVisibility(View.GONE);
                             finish();
 
+                        }else {
+                            Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
                         }
 
                     } catch (Exception e) {

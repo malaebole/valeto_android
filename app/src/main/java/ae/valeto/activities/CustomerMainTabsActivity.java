@@ -15,6 +15,8 @@ import com.kaopiz.kprogresshud.KProgressHUD;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
+
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import ae.valeto.R;
@@ -173,16 +175,26 @@ public class CustomerMainTabsActivity extends BaseActivity {
                             intent.putExtra("base64", base64String);
                             startActivity(intent);
 
+                        }else {
+                            Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
+                        Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
 
                     }
+                }else {
+                    Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
+                if (t instanceof UnknownHostException) {
+                    Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
+                } else {
+                    Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
+                }
             }
         });
     }

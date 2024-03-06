@@ -12,6 +12,8 @@ import com.shashank.sony.fancytoastlib.FancyToast;
 
 import org.json.JSONObject;
 
+import java.net.UnknownHostException;
+
 import ae.valeto.R;
 import ae.valeto.base.BaseActivity;
 import ae.valeto.databinding.ActivityVerifyEmailBinding;
@@ -118,21 +120,27 @@ public class VerifyEmailActivity extends BaseActivity implements View.OnClickLis
 
                                 userInfo.setEmailVerified("yes");
                                 Functions.saveUserinfo(getContext(), userInfo);
-
-
                             }
                             else {
                                 Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
+                            Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
 
                         }
+                    } else {
+                        Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                     }
                 }
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
                     Functions.hideLoader(hud);
+                    if (t instanceof UnknownHostException) {
+                        Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
+                    } else {
+                        Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
+                    }
                 }
             });
         }
@@ -155,13 +163,20 @@ public class VerifyEmailActivity extends BaseActivity implements View.OnClickLis
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
-
+                        Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
+                } else {
+                    Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
+                if (t instanceof UnknownHostException) {
+                    Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
+                } else {
+                    Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
+                }
             }
         });
     }

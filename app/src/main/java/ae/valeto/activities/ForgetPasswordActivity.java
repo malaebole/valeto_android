@@ -14,6 +14,8 @@ import com.shashank.sony.fancytoastlib.FancyToast;
 
 import org.json.JSONObject;
 
+import java.net.UnknownHostException;
+
 import ae.valeto.R;
 import ae.valeto.base.BaseActivity;
 import ae.valeto.databinding.ActivityForgetPasswordBinding;
@@ -69,22 +71,29 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
                     try {
                         JSONObject object = new JSONObject(response.body().string());
                         if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
-
                             binding.layoutResetPass.setVisibility(View.GONE);
                             binding.resetDoneImg.setVisibility(View.VISIBLE);
                             binding.tvInfo.setText("An email has been sent to " + email + " this email, please open your email and reset your password");
-
-
+                        }else {
+                            Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
+                        Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
 
                     }
+                }else {
+                    Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
+                if (t instanceof UnknownHostException) {
+                    Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
+                } else {
+                    Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
+                }
             }
         });
     }

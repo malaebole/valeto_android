@@ -14,6 +14,8 @@ import com.shashank.sony.fancytoastlib.FancyToast;
 
 import org.json.JSONObject;
 
+import java.net.UnknownHostException;
+
 import ae.valeto.R;
 import ae.valeto.databinding.FragmentChangePassDialogBinding;
 import ae.valeto.databinding.FragmentEditCarDialogBinding;
@@ -100,19 +102,27 @@ public class ChangePassDialogFragment extends DialogFragment implements View.OnC
                     try {
                         JSONObject object = new JSONObject(response.body().string());
                         if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
-
                             dialogCallback.didSubmitResult(ChangePassDialogFragment.this);
-
+                        }else {
+                            Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
+                        Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
 
                     }
+                }else {
+                    Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
+                if (t instanceof UnknownHostException) {
+                    Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
+                } else {
+                    Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
+                }
             }
         });
     }

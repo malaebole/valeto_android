@@ -13,8 +13,11 @@ import android.widget.TextView;
 import com.google.android.datatransport.backend.cct.BuildConfig;
 import com.google.gson.Gson;
 import com.kaopiz.kprogresshud.KProgressHUD;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import org.json.JSONObject;
+
+import java.net.UnknownHostException;
 
 import ae.valeto.R;
 import ae.valeto.activities.CustomerMainTabsActivity;
@@ -208,16 +211,25 @@ public class SplashActivity extends BaseActivity {
                             Gson gson = new Gson();
                             UserInfo userInfo = gson.fromJson(obj.toString(), UserInfo.class);
                             Functions.saveUserinfo(getContext(), userInfo);
+                        }  else {
+                            Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
                         }
                     } catch (Exception e) {
+                        Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                         e.printStackTrace();
-
                     }
+                }else {
+                    Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
+                if (t instanceof UnknownHostException) {
+                    Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
+                } else {
+                    Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
+                }
             }
         });
     }

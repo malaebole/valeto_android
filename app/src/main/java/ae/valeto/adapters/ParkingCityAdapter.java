@@ -54,9 +54,14 @@ public class ParkingCityAdapter extends RecyclerView.Adapter<ParkingCityAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ParkingCity parkingCity = list.get(position);
-        holder.tvName.setText(parkingCity.getName());
 
-        if (parkingCity.getId() == selectedId) {
+        if (parkingCity == null){
+            holder.tvName.setText("All");
+        }else{
+            holder.tvName.setText(parkingCity.getName());
+        }
+
+        if (position == selectedIndex) {
             holder.cardView.setStrokeColor(context.getResources().getColor(R.color.yellowColor) );
             holder.cardView.setCardBackgroundColor(Color.parseColor("#25A297"));
             holder.tvName.setTextColor(context.getResources().getColor(R.color.yellowColor));

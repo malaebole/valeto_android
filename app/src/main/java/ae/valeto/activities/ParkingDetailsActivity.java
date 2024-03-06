@@ -106,6 +106,8 @@ public class ParkingDetailsActivity extends BaseActivity implements View.OnClick
                             parking = gson.fromJson(obj.toString(), Parking.class);
                             populateParkingData();
 
+                        }else {
+                            Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
                         }
 
                     } catch (Exception e) {

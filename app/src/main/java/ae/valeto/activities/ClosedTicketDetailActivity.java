@@ -88,6 +88,8 @@ public class ClosedTicketDetailActivity extends BaseActivity implements View.OnC
                             myTicket = gson.fromJson(obj.toString(), MyTicket.class);
                             populateMyTicket();
 
+                        }else {
+                            Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
                         }
 
                     } catch (Exception e) {
