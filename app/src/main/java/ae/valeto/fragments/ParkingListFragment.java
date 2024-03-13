@@ -126,14 +126,6 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
             parkingCityAdapter.setSelectedIndex(pos);
 
 
-
-
-
-
-
-
-
-
         }
     };
 
@@ -153,7 +145,9 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        ticketTimer.stop();
+        if (ticketTimer !=null){
+            ticketTimer.stop();
+        }
     }
 
     @Override

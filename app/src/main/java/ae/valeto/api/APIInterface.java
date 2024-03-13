@@ -4,6 +4,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -32,13 +33,12 @@ public interface APIInterface {
     @FormUrlEncoded
     @POST("auth/verify-email")
     Call<ResponseBody> verifyEmail(@Field("otp_code") String otpCode); //clear
+
     @FormUrlEncoded
     @POST("auth/forgot-password")
     Call<ResponseBody> forgetPassword(@Field("email") String email); //clear
-
     @POST("auth/resend-otp")
     Call<ResponseBody> sendOtp(); //clear
-
 
     //user Apis
     @FormUrlEncoded
@@ -63,6 +63,10 @@ public interface APIInterface {
     @POST("user/profile/change-password")
     Call<ResponseBody> changePassword(@Field("old_password") String oldPassword,
                                       @Field("new_password") String newPassword); //clear
+
+
+
+
 
 
 

@@ -150,6 +150,8 @@ public class BaseActivity extends AppCompatActivity {
 
     protected void sendFcmTokenApi(String token) {
         String uniqueID = Functions.getPrefValue(this, Constants.kDeviceUniqueId);
+//        Log.e("Device ID",uniqueID);
+//        Log.e("Device Token",token);
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.sendFcmToken(uniqueID, "android", token);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -222,105 +224,7 @@ public class BaseActivity extends AppCompatActivity {
         drawable.draw(canvas);
         return bitmap;
     }
-    protected Bitmap getBitmapFromView(View view, Drawable drawable) {
-        //Define a bitmap with the same size as the view
-        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),Bitmap.Config.ARGB_8888);
-        //Bind a canvas to it
-        Canvas canvas = new Canvas(returnedBitmap);
-        if (drawable != null) {
-            Bitmap bitmap = getBitmap(drawable);
-            canvas.drawBitmap(bitmap, canvas.getWidth() - bitmap.getWidth(), canvas.getHeight() - bitmap.getHeight(), new Paint());
-        }
-        else {
-            canvas.drawColor(Color.WHITE);
-        }
-        // draw the view on the canvas
-        view.draw(canvas);
-        //return the bitmap
-        return returnedBitmap;
-    }
-    protected Bitmap getBitmapFromView(View view) {
-        //Define a bitmap with the same size as the view
-        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),Bitmap.Config.ARGB_8888);
-        //Bind a canvas to it
-        Canvas canvas = new Canvas(returnedBitmap);
-        //Get the view's background
-        Drawable bgDrawable =view.getBackground();
-        if (bgDrawable!=null) {
-            //has background drawable, then draw it on the canvas
-            bgDrawable.draw(canvas);
-        }   else{
-            //does not have background drawable, then draw white background on the canvas
-            canvas.drawColor(Color.WHITE);
-        }
-        // draw the view on the canvas
-        view.draw(canvas);
-        //return the bitmap
-        return returnedBitmap;
-    }
-    protected Uri saveBitmap(@NonNull final Context context, @NonNull final Bitmap bitmap) throws IOException {
 
-        final ContentValues values = new ContentValues();
-        //values.put(MediaStore.MediaColumns.DISPLAY_NAME, "image_" + System.currentTimeMillis() + ".jpg");
-        //values.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpg");
-        values.put(MediaStore.MediaColumns.DISPLAY_NAME, "image_" + System.currentTimeMillis() + ".png");
-        values.put(MediaStore.MediaColumns.MIME_TYPE, "image/png");
-        values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DCIM);
-
-        final ContentResolver resolver = context.getContentResolver();
-        Uri uri = null;
-
-        try {
-            final Uri contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-            uri = resolver.insert(contentUri, values);
-
-            if (uri == null)
-                throw new IOException("Failed to create new MediaStore record.");
-
-            try (final OutputStream stream = resolver.openOutputStream(uri)) {
-                if (stream == null)
-                    throw new IOException("Failed to open output stream.");
-
-//                if (!bitmap.compress(Bitmap.CompressFormat.JPEG, 95, stream))
-//                    throw new IOException("Failed to save bitmap.");
-
-                if (!bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream))
-                    throw new IOException("Failed to save bitmap.");
-            }
-
-            return uri;
-        }
-        catch (IOException e) {
-
-            if (uri != null) {
-                // Don't leave an orphan entry in the MediaStore
-                resolver.delete(uri, null, null);
-            }
-
-            throw e;
-        }
-    }
-    public String saveBitmap(Bitmap bitmap) {
-        File mediaStorageDir = getCacheDir();
-        File myFilePath = new File(mediaStorageDir.getAbsolutePath() + "/camera");
-        if (!myFilePath.exists())
-            myFilePath.mkdir();
-
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        File fileName = new File(myFilePath.getPath() + File.separator + "IMG_" + timeStamp + ".png");
-
-        try {
-            FileOutputStream outputStream = new FileOutputStream(String.valueOf(fileName));
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-            outputStream.close();
-
-            return fileName.getAbsolutePath();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
     protected void getUnreadNotificationAPI(UnreadCountCallback callback) {
 //        Call<ResponseBody> call = AppManager.getInstance().apiInterface.unreadNotifCount(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID));
 //        call.enqueue(new Callback<ResponseBody>() {
@@ -357,5 +261,6 @@ public class BaseActivity extends AppCompatActivity {
     public interface UnreadCountCallback {
         void unreadNotificationCount(int count);
     }
+
 
 }

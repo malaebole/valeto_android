@@ -89,9 +89,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_marginStart="@dimen/_5sdp"
-                app:cardElevation="4dp"
                 app:cardBackgroundColor="#E5FFEB"
                 app:strokeColor="#74C686"
+                android:layout_marginBottom="@dimen/_5sdp"
                 app:strokeWidth="@dimen/_1sdp"
                 app:cardCornerRadius="@dimen/_18sdp"
                 android:layout_gravity="center_vertical|end">

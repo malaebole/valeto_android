@@ -164,8 +164,7 @@ public class ClosedTicketDetailActivity extends BaseActivity implements View.OnC
                 Glide.with(getApplicationContext()).load(myTicket.getInvoice()).into(binding.invoiceVu);
             }
             if (!myTicket.getParking().getPhoto().isEmpty()){
-                Glide.with(getApplicationContext()).load(myTicket.getParking().getPhoto()).into(binding.invoiceVu);
-
+                Glide.with(getApplicationContext()).load(myTicket.getParking().getPhoto()).into(binding.imgVu);
             }
 
         }

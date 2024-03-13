@@ -15,7 +15,7 @@ public class ClosedTickets {
     private String endTime;
     @SerializedName("price")
     @Expose
-    private Integer price;
+    private Double price;
     @SerializedName("discount")
     @Expose
     private Integer discount;
@@ -59,11 +59,11 @@ public class ClosedTickets {
         this.endTime = endTime;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

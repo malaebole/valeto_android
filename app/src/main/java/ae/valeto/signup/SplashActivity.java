@@ -28,6 +28,8 @@ import ae.valeto.models.UserInfo;
 import ae.valeto.util.AppManager;
 import ae.valeto.util.Constants;
 import ae.valeto.util.Functions;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -211,6 +213,7 @@ public class SplashActivity extends BaseActivity {
                             Gson gson = new Gson();
                             UserInfo userInfo = gson.fromJson(obj.toString(), UserInfo.class);
                             Functions.saveUserinfo(getContext(), userInfo);
+
                         }  else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
                         }
@@ -233,4 +236,78 @@ public class SplashActivity extends BaseActivity {
             }
         });
     }
+//    protected void isUserActive(boolean isLoader) {
+//        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing") : null;
+//        Call<ResponseBody> call = AppManager.getInstance().apiInterface.isUserActive(true); // Call isUserActive with false as the argument
+//        call.enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                Functions.hideLoader(hud);
+//                if (response.isSuccessful()) {
+//                    try {
+//                        JSONObject object = new JSONObject(response.body().string());
+//                        if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
+//                            // Handle success case here
+//                        } else {
+//                            Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
+//                        }
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                        Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
+//                    }
+//                } else {
+//                    Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                Functions.hideLoader(hud);
+//                if (t instanceof UnknownHostException) {
+//                    Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
+//                } else {
+//                    Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
+//                }
+//            }
+//        });
+//    }
+
+//    protected void isUserActive(boolean isLoader, Boolen value) {
+//        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing") : null;
+//
+//        try {
+//            JSONObject requestData = new JSONObject();
+//            requestData.put("is_online", true);
+//
+//            RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), requestData.toString());
+//
+//            Call<ResponseBody> call = AppManager.getInstance().apiInterface.isUserActive(requestBody);
+//            call.enqueue(new Callback<ResponseBody>() {
+//                @Override
+//                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                    Functions.hideLoader(hud);
+//                    if (response.isSuccessful()) {
+//
+//                        // Handle success response
+//
+//                    } else {
+//                        Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                    Functions.hideLoader(hud);
+//                    if (t instanceof UnknownHostException) {
+//                        Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
+//                    } else {
+//                        Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
+//                    }
+//                }
+//            });
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
+//        }
+//    }
 }

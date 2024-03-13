@@ -532,8 +532,7 @@
                     android:layout_height="120dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:scaleType="center"
-                    android:src="@drawable/qr" />
+                    android:scaleType="center" />
 
 
                 <TextView
