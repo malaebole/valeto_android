@@ -68,7 +68,7 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
 
     private String selectedClubId = "";
     private int selectedIndex = 0;
-    private int parkingCityId;
+    private String parkingCityId = "";
     private Location location;
     private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
     private static final float MIN_DISTANCE_CHANGE_FOR_UPDATES = 10.0f; // 10 meters
@@ -116,14 +116,16 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
         public void itemClicked(View view, int pos) {
 
 
-            if (parkingCityList.get(pos) != null){
+            if (parkingCityList.get(pos) == null){
+                parkingCityId = "";
+                getParkingList(true);
 
-                parkingCityId = parkingCityList.get(pos).getId();
-//            getParkingList(true, parkingCityId);
-
+            }else{
+                parkingCityId = String.valueOf(parkingCityList.get(pos).getId());
+                getParkingList(true);
             }
-            parkingAdapter.notifyDataSetChanged();
             parkingCityAdapter.setSelectedIndex(pos);
+//            parkingAdapter.notifyDataSetChanged();
 
 
         }
@@ -195,15 +197,15 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
 //    }
 
 
-    private void getParkingList(boolean isLoader, int cityId) {
+    private void getParkingList(boolean isLoader) {
         Call<ResponseBody> call;
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
 //        call = AppManager.getInstance().apiInterface.getParkingList(latitude,longitude);
         if (location == null) {
-            call = AppManager.getInstance().apiInterface.getParkingList(cityId,0, 0);
+            call = AppManager.getInstance().apiInterface.getParkingList(parkingCityId,0, 0);
         }
         else {
-            call = AppManager.getInstance().apiInterface.getParkingList(cityId, location.getLatitude(), location.getLongitude());
+            call = AppManager.getInstance().apiInterface.getParkingList(parkingCityId, location.getLatitude(), location.getLongitude());
         }
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -218,30 +220,34 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
                             JSONArray arr = data.getJSONArray("parking");
                             Gson gson = new Gson();
                             parkingList.clear();
-                            AppManager.getInstance().parkings.clear();
+//                            AppManager.getInstance().parkings.clear();
                             for (int i = 0; i < arr.length(); i++) {
                                 Parking parking = gson.fromJson(arr.get(i).toString(), Parking.class);
                                 parkingList.add(parking);
-                                AppManager.getInstance().parkings.add(parking);
+//                                AppManager.getInstance().parkings.add(parking);
                             }
 
-                            JSONArray citiesArr = data.getJSONArray("cities");
-                            Gson gson1 = new Gson();
-                            parkingCityList.clear();
-//
-//                            ParkingCity allParkingCity = new ParkingCity();
-//                            parkingCityList.add(0,null);
-//                            parkingCityList.get(0).setId(0);
-//                            parkingCityList.add(allParkingCity);
+                            if (parkingCityList.isEmpty()){
+
+                                JSONArray citiesArr = data.getJSONArray("cities");
+                                Gson gson1 = new Gson();
+                                parkingCityList.clear();
+
+                                //                            ParkingCity allParkingCity = new ParkingCity();
+                                //                            parkingCityList.add(0,null);
+                                //                            parkingCityList.get(0).setId(0);
+                                //                            parkingCityList.add(allParkingCity);
+
+                                for (int i = 0; i < citiesArr.length(); i++) {
+                                    ParkingCity parkingCity = gson1.fromJson(citiesArr.get(i).toString(), ParkingCity.class);
+                                    parkingCityList.add(parkingCity);
+                                }
+                                parkingCityList.add(0, null);
+                                parkingCityAdapter.setSelectedIndex(0);
 
 
-
-                            for (int i = 0; i < citiesArr.length(); i++) {
-                                ParkingCity parkingCity = gson1.fromJson(citiesArr.get(i).toString(), ParkingCity.class);
-                                parkingCityList.add(parkingCity);
+                                parkingCityAdapter.notifyDataSetChanged();
                             }
-                            parkingCityList.add(0, null);
-                            parkingCityAdapter.setSelectedIndex(0);
 
                             if (data.has("ticket")) {
                                 myTicket = new Gson().fromJson(data.getString("ticket"), MyTicket.class);
@@ -250,7 +256,7 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
 
 
                             parkingAdapter.notifyDataSetChanged();
-                            parkingCityAdapter.notifyDataSetChanged();
+
 
 
                         }else {
@@ -429,12 +435,12 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
             @Override
             public void onSuccess(Location loc) {
                 location = loc;
-                getParkingList(parkingList.isEmpty(), parkingCityId);
+                getParkingList(parkingList.isEmpty());
             }
 
             @Override
             public void onFailed(AirLocation.LocationFailedEnum locationFailedEnum) {
-                getParkingList(false,parkingCityId);
+                getParkingList(false);
             }
         });
     }

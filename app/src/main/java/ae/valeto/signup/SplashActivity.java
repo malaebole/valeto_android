@@ -140,7 +140,6 @@ public class SplashActivity extends BaseActivity {
         }
 
     }
-
     protected void sendAppLangApi() {
 //        String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
 //        if (userId!=null){
@@ -167,7 +166,6 @@ public class SplashActivity extends BaseActivity {
 //            });
 //        }
     }
-
     private void checkUpdatesApi() {
 //        Call<ResponseBody> call = AppManager.getInstance().apiInterface.checkUpdate("android");
 //        call.enqueue(new Callback<ResponseBody>() {
@@ -197,7 +195,6 @@ public class SplashActivity extends BaseActivity {
 //            }
 //        });
     }
-
     private void getProfileAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getUserProfile();

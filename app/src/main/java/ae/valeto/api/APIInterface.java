@@ -118,7 +118,7 @@ public interface APIInterface {
                                       @Field("make_ready_in") String makeItReadyIn); //clear
 
     @GET("user/parking")
-    Call<ResponseBody> getParkingList(@Query("city_id") int cityId,
+    Call<ResponseBody> getParkingList(@Query("city_id") String cityId,
                                       @Query("latitude") double latitude,
                                       @Query("longitude") double longitude); //clear
 
