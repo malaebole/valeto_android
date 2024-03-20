@@ -2,9 +2,11 @@ package ae.valeto.fragments;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -12,6 +14,9 @@ import android.location.LocationManager;
 import android.os.Bundle;
 
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.provider.Settings;
@@ -44,6 +49,8 @@ import ae.valeto.adapters.ParkingCityAdapter;
 import ae.valeto.base.BaseFragment;
 import ae.valeto.activities.CustomerMainTabsActivity;
 import ae.valeto.databinding.FragmentParkingListBinding;
+import ae.valeto.dialogs.RatingDialogFragment;
+import ae.valeto.dialogs.ScanSuccessPopupFragment;
 import ae.valeto.models.MyTicket;
 import ae.valeto.models.Parking;
 import ae.valeto.models.ParkingCity;
@@ -65,20 +72,15 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
     private ParkingCityAdapter parkingCityAdapter;
     private ParkingAdapter parkingAdapter;
     private MyTicket myTicket;
-
-    private String selectedClubId = "";
-    private int selectedIndex = 0;
+    private final String selectedClubId = "";
+    private final int selectedIndex = 0;
     private String parkingCityId = "";
     private Location location;
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
-    private static final float MIN_DISTANCE_CHANGE_FOR_UPDATES = 10.0f; // 10 meters
     TicketTimer ticketTimer;
-
 
     public ParkingListFragment() {
         //Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -110,7 +112,6 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
 
         return view;
     }
-
     ParkingCityAdapter.ItemClickListener parkingNameClickListener = new ParkingCityAdapter.ItemClickListener() {
         @Override
         public void itemClicked(View view, int pos) {
@@ -130,7 +131,6 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
 
         }
     };
-
     ParkingAdapter.ItemClickListener itemClickListener = new ParkingAdapter.ItemClickListener() {
         @Override
         public void itemClicked(View view, int pos) {
@@ -141,15 +141,14 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
         }
     };
 
-
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
         if (ticketTimer !=null){
             ticketTimer.stop();
         }
+        binding = null;
+
     }
 
     @Override
@@ -157,6 +156,49 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
         super.onResume();
         getLocationAndCallAPI();
         setBadgeValue();
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mMessageReceiver, new IntentFilter("receive_push"));
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(mMessageReceiver);
+    }
+
+    private final BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String type = intent.getStringExtra("type");
+            if (type !=null){
+                if (type.equalsIgnoreCase("ticketAcceptedByEmployee")) {
+                    binding.tvStatus.setText("Accepted");
+                }
+                else if (type.equalsIgnoreCase("ticketClosed")) {
+                    binding.activeTicketVu.setVisibility(View.GONE);
+                    showRatingDialog();
+                }
+            }
+
+
+        }
+    };
+
+
+    protected void showRatingDialog() {
+        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+        Fragment fragment = getParentFragmentManager().findFragmentByTag("RatingDialogFragment");
+        if (fragment != null) {
+            fragmentTransaction.remove(fragment);
+        }
+        fragmentTransaction.addToBackStack(null);
+        RatingDialogFragment dialogFragment = new RatingDialogFragment(String.valueOf(myTicket.getParking().getId()),
+                                                                            myTicket.getParking().getPhoto(), myTicket.getParking().getName(),
+                                                                            myTicket.getParking().getLocation());
+        dialogFragment.setDialogCallback((df) -> {
+            df.dismiss();
+        });
+        dialogFragment.show(fragmentTransaction, "RatingDialogFragment");
+
     }
 
     @Override
@@ -173,14 +215,11 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
         }
 
     }
-
-
     private void notifClicked() {
         if (getActivity() instanceof CustomerMainTabsActivity) {
             ((CustomerMainTabsActivity) getActivity()).notificationsClicked();
         }
     }
-
     public void setBadgeValue() {
         if (AppManager.getInstance().notificationCount > 0) {
             binding.toolbarBadge.setVisibility(View.VISIBLE);
@@ -192,11 +231,10 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
     }
 
 
+
 //    private void populateClubData (int pos){
 //
 //    }
-
-
     private void getParkingList(boolean isLoader) {
         Call<ResponseBody> call;
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
@@ -220,11 +258,11 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
                             JSONArray arr = data.getJSONArray("parking");
                             Gson gson = new Gson();
                             parkingList.clear();
-//                            AppManager.getInstance().parkings.clear();
+                                // AppManager.getInstance().parkings.clear();
                             for (int i = 0; i < arr.length(); i++) {
                                 Parking parking = gson.fromJson(arr.get(i).toString(), Parking.class);
                                 parkingList.add(parking);
-//                                AppManager.getInstance().parkings.add(parking);
+                                // AppManager.getInstance().parkings.add(parking);
                             }
 
                             if (parkingCityList.isEmpty()){
@@ -233,10 +271,10 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
                                 Gson gson1 = new Gson();
                                 parkingCityList.clear();
 
-                                //                            ParkingCity allParkingCity = new ParkingCity();
-                                //                            parkingCityList.add(0,null);
-                                //                            parkingCityList.get(0).setId(0);
-                                //                            parkingCityList.add(allParkingCity);
+                                //   ParkingCity allParkingCity = new ParkingCity();
+                                //   parkingCityList.add(0,null);
+                                //   parkingCityList.get(0).setId(0);
+                                //   parkingCityList.add(allParkingCity);
 
                                 for (int i = 0; i < citiesArr.length(); i++) {
                                     ParkingCity parkingCity = gson1.fromJson(citiesArr.get(i).toString(), ParkingCity.class);
@@ -285,29 +323,33 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
             }
         });
     }
-
     private void populateMyTicket() {
     if (myTicket != null){
             binding.activeTicketVu.setVisibility(View.VISIBLE);
             binding.tvCarNumber.setText(myTicket.getCar().getPlateNumber());
             binding.tvParkingName.setText(myTicket.getParking().getName());
             binding.tvParkingPrice.setText("AED " + myTicket.getParking().getPrice()+ "/hr");
+            binding.tvStatus.setText(myTicket.getStatus());
 
-            ticketTimer = new TicketTimer(myTicket.getStartTime(), Double.parseDouble(myTicket.getParking().getPrice()));
-            ticketTimer.start();
+            if (myTicket.getStatus().equalsIgnoreCase("requested") || myTicket.getStatus().equalsIgnoreCase("accepted") || myTicket.getStatus().equalsIgnoreCase("closed")){
+                if (ticketTimer !=null){
+                    ticketTimer.stop();
+                }
+            }else{
+                ticketTimer = new TicketTimer(myTicket.getStartTime(), Double.parseDouble(myTicket.getParking().getPrice()));
+                ticketTimer.start();
+            }
 
         }
 
     }
-
-
     private class TicketTimer {
         private static final String TIME_FORMAT = "dd/MM/yyyy hh:mma";
         private static final long TICK_INTERVAL = 1000; // Update timer every second
 
         private Date startTime;
         private Timer timer;
-        private double parkingPrice;
+        private final double parkingPrice;
 
         public TicketTimer(String startTimeString, double parkingPrice) {
             this.parkingPrice = parkingPrice;
@@ -367,15 +409,11 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
             });
         }
 
-
-
         private double calculatePrice(long elapsedTime) {
             double totalMinutes = elapsedTime / (60 * 1000);
             return (parkingPrice / 60) * totalMinutes;
         }
     }
-
-
     private void enableLocationUpdates() {
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
@@ -408,7 +446,6 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
             //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, locationListener);
         }
     }
-
 //    private LocationListener locationListener = new LocationListener() {
 //        @Override
 //        public void onLocationChanged(Location location) {
@@ -427,9 +464,6 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
 //        @Override
 //        public void onProviderDisabled(String provider) {}
 //    };
-
-
-
     private void getLocationAndCallAPI() {
         new AirLocation(getActivity(), true, false, new AirLocation.Callbacks() {
             @Override
@@ -444,7 +478,5 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
             }
         });
     }
-
-
 
 }

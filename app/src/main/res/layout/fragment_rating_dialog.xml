@@ -4,7 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/darkGrayColor">
+        android:background="@color/transparent">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/rel_main"
@@ -62,7 +62,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
-                                    android:id="@+id/tv_parking_name"
+                                    android:id="@+id/tv_name"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:ellipsize="end"
@@ -105,7 +105,7 @@
 
                         </RelativeLayout>
                 <TextView
-                    android:id="@+id/tv_name"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -141,7 +141,7 @@
                     android:layout_marginEnd="@dimen/_20sdp"
                     android:fontFamily="@font/helvetica"
                     android:gravity="center"
-                    android:text="How is the park? Give your rating to support this parking place."
+                    android:text="Your feedback is important to us, please leave a feedback."
                     android:textColor="@color/lightGreyTextColor"
                     android:textSize="@dimen/_16sdp" />
 
@@ -159,15 +159,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@null"
-                        android:fontFamily="@font/helvetica"
-                        android:hint="Type your comment here"
-                        android:paddingTop="@dimen/_5sdp"
-                        android:gravity="start"
-                        android:inputType="text"
-                        android:textColor="@color/appColor"
-                        android:textSize="@dimen/_16sdp"
                         android:cursorVisible="true"
-                        android:textCursorDrawable="@drawable/green_cursor_drawable"/>
+                        android:fontFamily="@font/helvetica"
+                        android:gravity="start"
+                        android:hint="Type your comment here"
+                        android:inputType="textMultiLine"
+                        android:maxLines="2"
+                        android:paddingTop="@dimen/_5sdp"
+                        android:textColor="@color/appColor"
+                        android:textCursorDrawable="@drawable/green_cursor_drawable"
+                        android:textSize="@dimen/_16sdp" />
 
                 </RelativeLayout>
 

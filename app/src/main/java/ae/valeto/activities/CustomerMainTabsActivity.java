@@ -1,7 +1,11 @@
 package ae.valeto.activities;
 
 import androidx.fragment.app.Fragment;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -35,6 +39,7 @@ import retrofit2.Response;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import org.json.JSONObject;
 
@@ -85,16 +90,51 @@ public class CustomerMainTabsActivity extends BaseActivity {
 
 //        //callUnreadNotifAPI();
 //        populateSideMenuData();
+        try {
+            LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, new IntentFilter("receive_push"));
+        }
+        catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
         devicesLoginLimit();
 
     }
+    BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent)
+        {
+            AppManager.getInstance().notificationCount += 1;
+            setBadgeValue();
+        }
+    };
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (broadcastReceiver != null) {
+            LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
+        }
+    }
+
 
     public void notificationsClicked() {
         if (!Functions.getPrefValue(getContext(), Constants.kIsSignIn).equalsIgnoreCase("1")) {
             Functions.showToast(getContext(), "Please Login First", FancyToast.ERROR, FancyToast.LENGTH_SHORT);
         }
-//        startActivity(new Intent(getContext(), OleNotificationsActivity.class));
+        startActivity(new Intent(getContext(), NotificationsActivity.class));
     }
+
+//    public void setBadgeValue() {
+//        if (AppManager.getInstance().notificationCount > 0) {
+//            binding.toolbarBadge.setVisibility(View.VISIBLE);
+//            binding.toolbarBadge.setNumber(AppManager.getInstance().notificationCount);
+//        }
+//        else  {
+//            binding.toolbarBadge.setVisibility(View.GONE);
+//        }
+//    }
+
 
     @Override
     public void onBackPressed() {
@@ -115,9 +155,6 @@ public class CustomerMainTabsActivity extends BaseActivity {
         if (parkingListFragment.isVisible()) {
             parkingListFragment.setBadgeValue();
         }
-//        else if (oleBookingListFragment.isVisible()) {
-//            oleBookingListFragment.setBadgeValue();
-//        }
 
     }
 

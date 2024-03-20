@@ -25,6 +25,8 @@ import org.json.JSONObject;
 import java.util.Map;
 
 import ae.valeto.R;
+import ae.valeto.activities.NotificationsActivity;
+import ae.valeto.base.BaseActivity;
 import ae.valeto.util.AppManager;
 import ae.valeto.util.Constants;
 import ae.valeto.util.Functions;
@@ -40,11 +42,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         super.onMessageReceived(remoteMessage);
         Map<String, String> stringMap = remoteMessage.getData();
         String notType = stringMap.get("type");
-        String bookingId = stringMap.get("booking_id");
-        String clubId = stringMap.get("club_id");
-        String bookingType = stringMap.get("booking_type");
-        String isRated = stringMap.get("is_rated");
         String notificationTitle = remoteMessage.getNotification().getTitle();
+//        String bookingId = stringMap.get("booking_id");
+//        String clubId = stringMap.get("club_id");
+//        String bookingType = stringMap.get("booking_type");
+//        String isRated = stringMap.get("is_rated");
 
 //            String gameId = stringMap.get("game_id");
             Intent intent = new Intent("receive_push");
@@ -79,7 +81,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         editor.putString(Constants.kFCMToken, s);
         editor.apply();
         if (Functions.getPrefValue(this, Constants.kIsSignIn).equalsIgnoreCase("1")) {
-          //  sendFcmTokenApi(s);
+            sendFcmTokenApi(s);
         }
     }
 
@@ -100,10 +102,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void sendMyNotification(String message, String notType, String title) {
-            //Intent intent1 = new Intent(getApplicationContext(), NotificationsActivityLineup.class);
-           // intent1.putExtra("from_notif", true);
-           // intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
-           // PendingIntent pendingIntent1 = PendingIntent.getActivity(this, 0, intent1, PendingIntent.FLAG_IMMUTABLE);
+//            Intent intent1 = new Intent(getApplicationContext(), NotificationsActivity.class);
+//            intent1.putExtra("from_notif", true);
+//            intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+//            PendingIntent pendingIntent1 = PendingIntent.getActivity(this, 0, intent1, PendingIntent.FLAG_IMMUTABLE);
 
             Uri soundUri1= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             String NOTIFICATION_CHANNEL_ID1 = "my_channel_id_01";
@@ -131,6 +133,31 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             notificationManager1.notify(1, notificationBuilder1.build());
 
 
+    }
+
+    protected void sendFcmTokenApi(String token) {
+        String uniqueID = Functions.getPrefValue(this, Constants.kDeviceUniqueId);
+        Call<ResponseBody> call = AppManager.getInstance().apiInterface.sendFcmToken(uniqueID, "android", token);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.body() != null) {
+                    try {
+                        JSONObject object = new JSONObject(response.body().string());
+                        if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
+
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 
 }

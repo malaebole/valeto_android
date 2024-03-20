@@ -51,7 +51,7 @@ public class ScanSuccessPopupFragment extends DialogFragment implements View.OnC
         getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         getDialog().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
-        //binding.btnClose.setOnClickListener(this);
+        binding.btnOk.setOnClickListener(this);
         //Glide.with(getActivity()).load(photoUrl).into(binding.shirtImgVuAd);
 
         return view;
@@ -67,9 +67,10 @@ public class ScanSuccessPopupFragment extends DialogFragment implements View.OnC
 
     @Override
     public void onClick(View v) {
-//        if (v == binding.btnClose){
-//            this.dismiss();
-//        }
+        if (v == binding.btnOk){
+            dialogCallback.didSubmitResult(this);
+            this.dismiss();
+        }
 
     }
 

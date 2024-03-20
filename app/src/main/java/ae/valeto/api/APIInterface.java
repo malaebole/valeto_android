@@ -111,22 +111,41 @@ public interface APIInterface {
 
 
     @GET("user/tickets/{id}")
-    Call<ResponseBody> getSingleUserTicket(@Path("id") int id); //clear
+    Call<ResponseBody> getSingleUserTicket(@Path("id") int id);
     @FormUrlEncoded
     @POST("user/tickets/make-car-ready")
     Call<ResponseBody> makeMyCarReady(@Field("ticket_id") int ticketId,
-                                      @Field("make_ready_in") String makeItReadyIn); //clear
+                                      @Field("make_ready_in") String makeItReadyIn);
 
     @GET("user/parking")
     Call<ResponseBody> getParkingList(@Query("city_id") String cityId,
                                       @Query("latitude") double latitude,
-                                      @Query("longitude") double longitude); //clear
+                                      @Query("longitude") double longitude);
 
     @GET("user/parking/{id}")
-    Call<ResponseBody> getSingleUserParking(@Path("id") int id); //clear
+    Call<ResponseBody> getSingleUserParking(@Path("id") int id);
     @FormUrlEncoded
     @POST("user/parking/add-review")
     Call<ResponseBody> addParkingReview(@Field("parking_id") String parkingId,
                                         @Field("stars") String stars,
                                         @Field("comments") String comments);
+
+    @GET("user/notification")
+    Call<ResponseBody> getUserNotification();
+
+    @FormUrlEncoded
+    @POST("user/notification/delete")
+    Call<ResponseBody> deleteAllNotification(@Field("notification_id") String notificationId);
+
+    @FormUrlEncoded
+    @POST("user/notification/mark-read")
+    Call<ResponseBody> readAllNotification(@Field("notification_id") String notificationId);
+
+    @FormUrlEncoded
+    @POST("user/notification/mark-read")
+    Call<ResponseBody> readNotification(@Field("notification_id") String notificationId);
+
+
+
+
 }

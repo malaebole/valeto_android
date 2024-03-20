@@ -53,6 +53,7 @@
                     android:textColor="@color/whiteColor"
                     android:textSize="@dimen/_26sdp"
                     android:textStyle="bold" />
+
                 <LinearLayout
                     android:id="@+id/linear_noti_layout"
                     android:layout_width="65dp"

@@ -187,7 +187,7 @@
                         android:gravity="start"
                         android:text="Arrived"
                         android:textColor="@color/lightGreyTextColor"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/tv_arrival_time"
@@ -198,7 +198,7 @@
                         android:text="11:00 AM"
                         android:textColor="#23272B"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -210,7 +210,7 @@
                         android:gravity="center"
                         android:text="22 Oct, 2023"
                         android:textColor="@color/lightGreyTextColor"
-                        android:textSize="10sp" />
+                        android:textSize="12sp" />
 
 
                 </LinearLayout>
@@ -221,7 +221,7 @@
                     android:layout_below="@+id/dot_line1"
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="35dp"
+                    android:layout_marginTop="40dp"
                     android:layout_marginEnd="10dp"
                     android:layout_toStartOf="@+id/linearLayout5"
                     android:layout_toEndOf="@+id/linearLayout3"
@@ -276,7 +276,7 @@
                         android:gravity="end"
                         android:text="Exit"
                         android:textColor="@color/lightGreyTextColor"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/tv_ex_time"
@@ -286,7 +286,7 @@
                         android:gravity="end"
                         android:text="11:00 AM"
                         android:textColor="#23272B"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:textStyle="bold" />
 
@@ -299,7 +299,7 @@
                         android:gravity="end"
                         android:text="22 Oct, 2023"
                         android:textColor="@color/lightGreyTextColor"
-                        android:textSize="10sp" />
+                        android:textSize="12sp" />
 
 
                 </LinearLayout>
@@ -332,7 +332,7 @@
                         android:gravity="center"
                         android:text="Parked by"
                         android:textColor="@color/lightGreyTextColor"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/tv_parked_by"
@@ -342,7 +342,7 @@
                         android:gravity="center"
                         android:text="Mohammad Nazir"
                         android:textColor="#23272B"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -353,7 +353,7 @@
                         android:gravity="center"
                         android:text="Vehicle"
                         android:textColor="@color/lightGreyTextColor"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/tv_vehicle"
@@ -363,7 +363,7 @@
                         android:gravity="center"
                         android:text="Hyundai Genesis"
                         android:textColor="#23272B"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -373,7 +373,7 @@
                         android:gravity="center"
                         android:text="Key pass"
                         android:textColor="@color/lightGreyTextColor"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/tv_key"
@@ -383,7 +383,7 @@
                         android:gravity="center"
                         android:text="#64-76-73"
                         android:textColor="#23272B"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -393,7 +393,7 @@
                         android:gravity="center"
                         android:text="Duration"
                         android:textColor="@color/lightGreyTextColor"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/tv_duration"
@@ -403,7 +403,7 @@
                         android:gravity="center"
                         android:text="2.30 hours"
                         android:textColor="#23272B"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
 
@@ -427,7 +427,7 @@
                         android:gravity="center"
                         android:text="Delivered by"
                         android:textColor="@color/lightGreyTextColor"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/tv_delivered_by"
@@ -437,7 +437,7 @@
                         android:gravity="center"
                         android:text="Mohammad Nazir"
                         android:textColor="#23272B"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -448,7 +448,7 @@
                         android:gravity="center"
                         android:text="Vehicle No"
                         android:textColor="@color/lightGreyTextColor"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/tv_car_number"
@@ -458,7 +458,7 @@
                         android:gravity="center"
                         android:text="N DU 23944"
                         android:textColor="#23272B"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -468,7 +468,7 @@
                         android:gravity="center"
                         android:text="Parking slot"
                         android:textColor="@color/lightGreyTextColor"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/tv_slot"
@@ -478,7 +478,7 @@
                         android:gravity="center"
                         android:text="#A 04(F 05)"
                         android:textColor="#23272B"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -488,7 +488,7 @@
                         android:gravity="center"
                         android:text="Paid"
                         android:textColor="@color/lightGreyTextColor"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/tv_paid"
@@ -498,7 +498,7 @@
                         android:gravity="center"
                         android:text="AED 35.00"
                         android:textColor="#23272B"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
 
@@ -515,39 +515,37 @@
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:background="@drawable/horizontal_dotted_line" />
 
-            <LinearLayout
-                android:id="@+id/linearLayout8"
+
+            <ImageView
+                android:id="@+id/invoice_vu"
+                android:layout_width="200dp"
+                android:layout_height="71dp"
+                android:layout_above="@+id/textView"
+                android:layout_below="@+id/dot_line3"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:scaleType="center" />
+
+
+            <TextView
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
-                android:layout_marginEnd="30dp"
-                android:layout_marginBottom="20dp"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/invoice_vu"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:scaleType="center" />
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:fontFamily="@font/helvetica"
+                android:gravity="center"
+                android:text="Thank you and drive safely"
+                android:textColor="#23272B"
+                android:textSize="16sp" />
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:fontFamily="@font/helvetica"
-                    android:gravity="center"
-                    android:text="Thank you and drive safely"
-                    android:textColor="#23272B"
-                    android:textSize="16sp" />
 
-
-            </LinearLayout>
 
             </RelativeLayout>
 

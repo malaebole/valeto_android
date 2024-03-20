@@ -42,7 +42,7 @@ public class MyCarsActivity extends BaseActivity implements View.OnClickListener
     private CarsAdapter carsAdapter;
     private final List<Cars> carsList = new ArrayList<>();
     private Boolean isUpdate;
-    private List<CarManufacturer> carManufacturerList = new ArrayList<>();
+    private final List<CarManufacturer> carManufacturerList = new ArrayList<>();
     private int position;
 
 

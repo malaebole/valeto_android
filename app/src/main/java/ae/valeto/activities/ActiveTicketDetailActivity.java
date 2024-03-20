@@ -220,7 +220,7 @@ public class ActiveTicketDetailActivity extends BaseActivity implements View.OnC
 
         private Date startTime;
         private Timer timer;
-        private double parkingPrice;
+        private final double parkingPrice;
 
         public TicketTimer(String startTimeString, double parkingPrice) {
             this.parkingPrice = parkingPrice;

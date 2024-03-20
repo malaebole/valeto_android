@@ -44,7 +44,7 @@ public class Parking {
     private String distance;
     @SerializedName("rating")
     @Expose
-    private Integer rating;
+    private Double rating;
 
     public Integer getId() {
         return id;
@@ -142,11 +142,11 @@ public class Parking {
         this.distance = distance;
     }
 
-    public Integer getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 

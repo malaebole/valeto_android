@@ -1,18 +1,36 @@
 package ae.valeto.activities;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
+import android.app.Dialog;
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.media.MediaScannerConnection;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
+import android.view.Window;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.gson.Gson;
 import com.kaopiz.kprogresshud.KProgressHUD;
+import com.nabinbhandari.android.permissions.PermissionHandler;
+import com.nabinbhandari.android.permissions.Permissions;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.net.UnknownHostException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,6 +61,7 @@ public class ClosedTicketDetailActivity extends BaseActivity implements View.OnC
 
     private MyTicket myTicket;
     private int ticketId;
+    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +74,11 @@ public class ClosedTicketDetailActivity extends BaseActivity implements View.OnC
         if (bundle !=null){
             ticketId = bundle.getInt("ticket_id");
         }
+
         getSingleUserTicket(true, ticketId);
+
         binding.btnBack.setOnClickListener(this);
+        binding.invoiceVu.setOnClickListener(this);
     }
 
     @Override
@@ -64,9 +86,9 @@ public class ClosedTicketDetailActivity extends BaseActivity implements View.OnC
         if (v == binding.btnBack){
             finish();
         }
-//        else if (v ) {
-//
-//        }
+        else if (v == binding.invoiceVu) {
+            showImageDialog();
+        }
 
     }
 
@@ -117,7 +139,6 @@ public class ClosedTicketDetailActivity extends BaseActivity implements View.OnC
 
     private void populateMyTicket() {
         if (myTicket != null){
-
             try {
                 SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy hh:mma", Locale.getDefault());
                 SimpleDateFormat outputDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
@@ -139,8 +160,6 @@ public class ClosedTicketDetailActivity extends BaseActivity implements View.OnC
                 e.printStackTrace();
             }
 
-
-
             binding.tvParkingName.setText(myTicket.getParking().getName());
             binding.tvLoc.setText(myTicket.getParking().getLocation());
             binding.tvParkedBy.setText(myTicket.getActivatedBy().getName());
@@ -149,12 +168,14 @@ public class ClosedTicketDetailActivity extends BaseActivity implements View.OnC
             binding.tvCarNumber.setText(myTicket.getCar().getPlateNumber());
             if (!myTicket.getSlotNumber().isEmpty()){
                 binding.tvSlot.setText(myTicket.getSlotNumber());
-            }else{
+            }
+            else{
                 binding.tvSlot.setText("N/A");
             }
             if (!myTicket.getKeyCode().isEmpty()){
                 binding.tvKey.setText(myTicket.getKeyCode());
-            }else{
+            }
+            else{
                 binding.tvKey.setText("N/A");
             }
 
@@ -168,6 +189,100 @@ public class ClosedTicketDetailActivity extends BaseActivity implements View.OnC
             }
 
         }
+    }
+
+    private void showImageDialog() {
+        dialog = new Dialog(getContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_invoice_vu); // Custom dialog layout with an ImageView
+        ImageView dialogImageView = dialog.findViewById(R.id.dialogImageView);
+        ImageButton downloadImgBtn = dialog.findViewById(R.id.btnDownload);
+
+        String imageUrl = myTicket.getInvoice();
+
+        Glide.with(getApplicationContext())
+                .load(imageUrl)
+                .into(new CustomTarget<Drawable>() {
+                    @Override
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        // Image loaded successfully
+                        dialogImageView.setImageDrawable(resource);
+                    }
+
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+                        // Called when the resource is cleared
+                    }
+                });
+
+        downloadImgBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveToGallery(imageUrl);
+            }
+        });
+
+
+        dialog.show();
+    }
+
+    private void saveToGallery(String fileUrl) {
+        String[] permissions;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_IMAGES};
+        } else {
+            permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+        }
+
+        Permissions.check(getApplicationContext(), permissions, null, null, new PermissionHandler() {
+            @Override
+            public void onGranted() {
+                Glide.with(getApplicationContext())
+                        .asBitmap()
+                        .load(fileUrl)
+                        .into(new CustomTarget<Bitmap>() {
+                            @Override
+                            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                                try {
+                                    saveBitmapToGallery(getContext(), resource);
+                                    Functions.showToast(getContext(), "Image saved to gallery", FancyToast.SUCCESS, FancyToast.LENGTH_SHORT);
+                                    dialog.dismiss();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                    Functions.showToast(getContext(), "Failed to download image", FancyToast.ERROR, FancyToast.LENGTH_SHORT);
+                                }
+                            }
+
+                            @Override
+                            public void onLoadCleared(@Nullable Drawable placeholder) {
+                                // Called when the resource is cleared
+                            }
+                        });
+            }
+
+            @Override
+            public void onDenied(Context context, ArrayList<String> deniedPermissions) {
+                // Handle permission denial
+            }
+        });
+    }
+
+    private void saveBitmapToGallery(Context context, Bitmap bitmap) throws Exception {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        String imageFileName = "IMG_" + timeStamp + ".png";
+
+        // Get the directory for saving the image
+        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        File imageFile = new File(storageDir, imageFileName);
+
+        // Save the bitmap to the image file
+        FileOutputStream outputStream = new FileOutputStream(imageFile);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+        outputStream.flush();
+        outputStream.close();
+
+        // Notify the gallery about the new image
+        MediaScannerConnection.scanFile(context, new String[]{imageFile.getAbsolutePath()}, null, null);
     }
 
 

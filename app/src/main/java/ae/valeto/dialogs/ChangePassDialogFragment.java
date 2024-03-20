@@ -32,7 +32,7 @@ public class ChangePassDialogFragment extends DialogFragment implements View.OnC
 
     private FragmentChangePassDialogBinding binding;
     private ResultDialogCallback dialogCallback;
-    private String photoUrl = "";
+    private final String photoUrl = "";
 
 
     public ChangePassDialogFragment() {

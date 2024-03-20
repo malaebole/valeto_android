@@ -18,7 +18,7 @@ public class ClosedTickets {
     private Double price;
     @SerializedName("discount")
     @Expose
-    private Integer discount;
+    private Double discount;
     @SerializedName("car")
     @Expose
     private Cars car;
@@ -67,11 +67,11 @@ public class ClosedTickets {
         this.price = price;
     }
 
-    public Integer getDiscount() {
+    public Double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Integer discount) {
+    public void setDiscount(Double discount) {
         this.discount = discount;
     }
 

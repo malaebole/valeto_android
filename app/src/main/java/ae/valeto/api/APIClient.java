@@ -40,8 +40,8 @@ public class APIClient {
                                 .addHeader("Authorization", "Bearer "+Functions.getPrefValue(MyApp.getAppContext(), Constants.kAccessToken));
                         Response response = chain.proceed(requestBuilder.build());
 
-                        String ValetoAccessToken = Functions.getPrefValue(MyApp.getAppContext(), Constants.kAccessToken);
-                        Log.d("ValetoAccessToken",ValetoAccessToken);
+//                        String ValetoAccessToken = Functions.getPrefValue(MyApp.getAppContext(), Constants.kAccessToken);
+//                        Log.d("ValetoAccessToken",ValetoAccessToken);
 
 
                         if (response.code() == 401){

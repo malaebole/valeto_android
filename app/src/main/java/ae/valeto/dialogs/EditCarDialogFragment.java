@@ -51,7 +51,7 @@ public class EditCarDialogFragment extends DialogFragment implements View.OnClic
 
     private int brandListItemId;
     private int pos;
-    private String photoFilePath = "";
+    private final String photoFilePath = "";
 
 
 

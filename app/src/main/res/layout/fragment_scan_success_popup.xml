@@ -56,12 +56,12 @@
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:fontFamily="@font/helvetica"
                 android:gravity="center"
-                android:text="Your vehicle is parked, and the time will be counted down."
+                android:text="Your vehicle is being parked, and the ticket will be activated shortly!"
                 android:textColor="@color/lightGreyTextColor"
                 android:textSize="@dimen/_16sdp" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/btn_go_back"
+                android:id="@+id/btn_ok"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_50sdp"
                 app:cardCornerRadius="@dimen/_5sdp"
