@@ -111,7 +111,7 @@ public class ClosedTicketDetailActivity extends BaseActivity implements View.OnC
                             populateMyTicket();
 
                         }else {
-                            Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
+                            Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
 
                     } catch (Exception e) {

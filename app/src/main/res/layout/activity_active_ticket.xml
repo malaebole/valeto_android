@@ -99,9 +99,10 @@
                         android:id="@+id/hours"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:fontFamily="@font/helvetica_neue_black"
+                        android:fontFamily="@font/helvetica"
+                        android:textStyle="bold"
                         android:gravity="center"
-                        android:text="00"
+                        android:text="XX"
                         android:textColor="@color/whiteColor"
                         android:textSize="28sp" />
 
@@ -110,7 +111,8 @@
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/_5sdp"
                         android:layout_marginEnd="@dimen/_5sdp"
-                        android:fontFamily="@font/helvetica_neue_black"
+                        android:fontFamily="@font/helvetica"
+                        android:textStyle="bold"
                         android:scaleType="centerInside"
                         android:text=":"
                         android:textColor="@color/whiteColor"
@@ -121,9 +123,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_centerInParent="true"
-                        android:fontFamily="@font/helvetica_neue_black"
+                        android:fontFamily="@font/helvetica"
+                        android:textStyle="bold"
                         android:gravity="center"
-                        android:text="00"
+                        android:text="XX"
                         android:textColor="@color/whiteColor"
                         android:textSize="28sp" />
 
@@ -132,7 +135,8 @@
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/_5sdp"
                         android:layout_marginEnd="@dimen/_5sdp"
-                        android:fontFamily="@font/helvetica_neue_black"
+                        android:fontFamily="@font/helvetica"
+                        android:textStyle="bold"
                         android:scaleType="centerInside"
                         android:text=":"
                         android:textColor="@color/whiteColor"
@@ -143,9 +147,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_centerInParent="true"
-                        android:fontFamily="@font/helvetica_neue_black"
+                        android:fontFamily="@font/helvetica"
+                        android:textStyle="bold"
                         android:gravity="center"
-                        android:text="00"
+                        android:text="XX"
                         android:textColor="@color/whiteColor"
                         android:textSize="26sp" />
 
@@ -177,7 +182,7 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:fontFamily="@font/helvetica"
                     android:scaleType="centerInside"
-                    android:text="00.00"
+                    android:text="XX.XX"
                     android:textColor="@color/whiteColor"
                     android:textSize="21sp" />
 
@@ -237,10 +242,11 @@
                             android:layout_marginTop="@dimen/_5sdp"
                             android:layout_marginEnd="@dimen/_10sdp"
                             android:layout_marginBottom="@dimen/_5sdp"
-                            android:fontFamily="@font/helvetica_neue_black"
+                            android:fontFamily="@font/helvetica"
+                            android:textStyle="bold"
                             android:gravity="center"
                             android:scaleType="centerInside"
-                            android:text="N DU 39478"
+                            android:text="X XX XXXXX"
                             android:textColor="@color/blackColor"
                             android:textSize="18sp" />
 
@@ -262,8 +268,7 @@
                         app:contentPadding="@dimen/_2sdp"
                         android:layout_marginStart="100dp"
                         android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="@dimen/_10sdp">
+                        android:layout_centerVertical="true">
 
                         <TextView
                             android:id="@+id/tv_status"
@@ -276,8 +281,6 @@
                             android:gravity="center"
                             android:layout_gravity="center"
                             android:textSize="16sp"
-                            android:paddingStart="@dimen/_5sdp"
-                            android:paddingEnd="@dimen/_5sdp"
                             android:layout_centerVertical="true"
                             android:fontFamily="sans-serif-medium"/>
 
@@ -382,7 +385,7 @@
                                         android:layout_marginEnd="@dimen/_5sdp"
                                         android:layout_marginBottom="@dimen/_5sdp"
                                         android:fontFamily="@font/helvetica"
-                                        android:text="A 04 (F 05)"
+                                        android:text="X XX (X XX)"
                                         android:textColor="@color/blackColor"
                                         android:textSize="12sp"
                                         android:textStyle="bold" />
@@ -425,7 +428,7 @@
                                         android:layout_marginEnd="@dimen/_5sdp"
                                         android:layout_marginBottom="@dimen/_5sdp"
                                         android:fontFamily="@font/helvetica"
-                                        android:text="64-73-76"
+                                        android:text="XX-XX-XX"
                                         android:textColor="@color/blackColor"
                                         android:textSize="12sp"
                                         android:textStyle="bold" />

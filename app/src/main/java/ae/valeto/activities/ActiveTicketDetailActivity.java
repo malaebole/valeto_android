@@ -183,6 +183,7 @@ public class ActiveTicketDetailActivity extends BaseActivity implements View.OnC
             binding.tvParkingName.setText(myTicket.getParking().getName());
             binding.tvCurrency.setText(myTicket.getCurrency());
             binding.tvParkedBy.setText(myTicket.getActivatedBy().getName());
+            binding.tvStatus.setText(myTicket.getStatus());
             if (!myTicket.getSlotNumber().isEmpty()){
                 binding.tvSlot.setText(myTicket.getSlotNumber());
             }else {

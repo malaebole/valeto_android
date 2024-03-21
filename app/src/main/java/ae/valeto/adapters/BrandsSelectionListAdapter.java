@@ -56,7 +56,7 @@ public class BrandsSelectionListAdapter extends RecyclerView.Adapter<BrandsSelec
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         CarManufacturer listItem = list.get(position);
-        holder.textView.setText(listItem.getName());
+        holder.tvTitle.setText(listItem.getName());
 
 
         holder.rel.setOnClickListener(new View.OnClickListener() {
@@ -75,14 +75,14 @@ public class BrandsSelectionListAdapter extends RecyclerView.Adapter<BrandsSelec
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView textView;
+        TextView tvTitle;
         ImageView imgVu;
         RelativeLayout rel;
 
         ViewHolder(View itemView) {
             super(itemView);
 
-            textView = itemView.findViewById(R.id.text_vu);
+            tvTitle = itemView.findViewById(R.id.tv_title);
             imgVu = itemView.findViewById(R.id.img_vu);
             rel = itemView.findViewById(R.id.rel);
 

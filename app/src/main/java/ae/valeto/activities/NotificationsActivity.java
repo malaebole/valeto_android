@@ -1,6 +1,7 @@
 package ae.valeto.activities;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -86,12 +87,12 @@ public class NotificationsActivity extends BaseActivity implements View.OnClickL
 //                startActivity(intent);
 //                finish();
 //            }
-//            else if (notification.getType().equalsIgnoreCase("oleUserAddedAsFriend")) {
-//
-//                Intent intent = new Intent(getContext(), FriendRequestActivity.class);
-//                startActivity(intent);
-//
-//            }
+             if (notification.getType().equalsIgnoreCase("ticketClosed")) {
+                Intent intent = new Intent(getContext(), ClosedTicketDetailActivity.class);
+                intent.putExtra("ticket_id", notification.getTicket().getId());
+                startActivity(intent);
+
+            }
         }
     };
     private void clearClicked() {

@@ -125,16 +125,6 @@ public class CustomerMainTabsActivity extends BaseActivity {
         startActivity(new Intent(getContext(), NotificationsActivity.class));
     }
 
-//    public void setBadgeValue() {
-//        if (AppManager.getInstance().notificationCount > 0) {
-//            binding.toolbarBadge.setVisibility(View.VISIBLE);
-//            binding.toolbarBadge.setNumber(AppManager.getInstance().notificationCount);
-//        }
-//        else  {
-//            binding.toolbarBadge.setVisibility(View.GONE);
-//        }
-//    }
-
 
     @Override
     public void onBackPressed() {

@@ -43,12 +43,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Map<String, String> stringMap = remoteMessage.getData();
         String notType = stringMap.get("type");
         String notificationTitle = remoteMessage.getNotification().getTitle();
-//        String bookingId = stringMap.get("booking_id");
-//        String clubId = stringMap.get("club_id");
-//        String bookingType = stringMap.get("booking_type");
-//        String isRated = stringMap.get("is_rated");
+            //        String bookingId = stringMap.get("booking_id");
+            //        String clubId = stringMap.get("club_id");
+            //        String bookingType = stringMap.get("booking_type");
+            //        String isRated = stringMap.get("is_rated");
 
-//            String gameId = stringMap.get("game_id");
+            //        `String gameId = stringMap.get("game_id");
             Intent intent = new Intent("receive_push");
             intent.putExtra("type", notType);
             LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
@@ -57,19 +57,19 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 sendMyNotification(remoteMessage.getNotification().getBody(), notType,  notificationTitle);
             }
 
-//            if (notType.equalsIgnoreCase("lineupGameRemoved")
-////                   || notType.equalsIgnoreCase("oleUserAddedAsFriend") //Remove these type so you can receive notification body
-//
-//                    // || notType.equalsIgnoreCase("lineupGameAdded")
-////                    || notType.equalsIgnoreCase("oleUserRemovedAsFriend")
-////                    || notType.equalsIgnoreCase("lineupEmployeeAdded")
-////                    || notType.equalsIgnoreCase("lineupEmployeeRemoved")
-//                    || notType.equalsIgnoreCase("lineupGameEnd")){
-//            }else{
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                    sendMyNotification(remoteMessage.getNotification().getBody(), notType, gameId);
-//                }
-//            }
+        //            if (notType.equalsIgnoreCase("lineupGameRemoved")
+        ////                   || notType.equalsIgnoreCase("oleUserAddedAsFriend") //Remove these type so you can receive notification body
+        //
+        //                    // || notType.equalsIgnoreCase("lineupGameAdded")
+        ////                    || notType.equalsIgnoreCase("oleUserRemovedAsFriend")
+        ////                    || notType.equalsIgnoreCase("lineupEmployeeAdded")
+        ////                    || notType.equalsIgnoreCase("lineupEmployeeRemoved")
+        //                    || notType.equalsIgnoreCase("lineupGameEnd")){
+        //            }else{
+        //                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        //                    sendMyNotification(remoteMessage.getNotification().getBody(), notType, gameId);
+        //                }
+        //            }
 
     }
 
@@ -102,10 +102,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void sendMyNotification(String message, String notType, String title) {
-//            Intent intent1 = new Intent(getApplicationContext(), NotificationsActivity.class);
-//            intent1.putExtra("from_notif", true);
-//            intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
-//            PendingIntent pendingIntent1 = PendingIntent.getActivity(this, 0, intent1, PendingIntent.FLAG_IMMUTABLE);
+            Intent intent1 = new Intent(getApplicationContext(), NotificationsActivity.class);
+            intent1.putExtra("from_notif", true);
+            intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+            PendingIntent pendingIntent1 = PendingIntent.getActivity(this, 0, intent1, PendingIntent.FLAG_IMMUTABLE);
 
             Uri soundUri1= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             String NOTIFICATION_CHANNEL_ID1 = "my_channel_id_01";
@@ -129,7 +129,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     .setAutoCancel(true)
                     .setLights(Color.RED, 500, 500)
                     .setSound(soundUri1);
-           // notificationBuilder1.setContentIntent(pendingIntent1);
+            notificationBuilder1.setContentIntent(pendingIntent1);
             notificationManager1.notify(1, notificationBuilder1.build());
 
 

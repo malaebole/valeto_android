@@ -29,6 +29,7 @@ import com.kaopiz.kprogresshud.KProgressHUD;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.UnknownHostException;
@@ -182,7 +183,6 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
 
         }
     };
-
 
     protected void showRatingDialog() {
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
