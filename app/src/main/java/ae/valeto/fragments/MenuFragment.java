@@ -81,6 +81,7 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
          if (userInfo !=null){
              Glide.with(getActivity()).load(userInfo.getPicture()).apply(RequestOptions.circleCropTransform()).into(binding.imgVu);
              binding.tvName.setText(userInfo.getName());
+             binding.tvPoints.setText(String.valueOf(userInfo.getPoints()));
              if (userInfo.getEmailVerified().equalsIgnoreCase("no")){
                  binding.tvEmailVerify.setVisibility(View.VISIBLE);
              }

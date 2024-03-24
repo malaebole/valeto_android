@@ -40,36 +40,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-        Map<String, String> stringMap = remoteMessage.getData();
-        String notType = stringMap.get("type");
-        String notificationTitle = remoteMessage.getNotification().getTitle();
-            //        String bookingId = stringMap.get("booking_id");
-            //        String clubId = stringMap.get("club_id");
-            //        String bookingType = stringMap.get("booking_type");
-            //        String isRated = stringMap.get("is_rated");
-
-            //        `String gameId = stringMap.get("game_id");
+            Map<String, String> stringMap = remoteMessage.getData();
+            String notType = stringMap.get("type");
+            String notificationTitle = remoteMessage.getNotification().getTitle();
             Intent intent = new Intent("receive_push");
             intent.putExtra("type", notType);
             LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                sendMyNotification(remoteMessage.getNotification().getBody(), notType,  notificationTitle);
-            }
-
-        //            if (notType.equalsIgnoreCase("lineupGameRemoved")
-        ////                   || notType.equalsIgnoreCase("oleUserAddedAsFriend") //Remove these type so you can receive notification body
-        //
-        //                    // || notType.equalsIgnoreCase("lineupGameAdded")
-        ////                    || notType.equalsIgnoreCase("oleUserRemovedAsFriend")
-        ////                    || notType.equalsIgnoreCase("lineupEmployeeAdded")
-        ////                    || notType.equalsIgnoreCase("lineupEmployeeRemoved")
-        //                    || notType.equalsIgnoreCase("lineupGameEnd")){
-        //            }else{
-        //                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        //                    sendMyNotification(remoteMessage.getNotification().getBody(), notType, gameId);
-        //                }
-        //            }
+            sendMyNotification(remoteMessage.getNotification().getBody(), notType, notificationTitle);
 
     }
 
@@ -100,7 +78,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 //        }
 //    }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     private void sendMyNotification(String message, String notType, String title) {
             Intent intent1 = new Intent(getApplicationContext(), NotificationsActivity.class);
             intent1.putExtra("from_notif", true);

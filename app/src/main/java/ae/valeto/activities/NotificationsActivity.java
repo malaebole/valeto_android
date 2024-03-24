@@ -1,13 +1,29 @@
 package ae.valeto.activities;
 
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.PermissionRequest;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.baoyz.actionsheet.ActionSheet;
 import com.google.gson.Gson;
 import com.kaopiz.kprogresshud.KProgressHUD;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.single.PermissionListener;
+import com.nabinbhandari.android.permissions.PermissionHandler;
+import com.nabinbhandari.android.permissions.Permissions;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -23,6 +39,8 @@ import ae.valeto.util.AppManager;
 import ae.valeto.util.Constants;
 import ae.valeto.util.Functions;
 import okhttp3.ResponseBody;
+import pl.aprilapps.easyphotopicker.ChooserType;
+import pl.aprilapps.easyphotopicker.EasyImage;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,6 +64,8 @@ public class NotificationsActivity extends BaseActivity implements View.OnClickL
         adapter.setItemClickListener(itemClickListener);
         binding.recyclerVu.setAdapter(adapter);
 
+        grantNotificationPermission();
+
         getNotifications(true);
 
         binding.btnClose.setOnClickListener(this);
@@ -61,6 +81,41 @@ public class NotificationsActivity extends BaseActivity implements View.OnClickL
             clearClicked();
         }
     }
+
+
+    private void grantNotificationPermission() {
+
+//            String[] permissions = new String[0];
+//            permissions = new String[]{Manifest.permission.POST_NOTIFICATIONS};
+//            Permissions.check(getContext(), permissions, null/*rationale*/, null/*options*/, new PermissionHandler() {
+//                @Override
+//                public void onGranted() {
+//                    // do your task.
+//
+//                }
+//            });
+
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                == PackageManager.PERMISSION_GRANTED){
+
+        }else{
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+                resultLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+            }
+        }
+
+
+
+    }
+
+    private final ActivityResultLauncher<String> resultLauncher =  registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    Functions.showToast(getContext(), "Permission granted", FancyToast.SUCCESS);
+                } else {
+                    Functions.showToast(getContext(), "Permission denied", FancyToast.ERROR);
+                }
+    });
 
     NotificationListAdapter.ItemClickListener itemClickListener = new NotificationListAdapter.ItemClickListener() {
         @Override

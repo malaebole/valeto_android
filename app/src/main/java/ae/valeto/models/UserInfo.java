@@ -16,6 +16,10 @@ public class UserInfo {
     @SerializedName("picture")
     @Expose
     private String picture;
+
+    @SerializedName("points")
+    @Expose
+    private int points;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
@@ -63,7 +67,13 @@ public class UserInfo {
     public void setPicture(String picture) {
         this.picture = picture;
     }
+    public int getPoints () {
+        return points;
+    }
 
+    public void setPoints(int points) {
+        this.points = points;
+    }
     public String getCreatedAt() {
         return createdAt;
     }
