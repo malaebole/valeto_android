@@ -130,6 +130,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+<!--                        app:cardBackgroundColor="#F9F8FA"-->
 
                             <androidx.cardview.widget.CardView
                                 android:id="@+id/rel_main_data"
@@ -140,7 +141,7 @@
                                 android:layout_marginBottom="@dimen/_10sdp"
                                 android:elevation="@dimen/_8sdp"
                                 android:foreground="?attr/selectableItemBackgroundBorderless"
-                                app:cardBackgroundColor="#F9F8FA"
+                                app:cardBackgroundColor="#FFFFFF"
                                 app:cardCornerRadius="@dimen/_100sdp"
                                 app:contentPadding="@dimen/_10sdp">
 

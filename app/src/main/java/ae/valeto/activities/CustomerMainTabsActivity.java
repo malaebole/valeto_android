@@ -195,7 +195,7 @@ public class CustomerMainTabsActivity extends BaseActivity {
                     try {
                         JSONObject object = new JSONObject(response.body().string());
                         if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
-                            Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
+                            Functions.showToast(getContext(), "Loading. . .", FancyToast.SUCCESS);
                             JSONObject dataObject = object.getJSONObject(Constants.kData);
                             String base64String = dataObject.getString("qr_token");
                             Intent intent = new Intent(getContext(), CustomerQrCodeActivity.class);

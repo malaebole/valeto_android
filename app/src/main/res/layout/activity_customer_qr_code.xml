@@ -87,7 +87,7 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:elevation="@dimen/_8sdp"
                 android:foreground="?attr/selectableItemBackgroundBorderless"
-                app:cardBackgroundColor="#F9F8FA"
+                app:cardBackgroundColor="@color/whiteColor"
                 app:cardCornerRadius="@dimen/_100sdp"
                 app:contentPadding="@dimen/_10sdp">
 
@@ -120,8 +120,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/_30sdp"
                 android:gravity="center"
-                android:scaleType="centerInside"
-                android:src="@drawable/qr" />
+                android:scaleType="centerInside"/>
 
             <TextView
                 android:id="@+id/tv_reset_info"

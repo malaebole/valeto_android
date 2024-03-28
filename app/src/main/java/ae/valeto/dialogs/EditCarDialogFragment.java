@@ -91,11 +91,14 @@ public class EditCarDialogFragment extends DialogFragment implements View.OnClic
             binding.etCarName.setText(carsList.get(pos).getName());
             binding.etCarNumber.setText(carsList.get(pos).getPlateNumber());
             binding.etCarModel.setText(carsList.get(pos).getBrand().getName());
+            binding.tvCarTitle.setText("Edit Car");
+            binding.tvBtnTitle.setText("Update");
         }
 
 
         binding.etCarModel.setOnClickListener(this);
         binding.btnConfirm.setOnClickListener(this);
+        binding.btnClose.setOnClickListener(this);
 
 
         return view;
@@ -139,6 +142,10 @@ public class EditCarDialogFragment extends DialogFragment implements View.OnClic
                 addUserCar(true, binding.etCarName.getText().toString(), binding.etCarNumber.getText().toString(), String.valueOf(brandListItemId));
             }
 
+        }
+
+        else if (v == binding.btnClose) {
+            dismiss();
         }
 
     }

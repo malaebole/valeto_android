@@ -54,6 +54,7 @@ public class DurationDialogFragment extends DialogFragment implements View.OnCli
         binding.lay10.setOnClickListener(this);
         binding.lay15.setOnClickListener(this);
         binding.btnConfirm.setOnClickListener(this);
+        binding.btnClose.setOnClickListener(this);
 
         return view;
     }
@@ -103,9 +104,10 @@ public class DurationDialogFragment extends DialogFragment implements View.OnCli
 
         }
         else if (v == binding.btnConfirm) {
-
             dialogCallback.didSubmitResult(this, time);
-
+        }
+        else if (v == binding.btnClose) {
+          dismiss();
         }
 
     }

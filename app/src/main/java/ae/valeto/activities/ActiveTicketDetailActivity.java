@@ -309,6 +309,7 @@ public class ActiveTicketDetailActivity extends BaseActivity implements View.OnC
             makeMyCarReady(true, ticketId, time);
 
 
+
         });
         dialogFragment.show(fragmentTransaction, "DurationDialogFragment");
 

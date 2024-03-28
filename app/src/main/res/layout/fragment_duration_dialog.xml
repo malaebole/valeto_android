@@ -25,25 +25,52 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <TextView
-                android:id="@+id/tv_parking_name"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/helvetica"
-                android:gravity="start"
-                android:text="Select the duration"
-                android:textColor="@color/blackColor"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="@dimen/_30sdp"
-                android:layout_marginStart="@dimen/_30sdp" />
+                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp">
+                <TextView
+                    android:id="@+id/tv_parking_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/helvetica"
+                    android:text="Select the duration"
+                    android:textColor="@color/blackColor"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"/>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/btn_close"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerInParent="true"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    app:cardBackgroundColor="@color/blackColor"
+                    app:cardCornerRadius="@dimen/_100sdp"
+                    app:cardElevation="4dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center_vertical">
+
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:src="@drawable/cross_drawable"
+                        android:layout_alignParentEnd="true"
+                        android:layout_gravity="center" />
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/lay_imd"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_50sdp"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginStart="@dimen/_30sdp"
                 android:layout_marginEnd="@dimen/_30sdp"
                 android:background="@drawable/rounded_corner_bg_white">

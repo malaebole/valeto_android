@@ -60,6 +60,7 @@ public class ChangePassDialogFragment extends DialogFragment implements View.OnC
         getDialog().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         binding.btnConfirm.setOnClickListener(this);
+        binding.btnClose.setOnClickListener(this);
         //Glide.with(getActivity()).load(photoUrl).into(binding.shirtImgVuAd);
 
         return view;
@@ -88,6 +89,9 @@ public class ChangePassDialogFragment extends DialogFragment implements View.OnC
             changePassword(true,binding.etOldPass.getText().toString(), binding.etNewPass.getText().toString());
 
         }
+        else if (v == binding.btnClose) {
+            dismiss();
+        }
 
     }
 
@@ -102,6 +106,7 @@ public class ChangePassDialogFragment extends DialogFragment implements View.OnC
                     try {
                         JSONObject object = new JSONObject(response.body().string());
                         if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
+                            Functions.showToast(getContext(),"Password has been changed successfully!", FancyToast.SUCCESS);
                             dialogCallback.didSubmitResult(ChangePassDialogFragment.this);
                         }else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);

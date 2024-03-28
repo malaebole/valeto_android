@@ -1,0 +1,27 @@
+<!-- cross_drawable.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Vertical line -->
+    <item android:top="1dp">
+        <rotate
+            android:fromDegrees="45"
+            android:toDegrees="45">
+            <shape android:shape="line">
+                <stroke
+                    android:width="2dp"
+                    android:color="@color/white"/> <!-- Yellow color for the cross -->
+            </shape>
+        </rotate>
+    </item>
+    <!-- Vertical line -->
+    <item android:bottom="1dp">
+        <rotate
+            android:fromDegrees="-45"
+            android:toDegrees="-45">
+            <shape android:shape="line">
+                <stroke
+                    android:width="2dp"
+                    android:color="@color/white"/> <!-- Yellow color for the cross -->
+            </shape>
+        </rotate>
+    </item>
+</layer-list>

@@ -178,7 +178,6 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         ChangePassDialogFragment dialogFragment = new ChangePassDialogFragment();
         dialogFragment.setDialogCallback((df) -> {
             df.dismiss();
-            Functions.showToast(getContext(),"Password has been changed successfully!", FancyToast.SUCCESS);
 
         });
         dialogFragment.show(fragmentTransaction, "ChangePassDialogFragment");
