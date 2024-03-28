@@ -176,7 +176,7 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
                 }
                 else if (type.equalsIgnoreCase("ticketClosed")) {
                     binding.activeTicketVu.setVisibility(View.GONE);
-                    showRatingDialog();
+                    showRatingDialog(myTicket.getParking().getId(),myTicket.getParking().getPhoto(), myTicket.getParking().getName(), myTicket.getParking().getLocation());
                 }
             }
 
@@ -184,22 +184,23 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
         }
     };
 
-    protected void showRatingDialog() {
-        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-        Fragment fragment = getParentFragmentManager().findFragmentByTag("RatingDialogFragment");
-        if (fragment != null) {
-            fragmentTransaction.remove(fragment);
-        }
-        fragmentTransaction.addToBackStack(null);
-        RatingDialogFragment dialogFragment = new RatingDialogFragment(String.valueOf(myTicket.getParking().getId()),
-                                                                            myTicket.getParking().getPhoto(), myTicket.getParking().getName(),
-                                                                            myTicket.getParking().getLocation());
-        dialogFragment.setDialogCallback((df) -> {
-            df.dismiss();
-        });
-        dialogFragment.show(fragmentTransaction, "RatingDialogFragment");
-
-    }
+//    protected void showRatingDialog() {
+//        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+//        Fragment fragment = getParentFragmentManager().findFragmentByTag("RatingDialogFragment");
+//        if (fragment != null) {
+//            fragmentTransaction.remove(fragment);
+//        }
+//        fragmentTransaction.addToBackStack(null);
+//        RatingDialogFragment dialogFragment = new RatingDialogFragment(String.valueOf(myTicket.getParking().getId()),
+//                                                                                      myTicket.getParking().getPhoto(),
+//                                                                                      myTicket.getParking().getName(),
+//                                                                                      myTicket.getParking().getLocation());
+//        dialogFragment.setDialogCallback((df) -> {
+//            df.dismiss();
+//        });
+//        dialogFragment.show(fragmentTransaction, "RatingDialogFragment");
+//
+//    }
 
     @Override
     public void onClick(View v) {
@@ -254,6 +255,9 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
                         JSONObject object = new JSONObject(response.body().string());
                         if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
                             JSONObject data = object.getJSONObject(Constants.kData);
+
+
+                            AppManager.getInstance().notificationCount = Integer.parseInt(data.getString("unread_count"));
 
                             JSONArray arr = data.getJSONArray("parking");
                             Gson gson = new Gson();

@@ -50,6 +50,9 @@ public class MyTicket {
     @SerializedName("currency")
     @Expose
     private String currency;
+    @SerializedName("reviews")
+    @Expose
+    private int reviews;
 
     public Integer getId() {
         return id;
@@ -169,6 +172,14 @@ public class MyTicket {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public int getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(int reviews) {
+        this.reviews = reviews;
     }
 
 }

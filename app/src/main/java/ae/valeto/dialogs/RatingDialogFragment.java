@@ -39,7 +39,8 @@ public class RatingDialogFragment extends DialogFragment implements View.OnClick
 
     private FragmentRatingDialogBinding binding;
     private ResultDialogCallback dialogCallback;
-    private String parkingId = "", photo= "", name= "", location= "";
+    private String photo= "", name= "", location= "";
+    private int parkingId;
     private float rating = 5;
 
 
@@ -47,7 +48,7 @@ public class RatingDialogFragment extends DialogFragment implements View.OnClick
         // Required empty public constructor
     }
 
-    public RatingDialogFragment(String parkingId, String photo, String name, String location) {
+    public RatingDialogFragment(int parkingId, String photo, String name, String location) {
         this.parkingId = parkingId;
         this.photo = photo;
         this.name = name;
@@ -79,9 +80,9 @@ public class RatingDialogFragment extends DialogFragment implements View.OnClick
 
         binding.tvName.setText(name);
         binding.tvLoc.setText(location);
-        Glide.with(getActivity()).load(photo).into(binding.imgVu);
-
-
+        if (!photo.isEmpty()){
+            Glide.with(getActivity()).load(photo).into(binding.imgVu);
+        }
         binding.ratingBar.setStar(rating);
         binding.ratingBar.setOnRatingChangeListener(new RatingBar.OnRatingChangeListener() {
             @Override
@@ -111,10 +112,6 @@ public class RatingDialogFragment extends DialogFragment implements View.OnClick
             else {
                 Functions.showToast(getActivity(), "Rating cannot be empty", FancyToast.ERROR);
             }
-
-
-
-
 
 //            dialogCallback.didSubmitResult(this);
 //            this.dismiss();

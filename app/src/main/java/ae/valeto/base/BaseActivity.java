@@ -29,6 +29,8 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.kaopiz.kprogresshud.KProgressHUD;
@@ -46,6 +48,7 @@ import java.util.Date;
 import java.util.Random;
 
 import ae.valeto.R;
+import ae.valeto.dialogs.RatingDialogFragment;
 import ae.valeto.util.AppManager;
 import ae.valeto.util.Constants;
 import ae.valeto.util.Functions;
@@ -147,6 +150,21 @@ public class BaseActivity extends AppCompatActivity {
 //        dialogFragment.setFragmentCallback(callback);
 //        dialogFragment.show(fragmentTransaction, "EmpReviewFilterDialogFragment");
 //    }
+
+    protected void showRatingDialog(int id, String photo, String name, String location) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag("RatingDialogFragment");
+        if (fragment != null) {
+            fragmentTransaction.remove(fragment);
+        }
+        fragmentTransaction.addToBackStack(null);
+        RatingDialogFragment dialogFragment = new RatingDialogFragment(id ,photo,name,location);
+        dialogFragment.setDialogCallback((df) -> {
+            df.dismiss();
+        });
+        dialogFragment.show(fragmentTransaction, "RatingDialogFragment");
+
+    }
 
     protected void sendFcmTokenApi(String token) {
         String uniqueID = Functions.getPrefValue(this, Constants.kDeviceUniqueId);

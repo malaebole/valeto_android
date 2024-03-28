@@ -126,7 +126,7 @@ public interface APIInterface {
     Call<ResponseBody> getSingleUserParking(@Path("id") int id);
     @FormUrlEncoded
     @POST("user/parking/add-review")
-    Call<ResponseBody> addParkingReview(@Field("parking_id") String parkingId,
+    Call<ResponseBody> addParkingReview(@Field("parking_id") int parkingId,
                                         @Field("stars") String stars,
                                         @Field("comments") String comments);
 

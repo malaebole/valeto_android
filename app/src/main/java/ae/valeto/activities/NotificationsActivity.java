@@ -13,6 +13,8 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.baoyz.actionsheet.ActionSheet;
 import com.google.gson.Gson;
@@ -34,6 +36,7 @@ import ae.valeto.R;
 import ae.valeto.adapters.NotificationListAdapter;
 import ae.valeto.base.BaseActivity;
 import ae.valeto.databinding.ActivityNotificationsBinding;
+import ae.valeto.dialogs.RatingDialogFragment;
 import ae.valeto.models.NotificationList;
 import ae.valeto.util.AppManager;
 import ae.valeto.util.Constants;
@@ -135,8 +138,35 @@ public class NotificationsActivity extends BaseActivity implements View.OnClickL
                 startActivity(intent);
 
             }
+
+            if (notificationList.get(pos).getType().equalsIgnoreCase("ticketClosedRateNow")) {
+                if (notification.getTicket().getReviews() == 0){
+                    showRatingDialog(notification.getTicket().getParking().getId(),
+                            notification.getTicket().getParking().getPhoto(),
+                            notification.getTicket().getParking().getName(),
+                            notification.getTicket().getParking().getLocation());
+                }
+            }
         }
     };
+
+//    protected void showRatingDialog() {
+//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//        Fragment fragment = getSupportFragmentManager().findFragmentByTag("RatingDialogFragment");
+//        if (fragment != null) {
+//            fragmentTransaction.remove(fragment);
+//        }
+//        fragmentTransaction.addToBackStack(null);
+//        RatingDialogFragment dialogFragment = new RatingDialogFragment(String.valueOf(myTicket.getParking().getId()),
+//                myTicket.getParking().getPhoto(), myTicket.getParking().getName(),
+//                myTicket.getParking().getLocation());
+//
+//        dialogFragment.setDialogCallback((df) -> {
+//            df.dismiss();
+//        });
+//        dialogFragment.show(fragmentTransaction, "RatingDialogFragment");
+//
+//    }
     private void clearClicked() {
         if (notificationList.isEmpty()) {
             return;

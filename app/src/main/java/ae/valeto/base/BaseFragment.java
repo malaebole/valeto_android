@@ -13,6 +13,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.shashank.sony.fancytoastlib.FancyToast;
@@ -24,6 +25,7 @@ import java.net.UnknownHostException;
 import ae.valeto.MyApp;
 import ae.valeto.R;
 import ae.valeto.activities.LoginActivity;
+import ae.valeto.dialogs.RatingDialogFragment;
 import ae.valeto.util.AppManager;
 import ae.valeto.util.Constants;
 import ae.valeto.util.Functions;
@@ -119,6 +121,21 @@ public class BaseFragment extends Fragment {
                 }
             }
         });
+    }
+
+    protected void showRatingDialog(int id, String photo, String name, String location) {
+        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+        Fragment fragment = getParentFragmentManager().findFragmentByTag("RatingDialogFragment");
+        if (fragment != null) {
+            fragmentTransaction.remove(fragment);
+        }
+        fragmentTransaction.addToBackStack(null);
+        RatingDialogFragment dialogFragment = new RatingDialogFragment(id ,photo,name,location);
+        dialogFragment.setDialogCallback((df) -> {
+            df.dismiss();
+        });
+        dialogFragment.show(fragmentTransaction, "RatingDialogFragment");
+
     }
 
 }
