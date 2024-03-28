@@ -193,7 +193,7 @@
                     android:ellipsize="end"
                     android:lines="1"
                     android:fontFamily="@font/helvetica_bold"
-                    android:text="Dubai bay parking"
+                    android:text="XXXXX XXX XXXXXX"
                     android:textColor="@color/darkTextColor"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -222,7 +222,7 @@
                         android:layout_marginBottom="@dimen/_5sdp"
                         android:textSize="13sp"
                         android:fontFamily="@font/helvetica"
-                        android:text="AED 10.00/hr"
+                        android:text="AED XX.XX/hr"
                         android:textColor="@color/blackColor"
                         android:textStyle="bold" />
 
@@ -327,7 +327,7 @@
 
                     <LinearLayout
                         android:id="@+id/linear"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:orientation="vertical"
@@ -361,7 +361,6 @@
                         </LinearLayout>
 
                     </LinearLayout>
-
                     <androidx.cardview.widget.CardView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -370,7 +369,7 @@
                         android:layout_marginEnd="@dimen/_10sdp"
                         app:cardBackgroundColor="@color/black30Color"
                         app:cardCornerRadius="@dimen/_50sdp"
-                        app:cardElevation="4dp"
+                        app:cardElevation="2dp"
                         app:contentPaddingLeft="@dimen/_5sdp"
                         app:contentPaddingRight="@dimen/_5sdp">
 
@@ -404,12 +403,12 @@
 
 
                     </androidx.cardview.widget.CardView>
-
                 </RelativeLayout>
 
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

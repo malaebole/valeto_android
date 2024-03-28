@@ -23,8 +23,8 @@
     <!--            android:textColor="@color/appColor"-->
     <!--            android:textSize="@dimen/_25sdp"-->
     <!--            android:textStyle="bold" />-->
-
     <!--    </RelativeLayout>-->
+
     <ImageView
         android:id="@+id/img_charac"
         android:layout_width="match_parent"
@@ -97,18 +97,31 @@
 
             <EditText
                 android:id="@+id/et_password"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="10dp"
+                android:layout_toStartOf="@+id/password_toggle"
                 android:background="@null"
+                android:cursorVisible="true"
+                android:fontFamily="@font/helvetica"
                 android:hint="Enter password"
                 android:inputType="textPassword"
-                android:textSize="@dimen/_16sdp"
-                android:fontFamily="@font/helvetica"
                 android:textColor="@color/appColor"
-                android:cursorVisible="true"
-                android:textCursorDrawable="@drawable/green_cursor_drawable"/>
+                android:textCursorDrawable="@drawable/green_cursor_drawable"
+                android:textSize="@dimen/_16sdp" />
+
+            <ImageView
+                android:id="@+id/password_toggle"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/hide"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true" />
 
         </RelativeLayout>
+
         <androidx.cardview.widget.CardView
             android:id="@+id/btn_login"
             android:layout_width="match_parent"

@@ -140,7 +140,7 @@ public class ParkingDetailsActivity extends BaseActivity implements View.OnClick
         }
         binding.tvParkingName.setText(parking.getName());
         binding.tvPrice.setText(parking.getCurrency()+ parking.getPrice() + "/hr");
-        binding.tvLoc.setText(parking.getDistance() +" "+ parking.getLocation());
+        binding.tvLoc.setText(parking.getDistance() +" - "+ parking.getLocation());
 
         List<TagItem> tagItems = new ArrayList<>();
         for (int i = 0; i < parking.getFacilites().size(); i++) {

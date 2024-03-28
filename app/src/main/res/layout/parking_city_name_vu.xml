@@ -17,7 +17,7 @@
         app:cardBackgroundColor="@color/transparent"
         app:strokeColor="#005F56"
         app:strokeWidth="@dimen/_2sdp"
-        app:cardCornerRadius="@dimen/_18sdp">
+        app:cardCornerRadius="@dimen/_50sdp">
 
         <TextView
             android:id="@+id/tv_name"

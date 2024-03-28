@@ -5,6 +5,9 @@ import android.os.Bundle;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.text.method.TransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,6 +64,7 @@ public class ChangePassDialogFragment extends DialogFragment implements View.OnC
 
         binding.btnConfirm.setOnClickListener(this);
         binding.btnClose.setOnClickListener(this);
+        binding.passwordToggle.setOnClickListener(this);
         //Glide.with(getActivity()).load(photoUrl).into(binding.shirtImgVuAd);
 
         return view;
@@ -91,6 +95,29 @@ public class ChangePassDialogFragment extends DialogFragment implements View.OnC
         }
         else if (v == binding.btnClose) {
             dismiss();
+        }
+        else if (v == binding.passwordToggle) {
+            TransformationMethod currentMethod = binding.etOldPass.getTransformationMethod();
+            TransformationMethod currentNewMethod = binding.etNewPass.getTransformationMethod();
+            if (currentMethod instanceof PasswordTransformationMethod) {
+                binding.etOldPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                binding.passwordToggle.setImageResource(R.drawable.show);
+            } else {
+                binding.etOldPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                binding.passwordToggle.setImageResource(R.drawable.hide);
+            }
+            binding.etOldPass.setSelection(binding.etOldPass.getText().length());
+
+            if (currentNewMethod instanceof PasswordTransformationMethod) {
+                binding.etNewPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                binding.passwordToggle.setImageResource(R.drawable.show);
+            } else {
+                binding.etNewPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                binding.passwordToggle.setImageResource(R.drawable.hide);
+            }
+            binding.etNewPass.setSelection(binding.etNewPass.getText().length());
+
+
         }
 
     }

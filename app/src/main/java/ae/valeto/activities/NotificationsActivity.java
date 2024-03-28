@@ -85,17 +85,6 @@ public class NotificationsActivity extends BaseActivity implements View.OnClickL
 
     private void grantNotificationPermission() {
 
-//            String[] permissions = new String[0];
-//            permissions = new String[]{Manifest.permission.POST_NOTIFICATIONS};
-//            Permissions.check(getContext(), permissions, null/*rationale*/, null/*options*/, new PermissionHandler() {
-//                @Override
-//                public void onGranted() {
-//                    // do your task.
-//
-//                }
-//            });
-
-
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
                 == PackageManager.PERMISSION_GRANTED){
 
@@ -105,15 +94,13 @@ public class NotificationsActivity extends BaseActivity implements View.OnClickL
             }
         }
 
-
-
     }
 
     private final ActivityResultLauncher<String> resultLauncher =  registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
                 if (isGranted) {
-                    Functions.showToast(getContext(), "Permission granted", FancyToast.SUCCESS);
+                  //  Functions.showToast(getContext(), "Permission granted", FancyToast.SUCCESS);
                 } else {
-                    Functions.showToast(getContext(), "Permission denied", FancyToast.ERROR);
+                   // Functions.showToast(getContext(), "Permission denied", FancyToast.ERROR);
                 }
     });
 

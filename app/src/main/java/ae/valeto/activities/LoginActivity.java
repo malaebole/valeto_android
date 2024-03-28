@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.text.method.TransformationMethod;
 import android.view.View;
 
 import com.google.gson.Gson;
@@ -55,6 +58,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         binding.tvForgetPass.setOnClickListener(this);
         binding.btnLogin.setOnClickListener(this);
         binding.btnSignup.setOnClickListener(this);
+        binding.passwordToggle.setOnClickListener(this);
 
 
 
@@ -110,6 +114,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             Intent intent = new Intent(getContext(), CustomerSignupActivity.class);
             startActivity(intent);
         }
+        else if (v == binding.passwordToggle) {
+            TransformationMethod currentMethod = binding.etPassword.getTransformationMethod();
+            if (currentMethod instanceof PasswordTransformationMethod) {
+                binding.etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                binding.passwordToggle.setImageResource(R.drawable.show);
+            } else {
+                binding.etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                binding.passwordToggle.setImageResource(R.drawable.hide);
+            }
+            binding.etPassword.setSelection(binding.etPassword.getText().length());
+        }
+
 
     }
     private void btnLoginClicked() {

@@ -1,14 +1,20 @@
 package ae.valeto.signup;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.TextView;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.datatransport.backend.cct.BuildConfig;
 import com.google.gson.Gson;
@@ -51,6 +57,9 @@ public class SplashActivity extends BaseActivity {
         if (Functions.getAppLangStr(getContext()).isEmpty()) {
             Functions.setAppLang(getContext(), "en");
         }
+
+        grantNotificationPermission();
+
         version_name = findViewById(R.id.version_text);
         PackageManager pm = getApplicationContext().getPackageManager();
         String pkgName = getApplicationContext().getPackageName();
@@ -74,6 +83,27 @@ public class SplashActivity extends BaseActivity {
         handler = new Handler();
         handler.postDelayed(runnable, 1000);
     }
+
+    private void grantNotificationPermission() {
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                == PackageManager.PERMISSION_GRANTED){
+
+        }else{
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+                resultLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+            }
+        }
+
+    }
+
+    private final ActivityResultLauncher<String> resultLauncher =  registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+        if (isGranted) {
+            //Functions.showToast(getContext(), "Permission granted", FancyToast.SUCCESS);
+        } else {
+           // Functions.showToast(getContext(), "Permission denied", FancyToast.ERROR);
+        }
+    });
 
     public void devicesLoginLimit() {
 //        String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
