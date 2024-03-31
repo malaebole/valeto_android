@@ -43,7 +43,6 @@ import retrofit2.Response;
 
 public class SplashActivity extends BaseActivity {
     private ActivitySplashBinding binding;
-
     private Handler handler;
     TextView version_name;
 

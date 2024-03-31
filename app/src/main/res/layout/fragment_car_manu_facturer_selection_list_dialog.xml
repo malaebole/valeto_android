@@ -1,62 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/bgVuColor">
+    android:background="@color/cutomerBgVuColor">
 
-<androidx.cardview.widget.CardView
+<ImageView
+    android:id="@+id/imageView"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentEnd="true"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
+    android:scaleType="centerCrop"
+    android:src="@drawable/main_bg" />
+
+<RelativeLayout
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="@dimen/_5sdp"
-    app:cardElevation="0dp">
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:orientation="horizontal"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    android:layout_marginTop="@dimen/_20sdp">
 
-    <LinearLayout
+    <ImageButton
+        android:id="@+id/btn_close"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:background="@null"
+        android:padding="@dimen/_3sdp"
+        android:scaleType="centerCrop"
+        android:layout_centerInParent="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/back_btn" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/helvetica_bold"
+        android:text="Brands List"
+        android:layout_centerInParent="true"
+        android:textColor="@color/whiteColor"
+        android:textSize="@dimen/_24sdp"
+        android:textStyle="bold" />
+
+</RelativeLayout>
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_vu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:background="@color/bgVuColor">
-
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="Manufacturer List"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/appColor"
-                android:textStyle="bold" />
-
-        </RelativeLayout>
-
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search_vu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusableInTouchMode="true"
-            android:theme="@style/SearchAutoCompleteTextView"
-            app:iconifiedByDefault="false"
-            app:queryBackground="@color/transparent"
-            app:queryHint="Search" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_1sdp"
-            android:background="@color/separatorColor" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_vu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        android:focusableInTouchMode="true"
+        app:iconifiedByDefault="false"
+        android:layout_below="@+id/linearLayout"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        app:queryHint="Search"
+        android:background="@drawable/rounded_corner_bg_white"/>
 
 
-    </LinearLayout>
-
-</androidx.cardview.widget.CardView>
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recycler_vu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/search_vu"
+    android:layout_marginTop="@dimen/_10sdp"
+    android:scrollbars="none" />
 
 </RelativeLayout>

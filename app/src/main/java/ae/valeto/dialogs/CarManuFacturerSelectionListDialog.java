@@ -139,6 +139,17 @@ public class CarManuFacturerSelectionListDialog extends Dialog {
         });
         adapter.notifyDataSetChanged();
 
+
+        binding.btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
+
+
+
+
     }
 
 
