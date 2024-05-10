@@ -210,22 +210,33 @@ public class ActiveTicketDetailActivity extends BaseActivity implements View.OnC
             binding.tagsLayout.initializeTags(this, tagItems);
 
 
-            TicketTimer ticketTimer = new TicketTimer(myTicket.getStartTime(), Double.parseDouble(myTicket.getParking().getPrice()));
+            TicketTimer ticketTimer = new TicketTimer(myTicket.getStartTime(), Double.parseDouble(myTicket.getParking().getPrice()), myTicket.getParking().getIsFixedPrice());
             ticketTimer.start();
         }
     }
 
-    private class TicketTimer {
+    public class TicketTimer {
         private static final String TIME_FORMAT = "dd/MM/yyyy hh:mma";
         private static final long TICK_INTERVAL = 1000; // Update timer every second
 
         private Date startTime;
         private Timer timer;
         private final double parkingPrice;
+        private String isFixedPrice;
 
-        public TicketTimer(String startTimeString, double parkingPrice) {
+        public TicketTimer(String startTimeString, double parkingPrice, String isFixedPrice) {
             this.parkingPrice = parkingPrice;
+            this.isFixedPrice = isFixedPrice;
             try {
+                // Test Code
+                // Set the initial start time to 59 minutes and 59 seconds ago
+
+//                Calendar calendar = Calendar.getInstance();
+//                calendar.setTime(new SimpleDateFormat(TIME_FORMAT, Locale.getDefault()).parse(startTimeString));
+//                calendar.add(Calendar.MINUTE, -47);
+//                calendar.add(Calendar.SECOND, -59);
+//                this.startTime = calendar.getTime();
+
                 this.startTime = new SimpleDateFormat(TIME_FORMAT, Locale.getDefault()).parse(startTimeString);
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -234,7 +245,7 @@ public class ActiveTicketDetailActivity extends BaseActivity implements View.OnC
 
         public void start() {
             timer = new Timer();
-            timer.scheduleAtFixedRate(new TimerTask() {
+            timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
                     updateTimer();
@@ -281,11 +292,24 @@ public class ActiveTicketDetailActivity extends BaseActivity implements View.OnC
             });
         }
 
-
-
         private double calculatePrice(long elapsedTime) {
-            double totalMinutes = elapsedTime / (60 * 1000);
-            return (parkingPrice / 60) * totalMinutes;
+            if (isFixedPrice.equalsIgnoreCase("1")) {
+                return parkingPrice;
+            } else {
+                long totalHours = elapsedTime / (60 * 60 * 1000);
+                double originalPrice = parkingPrice * totalHours;
+                double additionalPrice = 0;
+                long remainingMinutes = (elapsedTime / (60 * 1000)) % 60;
+                if (remainingMinutes > 0) {
+                    additionalPrice = parkingPrice;
+                }
+                double totalPrice = originalPrice + additionalPrice;
+                if (totalHours == 0) {
+                    return parkingPrice;
+                } else {
+                    return totalPrice;
+                }
+            }
         }
     }
 

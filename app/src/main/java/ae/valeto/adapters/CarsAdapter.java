@@ -55,41 +55,42 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.ViewHolder> {
 
             holder.tvCarNumber.setText(car.getPlateNumber());
 
-            if (!car.getName().isEmpty()){
-                holder.tvName.setText(car.getName());
+            if (!car.getBrand().getName().isEmpty()){
+                if (!car.getName().isEmpty()){
+                    holder.tvName.setText(car.getBrand().getName() + " ("+car.getName()+")");
+                }else{
+                    holder.tvName.setText(car.getBrand().getName());
+                }
             }
+
             if (!car.getPhoto().isEmpty()){
                 Glide.with(context).load(car.getPhoto()).into(holder.img);
             }
 
-
-        holder.layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (itemClickListener != null) {
-                    itemClickListener.itemClicked(v, holder.getAdapterPosition());
+            holder.layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (itemClickListener != null) {
+                        itemClickListener.itemClicked(v, holder.getAdapterPosition());
+                    }
                 }
-            }
-        });
+            });
 
-        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (itemClickListener != null) {
-                    itemClickListener.deleteClicked(v, holder.getAdapterPosition());
+            holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (itemClickListener != null) {
+                        itemClickListener.deleteClicked(v, holder.getAdapterPosition());
+                    }
                 }
-            }
-        });
-
+            });
 
     }
-
 
     @Override
     public int getItemCount () {
         return carsList.size();
     }
-
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -110,8 +111,6 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.ViewHolder> {
 
         }
     }
-
-
 
     public interface ItemClickListener {
         void itemClicked(View view, int pos);

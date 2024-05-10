@@ -45,6 +45,9 @@ public class Parking {
     @SerializedName("rating")
     @Expose
     private Double rating;
+    @SerializedName("is_fixed_price")
+    @Expose
+    private String isFixedPrice;
 
     public Integer getId() {
         return id;
@@ -148,6 +151,14 @@ public class Parking {
 
     public void setRating(Double rating) {
         this.rating = rating;
+    }
+
+    public String getIsFixedPrice() {
+        return isFixedPrice;
+    }
+
+    public void setIsFixedPrice(String isFixedPrice) {
+        this.isFixedPrice = isFixedPrice;
     }
 
 }

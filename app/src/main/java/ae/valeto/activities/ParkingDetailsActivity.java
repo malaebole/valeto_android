@@ -134,7 +134,12 @@ public class ParkingDetailsActivity extends BaseActivity implements View.OnClick
     }
 
     private void populateParkingData(){
-        binding.tvRate.setText(String.valueOf(parking.getRating()));
+        if (parking.getRating() > 0){
+            binding.rateVu.setVisibility(View.VISIBLE);
+            binding.tvRate.setText(String.valueOf(parking.getRating()));
+        }else{
+            binding.rateVu.setVisibility(View.GONE);
+        }
         if (!parking.getPhoto().isEmpty()){
             Glide.with(getApplicationContext()).load(parking.getPhoto()).into(binding.imgVu);
         }

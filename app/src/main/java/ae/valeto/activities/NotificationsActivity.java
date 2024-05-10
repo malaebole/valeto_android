@@ -140,12 +140,13 @@ public class NotificationsActivity extends BaseActivity implements View.OnClickL
             }
 
             if (notificationList.get(pos).getType().equalsIgnoreCase("ticketClosedRateNow")) {
-                if (notification.getTicket().getReviews() == 0){
+               // if (notification.getTicket().getReviews() == 0){
                     showRatingDialog(notification.getTicket().getParking().getId(),
                             notification.getTicket().getParking().getPhoto(),
                             notification.getTicket().getParking().getName(),
                             notification.getTicket().getParking().getLocation());
-                }
+                //}
+
             }
         }
     };

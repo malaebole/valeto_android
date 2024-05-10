@@ -36,6 +36,7 @@ import java.net.UnknownHostException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -239,7 +240,6 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
     private void getParkingList(boolean isLoader) {
         Call<ResponseBody> call;
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
-//        call = AppManager.getInstance().apiInterface.getParkingList(latitude,longitude);
         if (location == null) {
             call = AppManager.getInstance().apiInterface.getParkingList(parkingCityId,0, 0);
         }
@@ -256,17 +256,14 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
                         if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
                             JSONObject data = object.getJSONObject(Constants.kData);
 
-
                             AppManager.getInstance().notificationCount = Integer.parseInt(data.getString("unread_count"));
 
                             JSONArray arr = data.getJSONArray("parking");
                             Gson gson = new Gson();
                             parkingList.clear();
-                                // AppManager.getInstance().parkings.clear();
                             for (int i = 0; i < arr.length(); i++) {
                                 Parking parking = gson.fromJson(arr.get(i).toString(), Parking.class);
                                 parkingList.add(parking);
-                                // AppManager.getInstance().parkings.add(parking);
                             }
 
                             if (parkingCityList.isEmpty()){
@@ -275,18 +272,12 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
                                 Gson gson1 = new Gson();
                                 parkingCityList.clear();
 
-                                //   ParkingCity allParkingCity = new ParkingCity();
-                                //   parkingCityList.add(0,null);
-                                //   parkingCityList.get(0).setId(0);
-                                //   parkingCityList.add(allParkingCity);
-
                                 for (int i = 0; i < citiesArr.length(); i++) {
                                     ParkingCity parkingCity = gson1.fromJson(citiesArr.get(i).toString(), ParkingCity.class);
                                     parkingCityList.add(parkingCity);
                                 }
                                 parkingCityList.add(0, null);
                                 parkingCityAdapter.setSelectedIndex(0);
-
 
                                 parkingCityAdapter.notifyDataSetChanged();
                             }
@@ -295,7 +286,6 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
                                 myTicket = new Gson().fromJson(data.getString("ticket"), MyTicket.class);
                                 populateMyTicket();
                             }
-
 
                             parkingAdapter.notifyDataSetChanged();
 
@@ -340,24 +330,35 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
                     ticketTimer.stop();
                 }
             }else{
-                ticketTimer = new TicketTimer(myTicket.getStartTime(), Double.parseDouble(myTicket.getParking().getPrice()));
+                ticketTimer = new TicketTimer(myTicket.getStartTime(), Double.parseDouble(myTicket.getParking().getPrice()), myTicket.getParking().getIsFixedPrice());
                 ticketTimer.start();
             }
 
         }
 
     }
-    private class TicketTimer {
+    public class TicketTimer {
         private static final String TIME_FORMAT = "dd/MM/yyyy hh:mma";
         private static final long TICK_INTERVAL = 1000; // Update timer every second
 
         private Date startTime;
         private Timer timer;
         private final double parkingPrice;
+        private String isFixedPrice;
 
-        public TicketTimer(String startTimeString, double parkingPrice) {
+        public TicketTimer(String startTimeString, double parkingPrice, String isFixedPrice) {
             this.parkingPrice = parkingPrice;
+            this.isFixedPrice = isFixedPrice;
             try {
+                // Test Code
+                // Set the initial start time to 59 minutes and 59 seconds ago
+
+//                Calendar calendar = Calendar.getInstance();
+//                calendar.setTime(new SimpleDateFormat(TIME_FORMAT, Locale.getDefault()).parse(startTimeString));
+//                calendar.add(Calendar.MINUTE, -47);
+//                calendar.add(Calendar.SECOND, -59);
+//                this.startTime = calendar.getTime();
+
                 this.startTime = new SimpleDateFormat(TIME_FORMAT, Locale.getDefault()).parse(startTimeString);
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -366,7 +367,7 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
 
         public void start() {
             timer = new Timer();
-            timer.scheduleAtFixedRate(new TimerTask() {
+            timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
                     updateTimer();
@@ -414,60 +415,49 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
         }
 
         private double calculatePrice(long elapsedTime) {
-            double totalMinutes = elapsedTime / (60 * 1000);
-            return (parkingPrice / 60) * totalMinutes;
+            if (isFixedPrice.equalsIgnoreCase("1")) {
+                return parkingPrice;
+            } else {
+                long totalHours = elapsedTime / (60 * 60 * 1000);
+                double originalPrice = parkingPrice * totalHours;
+                double additionalPrice = 0;
+                long remainingMinutes = (elapsedTime / (60 * 1000)) % 60;
+                if (remainingMinutes > 0) {
+                    additionalPrice = parkingPrice;
+                }
+                double totalPrice = originalPrice + additionalPrice;
+                if (totalHours == 0) {
+                    return parkingPrice;
+                } else {
+                    return totalPrice;
+                }
+            }
         }
     }
     private void enableLocationUpdates() {
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-
-        // Check if GPS provider is enabled
         boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-
         if (!isGPSEnabled) {
-            // GPS provider is not enabled, prompt user to enable it
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setMessage("Location services are disabled. Please enable them to see nearest parking's.")
                     .setCancelable(false)
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            // Open location settings to allow the user to enable location services
                             startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
                         }
                     })
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            // User declined, inform the user about the necessity of location services or handle the situation accordingly
                         }
                     });
             AlertDialog alert = builder.create();
             alert.show();
         } else {
-            // GPS provider is enabled, proceed with requesting location updates
             if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 getLocationAndCallAPI();
             }
-            //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, locationListener);
         }
     }
-//    private LocationListener locationListener = new LocationListener() {
-//        @Override
-//        public void onLocationChanged(Location location) {
-//            // Handle location updates
-//            double latitude = location.getLatitude();
-//            double longitude = location.getLongitude();
-//            // Do something with latitude and longitude
-//        }
-//
-//        @Override
-//        public void onStatusChanged(String provider, int status, Bundle extras) {}
-//
-//        @Override
-//        public void onProviderEnabled(String provider) {}
-//
-//        @Override
-//        public void onProviderDisabled(String provider) {}
-//    };
     private void getLocationAndCallAPI() {
         new AirLocation(getActivity(), true, false, new AirLocation.Callbacks() {
             @Override
@@ -475,7 +465,6 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
                 location = loc;
                 getParkingList(parkingList.isEmpty());
             }
-
             @Override
             public void onFailed(AirLocation.LocationFailedEnum locationFailedEnum) {
                 getParkingList(false);

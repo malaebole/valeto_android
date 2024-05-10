@@ -54,11 +54,20 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.ViewHold
         if (!parking.getPhoto().isEmpty()){
             Glide.with(context).load(parking.getPhoto()).into(holder.imgBanner);
         }
-        holder.tvPrice.setText("AED " + parking.getPrice() + "/hr");
+        if (parking.getIsFixedPrice().equalsIgnoreCase("1")){
+            holder.tvPrice.setText("AED "+parking.getPrice() + " ");
+        }else{
+            holder.tvPrice.setText("AED "+parking.getPrice() + "/hr");
+        }
         holder.tvLoc.setText(parking.getDistance() +" "+ parking.getLocation());
         holder.tvParkingName.setText(parking.getName());
-        holder.tvRate.setText(String.valueOf(parking.getRating()));
 
+        if (parking.getRating() > 0){
+            holder.rateVu.setVisibility(View.VISIBLE);
+            holder.tvRate.setText(String.valueOf(parking.getRating()));
+        }else{
+            holder.rateVu.setVisibility(View.GONE);
+        }
 
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +93,7 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.ViewHold
 
         ImageView imgBanner;
         TextView tvPrice, tvLoc, tvRate, tvParkingName;
-        CardView layout;
+        CardView layout, rateVu;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -96,6 +105,7 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.ViewHold
             tvRate = itemView.findViewById(R.id.tv_rate);
             layout = itemView.findViewById(R.id.rel_main);
             tvParkingName = itemView.findViewById(R.id.tv_parking_name);
+            rateVu = itemView.findViewById(R.id.rate_vu);
 
         }
     }

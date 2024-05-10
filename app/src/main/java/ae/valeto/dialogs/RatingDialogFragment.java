@@ -80,7 +80,7 @@ public class RatingDialogFragment extends DialogFragment implements View.OnClick
 
         binding.tvName.setText(name);
         binding.tvLoc.setText(location);
-        if (!photo.isEmpty()){
+        if (photo !=null && !photo.isEmpty()){
             Glide.with(getActivity()).load(photo).into(binding.imgVu);
         }
         binding.ratingBar.setStar(rating);
