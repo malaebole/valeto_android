@@ -117,6 +117,13 @@ public interface APIInterface {
     Call<ResponseBody> makeMyCarReady(@Field("ticket_id") int ticketId,
                                       @Field("make_ready_in") String makeItReadyIn);
 
+    @FormUrlEncoded
+    @POST("user/contact/request")
+    Call<ResponseBody> submitRequest(@Field("name") String name,
+                                     @Field("email") String email,
+                                     @Field("phone") String phone,
+                                     @Field("message") String message);
+
     @GET("user/parking")
     Call<ResponseBody> getParkingList(@Query("city_id") String cityId,
                                       @Query("latitude") double latitude,

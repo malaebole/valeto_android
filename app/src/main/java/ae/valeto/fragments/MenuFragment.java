@@ -1,12 +1,17 @@
 package ae.valeto.fragments;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.appcompat.app.AlertDialog;
+
+import com.baoyz.actionsheet.ActionSheet;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.kaopiz.kprogresshud.KProgressHUD;
@@ -20,6 +25,7 @@ import java.util.List;
 
 import ae.valeto.activities.ActiveTicketDetailActivity;
 import ae.valeto.activities.CloseTicketActivity;
+import ae.valeto.activities.ContactUsActivity;
 import ae.valeto.activities.CustomerMainTabsActivity;
 import ae.valeto.activities.LoginActivity;
 import ae.valeto.activities.MyCarsActivity;
@@ -50,12 +56,11 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         binding = FragmentMenuBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-
         binding.profileVu.setOnClickListener(this);
         binding.carsVu.setOnClickListener(this);
-//        binding.activeTicketVu.setOnClickListener(this);
         binding.closedTicketVu.setOnClickListener(this);
         binding.termsAndConditionsVu.setOnClickListener(this);
         binding.privacyAndPolicyVu.setOnClickListener(this);
@@ -64,16 +69,14 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
         binding.imgVu.setOnClickListener(this);
         binding.relNotif.setOnClickListener(this);
         binding.tvEmailVerify.setOnClickListener(this);
-
         return view;
-    }
 
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -87,13 +90,10 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
              }
              else {
                  binding.tvEmailVerify.setVisibility(View.GONE);
-
              }
          }
-
-        // setBadgeValue();
+         setBadgeValue();
     }
-
     @Override
     public void onClick(View v) {
 
@@ -103,9 +103,6 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
         else if (v == binding.carsVu){
             carsClicked();
         }
-//        else if (v == binding.activeTicketVu){
-//            activeTicketClicked();
-//        }
         else if (v == binding.closedTicketVu) {
             closedTicketClicked();
         }
@@ -130,98 +127,76 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
         else if (v == binding.tvEmailVerify) {
             Intent intent = new Intent(getActivity(), VerifyEmailActivity.class);
             startActivity(intent);
-//            verifyEmailClicked(true);
+            // verifyEmailClicked(true);
         }
 
     }
-
-
-
-//    private void verifyEmailClicked(boolean isLoader) {
-//        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
-//        Call<ResponseBody> call = AppManager.getInstance().apiInterface.sendOtp();
-//        call.enqueue(new Callback<ResponseBody>() {
-//            @Override
-//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                Functions.hideLoader(hud);
-//                if (response.body() != null) {
-//                    try {
-//                        JSONObject object = new JSONObject(response.body().string());
-//                        if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
-//
-//                            Intent intent = new Intent(getActivity(), VerifyEmailActivity.class);
-//                            startActivity(intent);
-//
-//                        }
-//                        else {
-//                            Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
-//                        }
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//
-//                    }
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                Functions.hideLoader(hud);
-//            }
-//        });
-//    }
-
-
 
     private void closedTicketClicked() {
         Intent intent = new Intent(getActivity(), CloseTicketActivity.class);
         startActivity(intent);
     }
-
     private void termsAndConditionsClicked() {
 
     }
-
     private void privacyPolicyClicked() {
 
     }
-
     private void contactClicked() {
+        ActionSheet.createBuilder(getContext(), getParentFragmentManager())
+                .setCancelButtonTitle("Cancel")
+                .setOtherButtonTitles("WhatsApp","Submit Report")
+                .setCancelableOnTouchOutside(true)
+                .setListener(new ActionSheet.ActionSheetListener() {
+                    @Override
+                    public void onDismiss(ActionSheet actionSheet, boolean isCancel) {
+
+                    }
+
+                    @Override
+                    public void onOtherButtonClick(ActionSheet actionSheet, int index) {
+                        if (index == 0) {
+                            whatsAppClicked();
+                        }
+                        if (index == 1){
+                            submitReportClicked();
+                        }
+                    }
+                }).show();
 
     }
+    private void submitReportClicked() {
+        Intent intent = new Intent(getActivity(), ContactUsActivity.class);
+        startActivity(intent);
+    }
+    private void whatsAppClicked() {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("https://wa.me/"+userInfo.getAppOwnerPhone()));
+        startActivity(intent);
 
+    }
     private void logoutClicked() {
         logoutApi();
 
     }
-
     private void customerClicked() {
 
     }
-
-//    private void activeTicketClicked() {
-//
-//        Intent intent = new Intent(getActivity(), ActiveTicketDetailActivity.class);
-//        startActivity(intent);
-//
-//    }
-
     private void carsClicked() {
         Intent intent = new Intent(getActivity(), MyCarsActivity.class);
         startActivity(intent);
     }
-
     private void profileClicked() {
 
         Intent intent = new Intent(getActivity(), ProfileActivity.class);
         startActivity(intent);
 
     }
-
     private void notifClicked() {
         if (getActivity() instanceof CustomerMainTabsActivity) {
             ((CustomerMainTabsActivity) getActivity()).notificationsClicked();
         }
     }
-
     public void setBadgeValue() {
         if (AppManager.getInstance().notificationCount > 0) {
             binding.toolbarBadge.setVisibility(View.VISIBLE);
@@ -231,6 +206,5 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
             binding.toolbarBadge.setVisibility(View.GONE);
         }
     }
-
 
 }

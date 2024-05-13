@@ -238,6 +238,7 @@ public class SplashActivity extends BaseActivity {
                             JSONObject obj = object.getJSONObject(Constants.kData);
                             Gson gson = new Gson();
                             UserInfo userInfo = gson.fromJson(obj.toString(), UserInfo.class);
+                            userInfo.setAppOwnerPhone(object.getString("app_owner_phone"));
                             Functions.saveUserinfo(getContext(), userInfo);
 
                         }  else {

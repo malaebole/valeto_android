@@ -26,10 +26,6 @@ public class DurationDialogFragment extends DialogFragment implements View.OnCli
         // Required empty public constructor
     }
 
-//    public DurationDialogFragment(String photoUrl) {
-//        this.photoUrl = photoUrl;
-//    }
-
     public void setDialogCallback(ResultDialogCallback dialogCallback) {
         this.dialogCallback = dialogCallback;
     }
