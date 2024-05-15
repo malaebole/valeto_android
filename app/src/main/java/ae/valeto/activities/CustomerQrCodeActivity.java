@@ -65,9 +65,6 @@ public class CustomerQrCodeActivity extends BaseActivity implements View.OnClick
         binding.btnBack.setOnClickListener(this);
         binding.btnGoBack.setOnClickListener(this);
 
-
-
-
     }
 
     private void populateQrData() {

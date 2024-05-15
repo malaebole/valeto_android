@@ -176,7 +176,22 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
 
     }
     private void logoutClicked() {
-        logoutApi();
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Logout")
+                .setMessage("Are You Sure? You Want To Logout?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        logoutApi();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).create();
+        builder.show();
 
     }
     private void customerClicked() {
@@ -187,10 +202,8 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
         startActivity(intent);
     }
     private void profileClicked() {
-
         Intent intent = new Intent(getActivity(), ProfileActivity.class);
         startActivity(intent);
-
     }
     private void notifClicked() {
         if (getActivity() instanceof CustomerMainTabsActivity) {

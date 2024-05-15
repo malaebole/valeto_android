@@ -136,8 +136,10 @@
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
                             android:fontFamily="@font/helvetica"
-                            android:lines="1"
+                            android:inputType="textMultiLine"
                             android:text="Sharjah"
+                            android:maxLines="2"
+                            android:layout_marginEnd="@dimen/_150sdp"
                             android:textColor="@color/subTextColor" />
 
                     </LinearLayout>

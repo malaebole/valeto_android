@@ -137,16 +137,21 @@ public class ParkingDetailsActivity extends BaseActivity implements View.OnClick
         if (parking.getRating() > 0){
             binding.rateVu.setVisibility(View.VISIBLE);
             binding.tvRate.setText(String.valueOf(parking.getRating()));
-        }else{
+        }
+        else{
             binding.rateVu.setVisibility(View.GONE);
         }
+
         if (!parking.getPhoto().isEmpty()){
             Glide.with(getApplicationContext()).load(parking.getPhoto()).into(binding.imgVu);
         }
         binding.tvParkingName.setText(parking.getName());
-        binding.tvPrice.setText(parking.getCurrency()+ parking.getPrice() + "/hr");
+        if (parking.getIsFixedPrice().equalsIgnoreCase("1")){
+            binding.tvPrice.setText(parking.getCurrency()+" "+parking.getPrice() + " ");
+        }else{
+            binding.tvPrice.setText(parking.getCurrency()+" "+parking.getPrice() + "/hr");
+        }
         binding.tvLoc.setText(parking.getDistance() +" - "+ parking.getLocation());
-
         List<TagItem> tagItems = new ArrayList<>();
         for (int i = 0; i < parking.getFacilites().size(); i++) {
             String facilityName = parking.getFacilites().get(i).getName();
@@ -180,6 +185,11 @@ public class ParkingDetailsActivity extends BaseActivity implements View.OnClick
     }
 
     private void directionBtnClicked() {
+        Intent directionIntent = new Intent(Intent.ACTION_VIEW);
+        String uri = String.format("http://maps.google.com/maps?daddr=%f,%f", parking.getLatitude(), parking.getLongitude());
+        directionIntent.setData(Uri.parse(uri));
+        directionIntent.setPackage("com.google.android.apps.maps");
+        startActivity(directionIntent);
 
     }
 

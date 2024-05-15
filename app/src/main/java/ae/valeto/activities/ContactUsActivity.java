@@ -65,15 +65,15 @@ public class ContactUsActivity extends BaseActivity implements View.OnClickListe
                 Functions.showToast(getContext(), "Oops, Message cannot be empty!", FancyToast.SUCCESS);
                 return;
             }
-            submitRequest(true, binding.etMsg.getText().toString());
+            submitRequest(true, userInfo.getName(), userInfo.getEmail(),userInfo.getPhone(), binding.etMsg.getText().toString());
         }
 
     }
 
-    private void submitRequest(boolean isLoader, String msg) {
+    private void submitRequest(boolean isLoader,String name, String email, String phone, String msg) {
         Call<ResponseBody> call;
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
-        call = AppManager.getInstance().apiInterface.submitRequest(userInfo.getName(), userInfo.getEmail(),userInfo.getPhone(),msg);
+        call = AppManager.getInstance().apiInterface.submitRequest(name, email, phone, msg);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -82,7 +82,7 @@ public class ContactUsActivity extends BaseActivity implements View.OnClickListe
                     try {
                         JSONObject object = new JSONObject(response.body().string());
                         if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
-                            Functions.showToast(getContext(), "Report Submitted Successfully!", FancyToast.SUCCESS);
+                            Functions.showToast(getContext(), "Report Submitted Successfully!", FancyToast.ERROR);
                             finish();
 
                         }else {

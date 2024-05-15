@@ -206,6 +206,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                         if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
                             UserInfo info = new Gson().fromJson(object.getString(Constants.kData), UserInfo.class);
+                            userInfo.setAppOwnerPhone(object.getString("app_owner_phone"));
                             Functions.saveUserinfo(getContext(), info);
 
                         } else {
