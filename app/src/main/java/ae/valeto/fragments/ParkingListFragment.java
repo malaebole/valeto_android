@@ -20,6 +20,8 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -251,18 +253,15 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
                                 parkingList.add(parking);
                             }
                             if (parkingCityList.isEmpty()){
-
                                 JSONArray citiesArr = data.getJSONArray("cities");
                                 Gson gson1 = new Gson();
                                 parkingCityList.clear();
-
                                 for (int i = 0; i < citiesArr.length(); i++) {
                                     ParkingCity parkingCity = gson1.fromJson(citiesArr.get(i).toString(), ParkingCity.class);
                                     parkingCityList.add(parkingCity);
                                 }
                                 parkingCityList.add(0, null);
                                 parkingCityAdapter.setSelectedIndex(0);
-
                                 parkingCityAdapter.notifyDataSetChanged();
                             }
 
@@ -313,10 +312,15 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
             binding.activeTicketVu.setVisibility(View.VISIBLE);
             binding.tvCarNumber.setText(myTicket.getCar().getPlateNumber());
             binding.tvParkingName.setText(myTicket.getParking().getName());
-            binding.tvParkingPrice.setText("AED " + myTicket.getParking().getPrice()+ "/hr");
+            if (myTicket.getParking().getIsFixedPrice().equalsIgnoreCase("1")){
+                binding.tvParkingPrice.setText("AED "+myTicket.getParking().getPrice() + " ");
+            }else{
+                binding.tvParkingPrice.setText("AED "+myTicket.getParking().getPrice() + "/hr");
+            }
             binding.tvStatus.setText(myTicket.getStatus());
 
-            if (myTicket.getStatus().equalsIgnoreCase("requested") || myTicket.getStatus().equalsIgnoreCase("accepted") || myTicket.getStatus().equalsIgnoreCase("closed")){
+
+            if (myTicket.getStatus().equalsIgnoreCase("requested") || myTicket.getStatus().equalsIgnoreCase("accepted") || myTicket.getStatus().equalsIgnoreCase("closed") || myTicket.getStatus().equalsIgnoreCase("ready")){
                 if (ticketTimer !=null){
                     ticketTimer.stop();
                 }

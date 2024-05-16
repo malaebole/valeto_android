@@ -81,7 +81,6 @@ public class VerifyEmailActivity extends BaseActivity implements View.OnClickLis
                 Functions.showToast(getContext(),"Invalid OTP, Please enter valid OTP.", FancyToast.ERROR);
                 return;
             }
-
             verifyEmailClicked(true, binding.etOtp.getText().toString());
 
         }

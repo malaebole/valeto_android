@@ -104,7 +104,6 @@
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
-
     <ae.valeto.util.VerticalSwipeRefreshLayout
         android:id="@+id/pull_refresh"
         android:layout_width="match_parent"
@@ -417,6 +416,5 @@
         </LinearLayout>
 
     </ae.valeto.util.VerticalSwipeRefreshLayout>
-
 
 </RelativeLayout>

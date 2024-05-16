@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 
 import androidx.fragment.app.Fragment;
@@ -51,6 +53,7 @@ public class ActiveTicketDetailActivity extends BaseActivity implements View.OnC
     private ActivityActiveTicketBinding binding;
     private MyTicket myTicket;
     private int ticketId;
+    private TicketTimer ticketTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,17 +66,13 @@ public class ActiveTicketDetailActivity extends BaseActivity implements View.OnC
         if (bundle !=null){
            ticketId = bundle.getInt("ticket_id");
         }
-//        if (ticketId == 0){
-//            getParkingList(true,1);
-//        }else{
-            getSingleUserTicket(true, ticketId);
-//        }
 
-
+        getSingleUserTicket(true, ticketId);
 
         binding.btnBack.setOnClickListener(this);
         binding.callBtn.setOnClickListener(this);
         binding.btnMakeCarReady.setOnClickListener(this);
+        binding.directionBtn.setOnClickListener(this);
     }
 
     @Override
@@ -86,6 +85,9 @@ public class ActiveTicketDetailActivity extends BaseActivity implements View.OnC
         }
         else if (v == binding.btnMakeCarReady) {
             makeMyCarReadyDialog();
+        }
+        else if (v == binding.directionBtn) {
+            directionBtnClicked();
         }
 
     }
@@ -176,7 +178,6 @@ public class ActiveTicketDetailActivity extends BaseActivity implements View.OnC
             }
         });
     }
-
     private void populateMyTicket() {
         if (myTicket.getId() != null){
             binding.tvCarNumber.setText(myTicket.getCar().getPlateNumber());
@@ -186,13 +187,15 @@ public class ActiveTicketDetailActivity extends BaseActivity implements View.OnC
             binding.tvStatus.setText(myTicket.getStatus());
             if (!myTicket.getSlotNumber().isEmpty()){
                 binding.tvSlot.setText(myTicket.getSlotNumber());
-            }else {
+            }
+            else {
                 binding.tvSlot.setText("N/A");
 
             }
             if (!myTicket.getKeyCode().isEmpty()){
                 binding.tvKey.setText(myTicket.getKeyCode());
-            }else {
+            }
+            else {
                 binding.tvKey.setText("N/A");
 
             }
@@ -209,10 +212,27 @@ public class ActiveTicketDetailActivity extends BaseActivity implements View.OnC
             binding.tagsLayout.setBackgroundColor(Color.TRANSPARENT);
             binding.tagsLayout.initializeTags(this, tagItems);
 
+            if (myTicket.getStatus().equalsIgnoreCase("requested") || myTicket.getStatus().equalsIgnoreCase("accepted") || myTicket.getStatus().equalsIgnoreCase("closed") || myTicket.getStatus().equalsIgnoreCase("ready")){
+                if (ticketTimer !=null){
+                    ticketTimer.stop();
+                }
+                binding.btnMakeCarReady.setVisibility(View.GONE);
+            }
+            else{
+                ticketTimer = new TicketTimer(myTicket.getStartTime(), Double.parseDouble(myTicket.getParking().getPrice()), myTicket.getParking().getIsFixedPrice());
+                ticketTimer.start();
+                binding.btnMakeCarReady.setVisibility(View.VISIBLE);
 
-            TicketTimer ticketTimer = new TicketTimer(myTicket.getStartTime(), Double.parseDouble(myTicket.getParking().getPrice()), myTicket.getParking().getIsFixedPrice());
-            ticketTimer.start();
+            }
         }
+    }
+
+    private void directionBtnClicked() {
+        Intent directionIntent = new Intent(Intent.ACTION_VIEW);
+        String uri = String.format("http://maps.google.com/maps?daddr=%f,%f", myTicket.getParking().getLatitude(), myTicket.getParking().getLongitude());
+        directionIntent.setData(Uri.parse(uri));
+        directionIntent.setPackage("com.google.android.apps.maps");
+        startActivity(directionIntent);
     }
 
     public class TicketTimer {
@@ -231,11 +251,11 @@ public class ActiveTicketDetailActivity extends BaseActivity implements View.OnC
                 // Test Code
                 // Set the initial start time to 59 minutes and 59 seconds ago
 
-//                Calendar calendar = Calendar.getInstance();
-//                calendar.setTime(new SimpleDateFormat(TIME_FORMAT, Locale.getDefault()).parse(startTimeString));
-//                calendar.add(Calendar.MINUTE, -47);
-//                calendar.add(Calendar.SECOND, -59);
-//                this.startTime = calendar.getTime();
+                //  Calendar calendar = Calendar.getInstance();
+                //  calendar.setTime(new SimpleDateFormat(TIME_FORMAT, Locale.getDefault()).parse(startTimeString));
+                //  calendar.add(Calendar.MINUTE, -47);
+                //  calendar.add(Calendar.SECOND, -59);
+                //  this.startTime = calendar.getTime();
 
                 this.startTime = new SimpleDateFormat(TIME_FORMAT, Locale.getDefault()).parse(startTimeString);
             } catch (ParseException e) {

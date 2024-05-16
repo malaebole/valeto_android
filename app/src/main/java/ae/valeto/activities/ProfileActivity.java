@@ -216,7 +216,8 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                } else {
+                }
+                else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }

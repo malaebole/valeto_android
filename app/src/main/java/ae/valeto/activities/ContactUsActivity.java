@@ -82,7 +82,7 @@ public class ContactUsActivity extends BaseActivity implements View.OnClickListe
                     try {
                         JSONObject object = new JSONObject(response.body().string());
                         if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
-                            Functions.showToast(getContext(), "Report Submitted Successfully!", FancyToast.ERROR);
+                            Functions.showToast(getContext(), "Report Submitted Successfully!", FancyToast.SUCCESS);
                             finish();
 
                         }else {
