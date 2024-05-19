@@ -83,7 +83,7 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
     private final int selectedIndex = 0;
     private String parkingCityId = "";
     private Location location;
-//    TicketTimer ticketTimer;
+    // TicketTimer ticketTimer;
 
     public ParkingListFragment() {
         //Required empty public constructor
@@ -322,8 +322,8 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
             int hoursInt = Integer.parseInt(hours);
             int minutesInt = Integer.parseInt(minutes);
 
-            String formattedHours = String.format(Locale.getDefault(), "%02dH", hoursInt);
-            String formattedMinutes = String.format(Locale.getDefault(), "%02dM", minutesInt);
+            String formattedHours = String.format(Locale.getDefault(), "%01dH", hoursInt);
+            String formattedMinutes = String.format(Locale.getDefault(), "%01dM", minutesInt);
 
 
             binding.hours.setText(formattedHours);

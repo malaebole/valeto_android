@@ -218,8 +218,8 @@ public class ActiveTicketDetailActivity extends BaseActivity implements View.OnC
             int hoursInt = Integer.parseInt(hours);
             int minutesInt = Integer.parseInt(minutes);
 
-            String formattedHours = String.format(Locale.getDefault(), "%02dH", hoursInt);
-            String formattedMinutes = String.format(Locale.getDefault(), "%02dM", minutesInt);
+            String formattedHours = String.format(Locale.getDefault(), "%01dH", hoursInt);
+            String formattedMinutes = String.format(Locale.getDefault(), "%01dM", minutesInt);
 
 
             binding.hours.setText(formattedHours);
