@@ -165,7 +165,7 @@
             android:paddingStart="@dimen/_5sdp"
             android:paddingEnd="@dimen/_5sdp"
             android:textColor="@color/red"
-            android:textSize="13sp"
+            android:textSize="14sp"
             android:layout_gravity="center_vertical|end"
             android:layout_marginEnd="@dimen/_20sdp"
             android:layout_alignParentEnd="true"

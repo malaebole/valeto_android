@@ -322,8 +322,8 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
             int hoursInt = Integer.parseInt(hours);
             int minutesInt = Integer.parseInt(minutes);
 
-            String formattedHours = String.format(Locale.getDefault(), "%02d", hoursInt);
-            String formattedMinutes = String.format(Locale.getDefault(), "%02d", minutesInt);
+            String formattedHours = String.format(Locale.getDefault(), "%02dH", hoursInt);
+            String formattedMinutes = String.format(Locale.getDefault(), "%02dM", minutesInt);
 
 
             binding.hours.setText(formattedHours);

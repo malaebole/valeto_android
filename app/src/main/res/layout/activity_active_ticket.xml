@@ -130,29 +130,29 @@
                         android:textColor="@color/whiteColor"
                         android:textSize="28sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:fontFamily="@font/helvetica"
-                        android:textStyle="bold"
-                        android:scaleType="centerInside"
-                        android:text=":"
-                        android:textColor="@color/whiteColor"
-                        android:textSize="@dimen/_26sdp" />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_marginStart="@dimen/_5sdp"-->
+<!--                        android:layout_marginEnd="@dimen/_5sdp"-->
+<!--                        android:fontFamily="@font/helvetica"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:scaleType="centerInside"-->
+<!--                        android:text=":"-->
+<!--                        android:textColor="@color/whiteColor"-->
+<!--                        android:textSize="@dimen/_26sdp" />-->
 
-                    <TextView
-                        android:id="@+id/seconds"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_centerInParent="true"
-                        android:fontFamily="@font/helvetica"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:text="00"
-                        android:textColor="@color/whiteColor"
-                        android:textSize="26sp" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/seconds"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_centerInParent="true"-->
+<!--                        android:fontFamily="@font/helvetica"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:gravity="center"-->
+<!--                        android:text="00"-->
+<!--                        android:textColor="@color/whiteColor"-->
+<!--                        android:textSize="26sp" />-->
 
 
                 </LinearLayout>
@@ -312,13 +312,12 @@
                     android:layout_marginBottom="@dimen/_10sdp">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="0dp"
+                        android:layout_marginStart="5dp"
                         android:layout_marginBottom="0dp"
                         android:orientation="vertical">
 
@@ -345,16 +344,15 @@
                             android:textStyle="bold" />
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
                             <androidx.cardview.widget.CardView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:layout_marginEnd="@dimen/_10sdp"
-                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_height="40dp"
+                                android:layout_marginEnd="@dimen/_5sdp"
+                                android:layout_marginStart="@dimen/_5sdp"
                                 android:layout_marginBottom="@dimen/_10sdp"
                                 android:layout_marginTop="@dimen/_10sdp"
                                 app:cardBackgroundColor="#F8F9FA"
@@ -366,6 +364,7 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
                                     android:orientation="horizontal">
 
                                     <ImageView
@@ -387,7 +386,7 @@
                                         android:fontFamily="@font/helvetica"
                                         android:text="X XX (X XX)"
                                         android:textColor="@color/blackColor"
-                                        android:textSize="12sp"
+                                        android:textSize="14sp"
                                         android:textStyle="bold" />
 
                                 </LinearLayout>
@@ -397,8 +396,8 @@
 
                             <androidx.cardview.widget.CardView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_height="@dimen/_40sdp"
+                                android:layout_marginStart="@dimen/_5sdp"
                                 android:layout_marginTop="@dimen/_10sdp"
                                 app:cardBackgroundColor="#F8F9FA"
                                 app:cardCornerRadius="@dimen/_50sdp"
@@ -409,6 +408,7 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
                                     android:orientation="horizontal">
 
                                     <ImageView
@@ -430,7 +430,7 @@
                                         android:fontFamily="@font/helvetica"
                                         android:text="XX-XX-XX"
                                         android:textColor="@color/blackColor"
-                                        android:textSize="12sp"
+                                        android:textSize="14sp"
                                         android:textStyle="bold" />
 
                                 </LinearLayout>
@@ -450,7 +450,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true"
                         android:layout_marginEnd="@dimen/_10sdp"
                         app:cardBackgroundColor="#58AAFF"
                         app:cardCornerRadius="@dimen/_50sdp"

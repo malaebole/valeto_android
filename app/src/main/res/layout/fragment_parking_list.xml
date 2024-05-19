@@ -229,28 +229,28 @@
                                 android:textColor="#23272B"
                                 android:textSize="16sp" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:layout_marginEnd="@dimen/_5sdp"
-                                android:fontFamily="@font/helvetica"
-                                android:textStyle="bold"
-                                android:scaleType="centerInside"
-                                android:text=":"
-                                android:textColor="#23272B"
-                                android:textSize="@dimen/_16sdp" />
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_marginStart="@dimen/_5sdp"-->
+<!--                                android:layout_marginEnd="@dimen/_5sdp"-->
+<!--                                android:fontFamily="@font/helvetica"-->
+<!--                                android:textStyle="bold"-->
+<!--                                android:scaleType="centerInside"-->
+<!--                                android:text=":"-->
+<!--                                android:textColor="#23272B"-->
+<!--                                android:textSize="@dimen/_16sdp" />-->
 
-                            <TextView
-                                android:id="@+id/seconds"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:fontFamily="@font/helvetica"
-                                android:textStyle="bold"
-                                android:gravity="center"
-                                android:text="00"
-                                android:textColor="#23272B"
-                                android:textSize="16sp" />
+<!--                            <TextView-->
+<!--                                android:id="@+id/seconds"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:fontFamily="@font/helvetica"-->
+<!--                                android:textStyle="bold"-->
+<!--                                android:gravity="center"-->
+<!--                                android:text="00"-->
+<!--                                android:textColor="#23272B"-->
+<!--                                android:textSize="16sp" />-->
 
 
                         </LinearLayout>
