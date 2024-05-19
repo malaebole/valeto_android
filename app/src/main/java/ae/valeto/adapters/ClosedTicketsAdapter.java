@@ -13,6 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.transition.Hold;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -68,6 +69,13 @@ public class ClosedTicketsAdapter extends RecyclerView.Adapter<ClosedTicketsAdap
         holder.tvTime.setText(ticket.getDuration());
         holder.tvCarNumber.setText(ticket.getCar().getPlateNumber());
         holder.tvPrice.setText(ticket.getCurrency() + " " +ticket.getPaidAmount());
+        if (ticket.getDiscount() != 0){
+            holder.tvDiscount.setVisibility(View.VISIBLE);
+            holder.tvDiscount.setText("Discount: "+ticket.getDiscount() + " " +ticket.getCurrency());
+        }else{
+            holder.tvDiscount.setVisibility(View.GONE);
+        }
+
 //        holder.tvStatus.setText("Closed");
 //        holder.cardView.setStrokeColor(Color.parseColor("#C82333"));
 //        holder.cardView.setCardBackgroundColor(Color.parseColor("#FADDE0"));
@@ -92,7 +100,7 @@ public class ClosedTicketsAdapter extends RecyclerView.Adapter<ClosedTicketsAdap
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView tvParkingName, tvTime, tvDate, tvCarNumber, tvPrice, tvStatus;
+        TextView tvParkingName, tvTime, tvDate, tvCarNumber, tvPrice, tvStatus, tvDiscount;
 
         RelativeLayout layout;
         MaterialCardView cardView;
@@ -109,6 +117,7 @@ public class ClosedTicketsAdapter extends RecyclerView.Adapter<ClosedTicketsAdap
             tvStatus = itemView.findViewById(R.id.tv_status);
             layout = itemView.findViewById(R.id.ticket_vu);
             cardView = itemView.findViewById(R.id.card_vu_status);
+            tvDiscount = itemView.findViewById(R.id.tv_discount);
 
 
         }

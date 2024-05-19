@@ -54,7 +54,7 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.ViewHold
         if (!parking.getPhoto().isEmpty()){
             Glide.with(context).load(parking.getPhoto()).into(holder.imgBanner);
         }
-        if (parking.getIsFixedPrice().equalsIgnoreCase("1")){
+        if (String.valueOf(parking.getIsFixedPrice()).equalsIgnoreCase("1")){
             holder.tvPrice.setText("AED "+parking.getPrice() + " ");
         }else{
             holder.tvPrice.setText("AED "+parking.getPrice() + "/hr");

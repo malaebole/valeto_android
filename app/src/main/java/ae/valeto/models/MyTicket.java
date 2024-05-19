@@ -53,6 +53,10 @@ public class MyTicket {
     @SerializedName("reviews")
     @Expose
     private int reviews;
+    @SerializedName("ticket_price")
+    @Expose
+    private String ticketPrice;
+
 
     public Integer getId() {
         return id;
@@ -180,6 +184,14 @@ public class MyTicket {
 
     public void setReviews(int reviews) {
         this.reviews = reviews;
+    }
+
+    public String getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public void setTicketPrice(String ticketPrice) {
+        this.ticketPrice = ticketPrice;
     }
 
 }

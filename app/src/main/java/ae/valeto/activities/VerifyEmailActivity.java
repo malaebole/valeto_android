@@ -119,6 +119,7 @@ public class VerifyEmailActivity extends BaseActivity implements View.OnClickLis
 
                                 userInfo.setEmailVerified("yes");
                                 Functions.saveUserinfo(getContext(), userInfo);
+
                             }
                             else {
                                 Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
@@ -155,7 +156,7 @@ public class VerifyEmailActivity extends BaseActivity implements View.OnClickLis
                     try {
                         JSONObject object = new JSONObject(response.body().string());
                         if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
-                            Functions.showToast(getContext(), "OTP Code has been sent successfully!", FancyToast.ERROR);
+                            Functions.showToast(getContext(), "OTP Code has been sent successfully!", FancyToast.SUCCESS);
                         }
                         else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);

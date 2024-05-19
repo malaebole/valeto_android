@@ -156,6 +156,23 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/tv_discount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/helvetica_bold"
+            android:text="Discount: 0 AED"
+            android:paddingStart="@dimen/_5sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:textColor="@color/red"
+            android:textSize="13sp"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp" />
+
     </RelativeLayout>
 
 </RelativeLayout>

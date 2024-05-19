@@ -74,7 +74,6 @@ public class ClosedTicketDetailActivity extends BaseActivity implements View.OnC
         if (bundle !=null){
             ticketId = bundle.getInt("ticket_id");
         }
-
         getSingleUserTicket(true, ticketId);
 
         binding.btnBack.setOnClickListener(this);
@@ -180,7 +179,7 @@ public class ClosedTicketDetailActivity extends BaseActivity implements View.OnC
             }
 
             binding.tvDuration.setText(myTicket.getDuration());
-            binding.tvPaid.setText(myTicket.getPaidAmount());
+            binding.tvPaid.setText(myTicket.getPaidAmount()+" "+myTicket.getCurrency());
             if (!myTicket.getInvoice().isEmpty()){
                 Glide.with(getApplicationContext()).load(myTicket.getInvoice()).into(binding.invoiceVu);
             }

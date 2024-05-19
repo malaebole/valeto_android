@@ -45,6 +45,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import ae.valeto.R;
 import ae.valeto.activities.ActiveTicketDetailActivity;
@@ -81,7 +83,7 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
     private final int selectedIndex = 0;
     private String parkingCityId = "";
     private Location location;
-    TicketTimer ticketTimer;
+//    TicketTimer ticketTimer;
 
     public ParkingListFragment() {
         //Required empty public constructor
@@ -155,9 +157,9 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (ticketTimer !=null){
-            ticketTimer.stop();
-        }
+//        if (ticketTimer !=null){
+//            ticketTimer.stop();
+//        }
         binding = null;
     }
 
@@ -267,16 +269,8 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
 
                             if (data.has("ticket")) {
                                 myTicket = new Gson().fromJson(data.getString("ticket"), MyTicket.class);
-                                populateMyTicket();
                             }
-                            else{
-                                if (ticketTimer !=null){
-                                    ticketTimer.stop();
-                                }
-                                binding.activeTicketVu.setVisibility(View.GONE);
-                            }
-
-                            parkingAdapter.notifyDataSetChanged();
+                            populateMyTicket();
 
                         }else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
@@ -312,123 +306,135 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
             binding.activeTicketVu.setVisibility(View.VISIBLE);
             binding.tvCarNumber.setText(myTicket.getCar().getPlateNumber());
             binding.tvParkingName.setText(myTicket.getParking().getName());
-            if (myTicket.getParking().getIsFixedPrice().equalsIgnoreCase("1")){
+            if (String.valueOf(myTicket.getParking().getIsFixedPrice()).equalsIgnoreCase("1")){
                 binding.tvParkingPrice.setText("AED "+myTicket.getParking().getPrice() + " ");
-            }else{
+            }
+            else{
                 binding.tvParkingPrice.setText("AED "+myTicket.getParking().getPrice() + "/hr");
             }
             binding.tvStatus.setText(myTicket.getStatus());
 
 
-            if (myTicket.getStatus().equalsIgnoreCase("requested") || myTicket.getStatus().equalsIgnoreCase("accepted") || myTicket.getStatus().equalsIgnoreCase("closed") || myTicket.getStatus().equalsIgnoreCase("ready")){
-                if (ticketTimer !=null){
-                    ticketTimer.stop();
-                }
-            }
-            else{
-                ticketTimer = new TicketTimer(myTicket.getStartTime(), Double.parseDouble(myTicket.getParking().getPrice()), myTicket.getParking().getIsFixedPrice());
-                ticketTimer.start();
-            }
+            String[] parts = myTicket.getDuration().split(" ");
+            String hours = parts[0].substring(0, parts[0].length() - 1);
+            String minutes = parts[1].substring(0, parts[1].length() - 1);
 
+            int hoursInt = Integer.parseInt(hours);
+            int minutesInt = Integer.parseInt(minutes);
+
+            String formattedHours = String.format(Locale.getDefault(), "%02d", hoursInt);
+            String formattedMinutes = String.format(Locale.getDefault(), "%02d", minutesInt);
+
+
+            binding.hours.setText(formattedHours);
+            binding.minutes.setText(formattedMinutes);
+            binding.tvPrice.setText(myTicket.getTicketPrice()+".00");
+
+        }else{
+            binding.hours.setText("");
+            binding.minutes.setText("");
+            binding.tvPrice.setText("");
+            binding.activeTicketVu.setVisibility(View.GONE);
         }
+        parkingAdapter.notifyDataSetChanged();
     }
-    public class TicketTimer {
-        private static final String TIME_FORMAT = "dd/MM/yyyy hh:mma";
-        private static final long TICK_INTERVAL = 1000; // Update timer every second
-
-        private Date startTime;
-        private Timer timer;
-        private final double parkingPrice;
-        private String isFixedPrice;
-
-        public TicketTimer(String startTimeString, double parkingPrice, String isFixedPrice) {
-            this.parkingPrice = parkingPrice;
-            this.isFixedPrice = isFixedPrice;
-            try {
-                // Test Code
-                // Set the initial start time to 59 minutes and 59 seconds ago
-
-//                Calendar calendar = Calendar.getInstance();
-//                calendar.setTime(new SimpleDateFormat(TIME_FORMAT, Locale.getDefault()).parse(startTimeString));
-//                calendar.add(Calendar.MINUTE, -47);
-//                calendar.add(Calendar.SECOND, -59);
-//                this.startTime = calendar.getTime();
-
-                this.startTime = new SimpleDateFormat(TIME_FORMAT, Locale.getDefault()).parse(startTimeString);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
-
-        public void start() {
-            timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    updateTimer();
-                }
-            }, 0, TICK_INTERVAL);
-        }
-
-        public void stop() {
-            if (timer != null) {
-                timer.cancel();
-                timer = null;
-            }
-        }
-
-        private void updateTimer() {
-            Date currentTime = new Date();
-            long elapsedTime = currentTime.getTime() - startTime.getTime();
-            long hours = elapsedTime / (60 * 60 * 1000);
-            long minutes = (elapsedTime / (60 * 1000)) % 60;
-            long seconds = (elapsedTime / 1000) % 60;
-
-            // Convert numerical values to strings with leading zeros
-            String hoursString = String.format(Locale.getDefault(), "%02d", hours);
-            String minutesString = String.format(Locale.getDefault(), "%02d", minutes);
-            String secondsString = String.format(Locale.getDefault(), "%02d", seconds);
-
-            // Update UI with hours, minutes, and seconds on the main UI thread
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    binding.hours.setText(hoursString);
-                    binding.minutes.setText(minutesString);
-                    binding.seconds.setText(secondsString);
-                }
-            });
-
-            double price = calculatePrice(elapsedTime);
-            // Update UI with calculated price on the main UI thread
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    binding.tvPrice.setText(String.format(Locale.getDefault(), "%.2f", price));
-                }
-            });
-        }
-
-        private double calculatePrice(long elapsedTime) {
-            if (isFixedPrice.equalsIgnoreCase("1")) {
-                return parkingPrice;
-            } else {
-                long totalHours = elapsedTime / (60 * 60 * 1000);
-                double originalPrice = parkingPrice * totalHours;
-                double additionalPrice = 0;
-                long remainingMinutes = (elapsedTime / (60 * 1000)) % 60;
-                if (remainingMinutes > 0) {
-                    additionalPrice = parkingPrice;
-                }
-                double totalPrice = originalPrice + additionalPrice;
-                if (totalHours == 0) {
-                    return parkingPrice;
-                } else {
-                    return totalPrice;
-                }
-            }
-        }
-    }
+//    public class TicketTimer {
+//        private static final String TIME_FORMAT = "dd/MM/yyyy hh:mma";
+//        private static final long TICK_INTERVAL = 1000; // Update timer every second
+//
+//        private Date startTime;
+//        private Timer timer;
+//        private final double parkingPrice;
+//        private String isFixedPrice;
+//
+//        public TicketTimer(String startTimeString, double parkingPrice, String isFixedPrice) {
+//            this.parkingPrice = parkingPrice;
+//            this.isFixedPrice = isFixedPrice;
+//            try {
+//                // Test Code
+//                // Set the initial start time to 59 minutes and 59 seconds ago
+//
+////                Calendar calendar = Calendar.getInstance();
+////                calendar.setTime(new SimpleDateFormat(TIME_FORMAT, Locale.getDefault()).parse(startTimeString));
+////                calendar.add(Calendar.MINUTE, -47);
+////                calendar.add(Calendar.SECOND, -59);
+////                this.startTime = calendar.getTime();
+//
+//                this.startTime = new SimpleDateFormat(TIME_FORMAT, Locale.getDefault()).parse(startTimeString);
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//
+//        public void start() {
+//            timer = new Timer();
+//            timer.schedule(new TimerTask() {
+//                @Override
+//                public void run() {
+//                    updateTimer();
+//                }
+//            }, 0, TICK_INTERVAL);
+//        }
+//
+//        public void stop() {
+//            if (timer != null) {
+//                timer.cancel();
+//                timer = null;
+//            }
+//        }
+//
+//        private void updateTimer() {
+//            Date currentTime = new Date();
+//            long elapsedTime = currentTime.getTime() - startTime.getTime();
+//            long hours = elapsedTime / (60 * 60 * 1000);
+//            long minutes = (elapsedTime / (60 * 1000)) % 60;
+//            long seconds = (elapsedTime / 1000) % 60;
+//
+//            // Convert numerical values to strings with leading zeros
+//            String hoursString = String.format(Locale.getDefault(), "%02d", hours);
+//            String minutesString = String.format(Locale.getDefault(), "%02d", minutes);
+//            String secondsString = String.format(Locale.getDefault(), "%02d", seconds);
+//
+//            // Update UI with hours, minutes, and seconds on the main UI thread
+//            getActivity().runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    binding.hours.setText(hoursString);
+//                    binding.minutes.setText(minutesString);
+//                    binding.seconds.setText(secondsString);
+//                }
+//            });
+//
+//            double price = calculatePrice(elapsedTime);
+//            // Update UI with calculated price on the main UI thread
+//            getActivity().runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    binding.tvPrice.setText(String.format(Locale.getDefault(), "%.2f", price));
+//                }
+//            });
+//        }
+//
+//        private double calculatePrice(long elapsedTime) {
+//            if (isFixedPrice.equalsIgnoreCase("1")) {
+//                return parkingPrice;
+//            } else {
+//                long totalHours = elapsedTime / (60 * 60 * 1000);
+//                double originalPrice = parkingPrice * totalHours;
+//                double additionalPrice = 0;
+//                long remainingMinutes = (elapsedTime / (60 * 1000)) % 60;
+//                if (remainingMinutes > 0) {
+//                    additionalPrice = parkingPrice;
+//                }
+//                double totalPrice = originalPrice + additionalPrice;
+//                if (totalHours == 0) {
+//                    return parkingPrice;
+//                } else {
+//                    return totalPrice;
+//                }
+//            }
+//        }
+//    }
     private void enableLocationUpdates() {
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);

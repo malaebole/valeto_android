@@ -146,7 +146,7 @@ public class ParkingDetailsActivity extends BaseActivity implements View.OnClick
             Glide.with(getApplicationContext()).load(parking.getPhoto()).into(binding.imgVu);
         }
         binding.tvParkingName.setText(parking.getName());
-        if (parking.getIsFixedPrice().equalsIgnoreCase("1")){
+        if (String.valueOf(parking.getIsFixedPrice()).equalsIgnoreCase("1")){
             binding.tvPrice.setText(parking.getCurrency()+" "+parking.getPrice() + " ");
         }else{
             binding.tvPrice.setText(parking.getCurrency()+" "+parking.getPrice() + "/hr");
