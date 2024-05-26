@@ -167,7 +167,6 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
     public void onResume() {
         super.onResume();
         getLocationAndCallAPI();
-        setBadgeValue();
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mMessageReceiver, new IntentFilter("receive_push"));
     }
 
@@ -328,7 +327,8 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
 
             binding.hours.setText(formattedHours);
             binding.minutes.setText(formattedMinutes);
-            binding.tvPrice.setText(myTicket.getTicketPrice()+".00");
+            binding.tvPrice.setText(myTicket.getTicketPrice());
+            setBadgeValue();
 
         }else{
             binding.hours.setText("");

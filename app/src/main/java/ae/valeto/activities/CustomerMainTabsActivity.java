@@ -84,12 +84,7 @@ public class CustomerMainTabsActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (Functions.getPrefValue(getContext(), Constants.kIsSignIn).equalsIgnoreCase("1")){
-            callUnreadNotifAPI();
-        }
 
-//        //callUnreadNotifAPI();
-//        populateSideMenuData();
         try {
             LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, new IntentFilter("receive_push"));
         }
@@ -97,7 +92,6 @@ public class CustomerMainTabsActivity extends BaseActivity {
             // TODO: handle exception
             e.printStackTrace();
         }
-        devicesLoginLimit();
 
     }
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
@@ -167,7 +161,6 @@ public class CustomerMainTabsActivity extends BaseActivity {
             @Override
             public void onTabSelect(int index) {
                 selectedTabIndex = index;
-                devicesLoginLimit();
             }
 
             @Override
@@ -254,37 +247,4 @@ public class CustomerMainTabsActivity extends BaseActivity {
 //        }
     }
 
-    public void devicesLoginLimit() {
-//        String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
-//        String uniqueID = Functions.getPrefValue(this, Constants.kDeviceUniqueId);
-//        //yeh server py unique id bhej rhi haii
-//        Log.d("uniqueIDDDDDDD", uniqueID);
-//        Call<ResponseBody> call = AppManager.getInstance().apiInterface.devicesLoginLimit(userId, uniqueID, "ole");
-//        call.enqueue(new Callback<ResponseBody>() {
-//            @Override
-//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                if (response.body() != null) {
-//                    try {
-//                        JSONObject object = new JSONObject(response.body().string());
-//                        if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
-//
-//                        }
-//                        else{
-//                            Functions.showToast(getContext(), getString(R.string.you_have_been_log), FancyToast.ERROR, FancyToast.LENGTH_LONG);
-//                            Intent i = new Intent(getContext(), SplashActivity.class);
-//                            startActivity(i);
-//                            finish();
-//                        }
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResponseBody> call, Throwable t) {
-//
-//            }
-//        });
-    }
 }

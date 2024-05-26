@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.os.Bundle;
 import android.view.View;
 
+import com.baoyz.actionsheet.ActionSheet;
 import com.google.gson.Gson;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.shashank.sony.fancytoastlib.FancyToast;
@@ -78,9 +79,24 @@ public class MyCarsActivity extends BaseActivity implements View.OnClickListener
 
         @Override
         public void deleteClicked(View view, int pos) {
+            ActionSheet.createBuilder(getContext(), getSupportFragmentManager())
+                    .setCancelButtonTitle("Cancel")
+                    .setOtherButtonTitles("Delete")
+                    .setCancelableOnTouchOutside(true)
+                    .setListener(new ActionSheet.ActionSheetListener() {
+                        @Override
+                        public void onDismiss(ActionSheet actionSheet, boolean isCancel) {
 
-            deleteUserCar(true, carsList.get(pos).getId());
+                        }
 
+                        @Override
+                        public void onOtherButtonClick(ActionSheet actionSheet, int index) {
+                            if (index == 0) {
+                                deleteUserCar(true, carsList.get(pos).getId());
+                            }
+
+                        }
+                    }).show();
         }
 
     };

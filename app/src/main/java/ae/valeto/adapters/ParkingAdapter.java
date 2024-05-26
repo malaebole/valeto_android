@@ -55,9 +55,9 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.ViewHold
             Glide.with(context).load(parking.getPhoto()).into(holder.imgBanner);
         }
         if (String.valueOf(parking.getIsFixedPrice()).equalsIgnoreCase("1")){
-            holder.tvPrice.setText("AED "+parking.getPrice() + " ");
+            holder.tvPrice.setText(parking.getCurrency()+" "+ parking.getPrice() + " ");
         }else{
-            holder.tvPrice.setText("AED "+parking.getPrice() + "/hr");
+            holder.tvPrice.setText(parking.getCurrency()+" "+parking.getPrice() + "/hr");
         }
         holder.tvLoc.setText(parking.getDistance() +" "+ parking.getLocation());
         holder.tvParkingName.setText(parking.getName());

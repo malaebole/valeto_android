@@ -118,20 +118,6 @@ public class NotificationsActivity extends BaseActivity implements View.OnClickL
             }
 
             NotificationList notification = notificationList.get(pos);
-//            if (notification.getType().equalsIgnoreCase("gameScoreAdded") && !notification.getIsRated().equalsIgnoreCase("1")) {
-//                showBestPlayerDialog(notification.getGameId());
-//            }
-//            else if (notification.getType().equalsIgnoreCase("newCaptain")) {
-////                Intent intent = new Intent(getContext(), MainActivity.class); // GroupFormationActitvity.java // checkx
-////                intent.putExtra("game_id", notification.getGameId());
-////                startActivity(intent);
-//            }
-//            else if (notification.getType().equalsIgnoreCase("lineupGameAdded")) {
-//                Intent intent = new Intent(getContext(), SplashActivity.class); // any issue convert splash to main and comment //GroupFormationActitvity.java // checkx
-//                //intent.putExtra("game_id", notification.getGameId());
-//                startActivity(intent);
-//                finish();
-//            }
              if (notification.getType().equalsIgnoreCase("ticketClosed")) {
                 Intent intent = new Intent(getContext(), ClosedTicketDetailActivity.class);
                 intent.putExtra("ticket_id", notification.getTicket().getId());
@@ -140,34 +126,16 @@ public class NotificationsActivity extends BaseActivity implements View.OnClickL
             }
 
             if (notificationList.get(pos).getType().equalsIgnoreCase("ticketClosedRateNow")) {
-               // if (notification.getTicket().getReviews() == 0){
                     showRatingDialog(notification.getTicket().getParking().getId(),
                             notification.getTicket().getParking().getPhoto(),
                             notification.getTicket().getParking().getName(),
                             notification.getTicket().getParking().getLocation());
-                //}
 
             }
         }
     };
 
-//    protected void showRatingDialog() {
-//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//        Fragment fragment = getSupportFragmentManager().findFragmentByTag("RatingDialogFragment");
-//        if (fragment != null) {
-//            fragmentTransaction.remove(fragment);
-//        }
-//        fragmentTransaction.addToBackStack(null);
-//        RatingDialogFragment dialogFragment = new RatingDialogFragment(String.valueOf(myTicket.getParking().getId()),
-//                myTicket.getParking().getPhoto(), myTicket.getParking().getName(),
-//                myTicket.getParking().getLocation());
-//
-//        dialogFragment.setDialogCallback((df) -> {
-//            df.dismiss();
-//        });
-//        dialogFragment.show(fragmentTransaction, "RatingDialogFragment");
-//
-//    }
+
     private void clearClicked() {
         if (notificationList.isEmpty()) {
             return;
