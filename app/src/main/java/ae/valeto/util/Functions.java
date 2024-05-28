@@ -34,17 +34,6 @@ public class Functions {
         }
     }
 
-
-    public static void setSelectedCountry(Context context, String SelectedCountry) {
-        SharedPreferences prefs = context.getSharedPreferences(Constants.PREF_NAME, MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(Constants.kSelectedCountry, SelectedCountry);
-        editor.apply();
-    }
-
-    public static String getSelectedCountry(Context context, String SelectedCountry) {
-        return getPrefValue(context, Constants.kSelectedCountry);
-    }
     
     public static String getAppLangStr(Context context) {
         return getPrefValue(context, Constants.kAppLang);
@@ -94,12 +83,6 @@ public class Functions {
             e.printStackTrace();
         }
     }
-
-//    public static void showAlert(Context context, String title, String desc, OleCustomAlertDialog.OnDismiss dismiss) {
-//        OleCustomAlertDialog dialog = new OleCustomAlertDialog(context, title, desc);
-//        dialog.setOnDismiss(dismiss);
-//        dialog.show();
-//    }
 
 
     public static KProgressHUD showLoader(Context context, String image_processing) {

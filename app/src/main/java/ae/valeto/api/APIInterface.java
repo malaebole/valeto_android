@@ -64,6 +64,10 @@ public interface APIInterface {
     Call<ResponseBody> changePassword(@Field("old_password") String oldPassword,
                                       @Field("new_password") String newPassword); //clear
 
+    @FormUrlEncoded
+    @POST("auth/access-token")
+    Call<ResponseBody> refreshAccessToken(@Field("refresh_token") String refreshToken); //clear
+
 
 
 
