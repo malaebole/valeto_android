@@ -111,21 +111,6 @@ public class Functions {
     public static boolean isValidEmail(CharSequence target) {
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
     }
-
-//    public static boolean isArabic(String text) {
-//        for (char charac : text.toCharArray()) {
-//            if (Character.UnicodeBlock.of(charac) == Character.UnicodeBlock.ARABIC) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-//
-//    public static String getDayName(Date date) {
-//        SimpleDateFormat  dateFormat = new SimpleDateFormat("EEEE", Locale.ENGLISH);
-//        return dateFormat.format(date);
-//    }
-//
     public static void saveUserinfo(Context context, UserInfo info) {
         Gson gson = new Gson();
         String str = gson.toJson(info);

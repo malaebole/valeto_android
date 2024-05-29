@@ -67,13 +67,6 @@ public class ParkingDetailsActivity extends BaseActivity implements View.OnClick
         }
 
         getSingleUserParking(true);
-
-//        LinearLayoutManager facilitiesListLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-//        binding.facilitiesRecyclerVu.setLayoutManager(facilitiesListLayoutManager);
-//        facilitiesAdapter = new FacilitiesAdapter(getContext(), facilitiesList);
-//        facilitiesAdapter.setItemClickListener(itemClickListener);
-//        binding.facilitiesRecyclerVu.setAdapter(facilitiesAdapter);
-
         binding.btnBack.setOnClickListener(this);
         binding.callBtn.setOnClickListener(this);
         binding.directionBtn.setOnClickListener(this);

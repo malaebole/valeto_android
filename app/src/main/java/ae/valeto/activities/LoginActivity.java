@@ -47,14 +47,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
         checkKeyboardListener();
 
-        //  CCPCountry.setDialogTitle(getString(R.string.select_country_region));
-        //  CCPCountry.setSearchHintMessage(getString(R.string.search_hint));
-        //  binding.btnSkip.setOnClickListener(this);
-        //  binding.btnContinue.setOnClickListener(this);
-        //  binding.btnBack.setOnClickListener(this);
-        //  binding.infoIcon.setOnClickListener(this);
-        //  binding.resetPassword.setOnClickListener(this);
-
         binding.tvForgetPass.setOnClickListener(this);
         binding.btnLogin.setOnClickListener(this);
         binding.btnSignup.setOnClickListener(this);
@@ -129,11 +121,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     }
     private void btnLoginClicked() {
-            //        SelectedcountryCode = binding.ccp.getSelectedCountryCodeWithPlus();
-            //        if (SelectedcountryCode.isEmpty()) {
-            //            Functions.showToast(getContext(), getString(R.string.select_country_code), FancyToast.ERROR);
-            //            return;
-            //        }
         if (binding.etEmail.getText().toString().isEmpty()) {
             Functions.showToast(getContext(), "Please enter your email", FancyToast.ERROR);
             return;

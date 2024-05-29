@@ -63,20 +63,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
     }
 
-//    private void moveToRatingScreen(String notType, String bookingId, String clubId, String bookingType, String isRated) {
-//        if (notType.equalsIgnoreCase(Constants.kBookingCompleteNotification) && !bookingId.isEmpty()) {
-////            Intent intent = new Intent(this, PlayerMainTabsActivity.class);
-//            Intent intent = new Intent("move_to_rating");
-//            intent.putExtra("type", notType);
-//            intent.putExtra("booking_id", bookingId);
-//            intent.putExtra("club_id", clubId);
-//            intent.putExtra("booking_type", bookingType);
-//            intent.putExtra("is_rated", isRated);
-//            LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-////            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
-////            startActivity(intent);
-//        }
-//    }
 
     private void sendMyNotification(String message, String notType, String title) {
             Intent intent1 = new Intent(getApplicationContext(), NotificationsActivity.class);

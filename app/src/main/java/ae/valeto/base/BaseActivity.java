@@ -66,27 +66,16 @@ public class BaseActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         Functions.changeLanguage(this, Functions.getPrefValue(this, Constants.kAppLang));
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        //InAppReviewManager.showRateDialogIfMeetsConditions(this);
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        if (!Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kLineupModule)) {
-//            LocalBroadcastManager.getInstance(this).registerReceiver(movetoRatingReceiver, new IntentFilter("move_to_rating"));
-//        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-//        if (!Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kLineupModule)) {
-//            if (movetoRatingReceiver != null) {
-//                LocalBroadcastManager.getInstance(this).unregisterReceiver(movetoRatingReceiver);
-//            }
-//        }
-
     }
 
     public void hideKeyboard() {
@@ -97,59 +86,6 @@ public class BaseActivity extends AppCompatActivity {
             // TODO: handle exception
         }
     }
-
-    BroadcastReceiver movetoRatingReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            Bundle bundle = intent.getExtras();
-//            if (bundle != null) {
-//                //get push data
-//                String notType = bundle.getString("type", "");
-//                String bookingId = bundle.getString("booking_id", "");
-//                String clubId = bundle.getString("club_id", "");
-//                String bookingType = bundle.getString("booking_type", "");
-//                String isRated = bundle.getString("is_rated", "");
-//                if (notType.equalsIgnoreCase(Constants.kBookingCompleteNotification) && !bookingId.isEmpty()) {
-//                    if (bookingType.equalsIgnoreCase(Constants.kFriendlyGame)) {
-//                        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//                        Fragment prev = getSupportFragmentManager().findFragmentByTag("RatingPagerDialogFragment");
-//                        if (prev != null) {
-//                            fragmentTransaction.remove(prev);
-//                        }
-//                        fragmentTransaction.addToBackStack(null);
-//                        OleRatingPagerDialogFragment dialogFragment = new OleRatingPagerDialogFragment(bookingId);
-//                        dialogFragment.show(fragmentTransaction, "RatingPagerDialogFragment");
-//                    } else {
-//                        gotoEmpRate(bookingId, clubId, isRated);
-//                    }
-//                }
-//            }
-        }
-    };
-
-//    protected void showRatingDialog(String gameId) {
-//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//        Fragment fragment = getSupportFragmentManager().findFragmentByTag("RatingPagerDialogFragment");
-//        if (fragment != null) {
-//            fragmentTransaction.remove(fragment);
-//        }
-//        fragmentTransaction.addToBackStack(null);
-//        RatingPagerDialogFragment dialogFragment = new RatingPagerDialogFragment(gameId);
-//        dialogFragment.show(fragmentTransaction, "RatingPagerDialogFragment");
-//    }
-
-
-//    public void showDateRangeFilter(String fromDate, String toDate, OleDateRangeFilterDialogFragment.DateRangeFilterDialogFragmentCallback callback) {
-//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//        Fragment fragment = getSupportFragmentManager().findFragmentByTag("EmpReviewFilterDialogFragment");
-//        if (fragment != null) {
-//            fragmentTransaction.remove(fragment);
-//        }
-//        fragmentTransaction.addToBackStack(null);
-//        OleDateRangeFilterDialogFragment dialogFragment = new OleDateRangeFilterDialogFragment(fromDate, toDate);
-//        dialogFragment.setFragmentCallback(callback);
-//        dialogFragment.show(fragmentTransaction, "EmpReviewFilterDialogFragment");
-//    }
 
     protected void showRatingDialog(int id, String photo, String name, String location) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -168,8 +104,6 @@ public class BaseActivity extends AppCompatActivity {
 
     protected void sendFcmTokenApi(String token) {
         String uniqueID = Functions.getPrefValue(this, Constants.kDeviceUniqueId);
-//        Log.e("Device ID",uniqueID);
-//        Log.e("Device Token",token);
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.sendFcmToken(uniqueID, "android", token);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -193,17 +127,6 @@ public class BaseActivity extends AppCompatActivity {
         });
     }
 
-//    protected void setBackground(ImageView imageView) {
-//        if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kRefereeType)) {
-//            //imageView.setImageResource(R.drawable.referee_bg);
-//        }
-//        else if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kOwnerType)) {
-//           // imageView.setImageResource(R.drawable.owner_bg);
-//        }
-//        else {
-//           // imageView.setImageResource(R.drawable.player_bg);
-//        }
-//    }
 
     public Activity getContext() {
         return this;
@@ -222,63 +145,7 @@ public class BaseActivity extends AppCompatActivity {
         window.setAttributes(winParams);
         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
     }
-    private Bitmap getBitmap(Drawable drawable) {
-        Bitmap bitmap;
-        if (drawable instanceof BitmapDrawable) {
-            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
-            if(bitmapDrawable.getBitmap() != null) {
-                return bitmapDrawable.getBitmap();
-            }
-        }
 
-        if(drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
-            bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
-        } else {
-            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        }
-
-        Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-        drawable.draw(canvas);
-        return bitmap;
-    }
-
-    protected void getUnreadNotificationAPI(UnreadCountCallback callback) {
-//        Call<ResponseBody> call = AppManager.getInstance().apiInterface.unreadNotifCount(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID));
-//        call.enqueue(new Callback<ResponseBody>() {
-//            @Override
-//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                int count = 0;
-//                if (response.body() != null) {
-//                    try {
-//                        JSONObject object = new JSONObject(response.body().string());
-//                        if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
-//                            JSONObject obj = object.getJSONObject(Constants.kData);
-//                            String c = obj.getString("total_unread");
-//                            count = Integer.parseInt(c);
-//                        }
-//                        else {
-//
-//                        }
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//                callback.unreadNotificationCount(count);
-//            }
-//            @Override
-//            public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                callback.unreadNotificationCount(0);
-//            }
-//        });
-    }
-
-
-
-
-    public interface UnreadCountCallback {
-        void unreadNotificationCount(int count);
-    }
 
 
 }

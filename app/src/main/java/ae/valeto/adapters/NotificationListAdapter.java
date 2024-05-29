@@ -45,13 +45,11 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
         holder.tvTitle.setText(notification.getMessage());
 
         if (notification.getIsRead()) {
-//            holder.tvTitle.setTypeface(holder.tvTitle.getTypeface(), Typeface.NORMAL);
             holder.isRead.setBackground(context.getResources().getDrawable(R.drawable.offline_circle));
             holder.tvTitle.setTextColor(context.getResources().getColor(R.color.subTextColor));
             holder.tvTime.setTextColor(context.getResources().getColor(R.color.subTextColor));
         }
         else {
-//            holder.tvTitle.setTypeface(holder.tvTitle.getTypeface(), Typeface.BOLD);
             holder.isRead.setBackground(context.getResources().getDrawable(R.drawable.online_circle));
             holder.tvTitle.setTextColor(context.getResources().getColor(R.color.blackColor));
             holder.tvTime.setTextColor(context.getResources().getColor(R.color.blackColor));

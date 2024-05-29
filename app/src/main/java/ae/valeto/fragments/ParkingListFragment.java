@@ -95,8 +95,6 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
         binding = FragmentParkingListBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        // getParkingList(parkingList.isEmpty());
-
         enableLocationUpdates();
 
 
@@ -140,9 +138,6 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
                 getParkingList(true);
             }
             parkingCityAdapter.setSelectedIndex(pos);
-//            parkingAdapter.notifyDataSetChanged();
-
-
         }
     };
     ParkingAdapter.ItemClickListener itemClickListener = new ParkingAdapter.ItemClickListener() {
@@ -157,9 +152,6 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-//        if (ticketTimer !=null){
-//            ticketTimer.stop();
-//        }
         binding = null;
     }
 
@@ -306,10 +298,13 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
             binding.tvCarNumber.setText(myTicket.getCar().getPlateNumber());
             binding.tvParkingName.setText(myTicket.getParking().getName());
             if (String.valueOf(myTicket.getParking().getIsFixedPrice()).equalsIgnoreCase("1")){
-                binding.tvParkingPrice.setText("AED "+myTicket.getParking().getPrice() + " ");
+                binding.tvParkingPrice.setText(myTicket.getParking().getCurrency()+" "+myTicket.getParking().getPrice() + " ");
+                binding.tvParkingPrice.setText(String.format("%s %s%s", myTicket.getParking().getCurrency(), myTicket.getParking().getPrice(), ""));
+
             }
             else{
-                binding.tvParkingPrice.setText("AED "+myTicket.getParking().getPrice() + "/hr");
+                binding.tvParkingPrice.setText(String.format("%s %s%s", myTicket.getParking().getCurrency(), myTicket.getParking().getPrice(), "/hr"));
+
             }
             binding.tvStatus.setText(myTicket.getStatus());
 
@@ -338,103 +333,6 @@ public class ParkingListFragment extends BaseFragment implements View.OnClickLis
         }
         parkingAdapter.notifyDataSetChanged();
     }
-//    public class TicketTimer {
-//        private static final String TIME_FORMAT = "dd/MM/yyyy hh:mma";
-//        private static final long TICK_INTERVAL = 1000; // Update timer every second
-//
-//        private Date startTime;
-//        private Timer timer;
-//        private final double parkingPrice;
-//        private String isFixedPrice;
-//
-//        public TicketTimer(String startTimeString, double parkingPrice, String isFixedPrice) {
-//            this.parkingPrice = parkingPrice;
-//            this.isFixedPrice = isFixedPrice;
-//            try {
-//                // Test Code
-//                // Set the initial start time to 59 minutes and 59 seconds ago
-//
-////                Calendar calendar = Calendar.getInstance();
-////                calendar.setTime(new SimpleDateFormat(TIME_FORMAT, Locale.getDefault()).parse(startTimeString));
-////                calendar.add(Calendar.MINUTE, -47);
-////                calendar.add(Calendar.SECOND, -59);
-////                this.startTime = calendar.getTime();
-//
-//                this.startTime = new SimpleDateFormat(TIME_FORMAT, Locale.getDefault()).parse(startTimeString);
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//
-//        public void start() {
-//            timer = new Timer();
-//            timer.schedule(new TimerTask() {
-//                @Override
-//                public void run() {
-//                    updateTimer();
-//                }
-//            }, 0, TICK_INTERVAL);
-//        }
-//
-//        public void stop() {
-//            if (timer != null) {
-//                timer.cancel();
-//                timer = null;
-//            }
-//        }
-//
-//        private void updateTimer() {
-//            Date currentTime = new Date();
-//            long elapsedTime = currentTime.getTime() - startTime.getTime();
-//            long hours = elapsedTime / (60 * 60 * 1000);
-//            long minutes = (elapsedTime / (60 * 1000)) % 60;
-//            long seconds = (elapsedTime / 1000) % 60;
-//
-//            // Convert numerical values to strings with leading zeros
-//            String hoursString = String.format(Locale.getDefault(), "%02d", hours);
-//            String minutesString = String.format(Locale.getDefault(), "%02d", minutes);
-//            String secondsString = String.format(Locale.getDefault(), "%02d", seconds);
-//
-//            // Update UI with hours, minutes, and seconds on the main UI thread
-//            getActivity().runOnUiThread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    binding.hours.setText(hoursString);
-//                    binding.minutes.setText(minutesString);
-//                    binding.seconds.setText(secondsString);
-//                }
-//            });
-//
-//            double price = calculatePrice(elapsedTime);
-//            // Update UI with calculated price on the main UI thread
-//            getActivity().runOnUiThread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    binding.tvPrice.setText(String.format(Locale.getDefault(), "%.2f", price));
-//                }
-//            });
-//        }
-//
-//        private double calculatePrice(long elapsedTime) {
-//            if (isFixedPrice.equalsIgnoreCase("1")) {
-//                return parkingPrice;
-//            } else {
-//                long totalHours = elapsedTime / (60 * 60 * 1000);
-//                double originalPrice = parkingPrice * totalHours;
-//                double additionalPrice = 0;
-//                long remainingMinutes = (elapsedTime / (60 * 1000)) % 60;
-//                if (remainingMinutes > 0) {
-//                    additionalPrice = parkingPrice;
-//                }
-//                double totalPrice = originalPrice + additionalPrice;
-//                if (totalHours == 0) {
-//                    return parkingPrice;
-//                } else {
-//                    return totalPrice;
-//                }
-//            }
-//        }
-//    }
     private void enableLocationUpdates() {
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);

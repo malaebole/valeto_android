@@ -15,12 +15,6 @@ public class AppManager {
     }
 
     public APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
-
-
-//    public List<OleCountry> countries = new ArrayList<>();
-    public List<Parking> parkings = new ArrayList<>();
-//    public List<OleClubFacility> clubFacilities = new ArrayList<>();
-//    public OleFieldData oleFieldData = null;
     public int notificationCount = 0;
 
     private AppManager() {

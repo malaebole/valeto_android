@@ -82,12 +82,9 @@ public class VerifyEmailActivity extends BaseActivity implements View.OnClickLis
                 return;
             }
             verifyEmailClicked(true, binding.etOtp.getText().toString());
-
         }
         else if (v == binding.etResendEmail) {
-
             resendOtpCodeClicked();
-
         }
 
 

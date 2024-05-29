@@ -226,7 +226,7 @@ public class ActiveTicketDetailActivity extends BaseActivity implements View.OnC
             binding.minutes.setText(formattedMinutes);
 
 
-            binding.tvPrice.setText(myTicket.getTicketPrice()+".00");
+            binding.tvPrice.setText(myTicket.getTicketPrice());
 
             if (myTicket.getStatus().equalsIgnoreCase("requested") || myTicket.getStatus().equalsIgnoreCase("accepted") || myTicket.getStatus().equalsIgnoreCase("closed") || myTicket.getStatus().equalsIgnoreCase("ready")){
                 binding.btnMakeCarReady.setVisibility(View.GONE);

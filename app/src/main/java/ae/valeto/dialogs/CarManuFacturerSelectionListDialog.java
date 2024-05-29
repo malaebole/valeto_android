@@ -71,16 +71,6 @@ public class CarManuFacturerSelectionListDialog extends Dialog {
         if (getWindow() != null) {
             getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }
-
-//        binding.tvTitle.setText(title);
-
-//        if (isMultiSelection) {
-//            binding.btnDone.setVisibility(View.VISIBLE);
-//        }
-//        else {
-//            binding.btnDone.setVisibility(View.GONE);
-//        }
-
         if (isShowSearch) {
             binding.searchVu.setVisibility(View.VISIBLE);
         }
@@ -146,10 +136,6 @@ public class CarManuFacturerSelectionListDialog extends Dialog {
                 dismiss();
             }
         });
-
-
-
-
     }
 
 

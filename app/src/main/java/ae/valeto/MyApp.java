@@ -27,8 +27,6 @@ public class MyApp extends Application implements Application.ActivityLifecycleC
     public void onCreate() {
         super.onCreate();
         mContext = getApplicationContext();
-//        Fresco.initialize(this);
-//        MobileAds.initialize(this);
 
 
         if (Functions.getPrefValue(this, Constants.kDeviceUniqueId).equalsIgnoreCase("")) {
@@ -41,16 +39,6 @@ public class MyApp extends Application implements Application.ActivityLifecycleC
 
         registerActivityLifecycleCallbacks(this);
 
-//        OleInAppReviewManager.with(this)
-//                .setInstallDays(5) // default 10, 0 means install day.
-//                .setLaunchTimes(10) // default 10
-//                .setRemindInterval(2) // default 1
-//                .setDebug(false) // default false
-//                .monitor();
-//
-//        if (!Places.isInitialized()) {
-//            Places.initialize(getApplicationContext(), getString(R.string.maps_api_key), Locale.getDefault());
-//        }
     }
 
 
@@ -72,12 +60,7 @@ public class MyApp extends Application implements Application.ActivityLifecycleC
     @Override
     public void onActivityResumed(@NonNull Activity activity) {
         if (activity instanceof SplashActivity) {
-//            OleInAppReviewManager.with(this)
-//                    .setInstallDays(5) // default 10, 0 means install day.
-//                    .setLaunchTimes(10) // default 10
-//                    .setRemindInterval(2) // default 1
-//                    .setDebug(false) // default false
-//                    .monitor();
+
         }
     }
 

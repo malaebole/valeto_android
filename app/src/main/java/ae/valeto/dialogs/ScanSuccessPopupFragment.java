@@ -52,7 +52,6 @@ public class ScanSuccessPopupFragment extends DialogFragment implements View.OnC
         getDialog().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         binding.btnOk.setOnClickListener(this);
-        //Glide.with(getActivity()).load(photoUrl).into(binding.shirtImgVuAd);
 
         return view;
     }

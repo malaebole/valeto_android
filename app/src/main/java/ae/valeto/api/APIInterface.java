@@ -68,14 +68,7 @@ public interface APIInterface {
     @POST("auth/access-token")
     Call<ResponseBody> refreshAccessToken(@Field("refresh_token") String refreshToken); //clear
 
-
-
-
-
-
-
     //User car Apis
-
 
     @GET("user/cars")
     Call<ResponseBody> getUserCars(); //clear

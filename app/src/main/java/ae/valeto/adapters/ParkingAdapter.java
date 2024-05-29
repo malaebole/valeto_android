@@ -110,8 +110,6 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.ViewHold
         }
     }
 
-
-
         public interface ItemClickListener {
             void itemClicked(View view, int pos);
         }

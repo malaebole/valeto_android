@@ -112,9 +112,6 @@ public class RatingDialogFragment extends DialogFragment implements View.OnClick
             else {
                 Functions.showToast(getActivity(), "Rating cannot be empty", FancyToast.ERROR);
             }
-
-//            dialogCallback.didSubmitResult(this);
-//            this.dismiss();
         }
 
     }

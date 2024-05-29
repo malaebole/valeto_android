@@ -51,8 +51,6 @@ public class CustomerMainTabsActivity extends BaseActivity {
     private final MenuFragment menuFragment = new MenuFragment();
     private int selectedTabIndex = 0;
 
-    // private final OleBookingListFragment oleBookingListFragment = new OleBookingListFragment();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,17 +122,6 @@ public class CustomerMainTabsActivity extends BaseActivity {
     public void onBackPressed() {
         super.onBackPressed();
     }
-
-    private void callUnreadNotifAPI() {
-        getUnreadNotificationAPI(new UnreadCountCallback() {
-            @Override
-            public void unreadNotificationCount(int count) {
-                AppManager.getInstance().notificationCount = count;
-                setBadgeValue();
-            }
-        });
-    }
-
     private void setBadgeValue() {
         if (parkingListFragment.isVisible()) {
             parkingListFragment.setBadgeValue();
@@ -242,9 +229,6 @@ public class CustomerMainTabsActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        if (oleOwnerProfileFragment.isVisible()) {
-//            oleOwnerProfileFragment.onActivityResult(requestCode, resultCode, data);
-//        }
     }
 
 }
